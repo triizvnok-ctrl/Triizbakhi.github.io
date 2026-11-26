@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "updatedAt": "2026-11-26T11:33:08.275Z",
+  "pin": "1234",
+  "searchEnabled": true,
+  "profile": {
+    "name": "Gaming & Fix Lag",
+    "bio": "Chia sẻ Script Roblox mượt & App Fix Lag tăng FPS cực đã cho điện thoại",
+    "avatar": "",
+    "verified": true
+  },
+  "musicSettings": {
+    "enabled": true,
+    "volume": 75,
+    "playMode": "next"
+  },
+  "playlist": [
+    {
+      "id": "builtin-lofi",
+      "title": "Midnight Lo-Fi Chill",
+      "artist": "Gaming Beats • Nhạc tích hợp",
+      "sourceType": "builtin",
+      "synthType": "lofi",
+      "audioUrl": "",
+      "audioData": "",
+      "fileName": "",
+      "fileSize": 0,
+      "cover": "",
+      "duration": 90
+    },
+    {
+      "id": "builtin-phonk",
+      "title": "Neon Phonk Drift",
+      "artist": "Phonk Gaming • Nhạc tích hợp",
+      "sourceType": "builtin",
+      "synthType": "phonk",
+      "audioUrl": "",
+      "audioData": "",
+      "fileName": "",
+      "fileSize": 0,
+      "cover": "",
+      "duration": 96
+    }
+  ],
+  "scriptItems": [
+    {
+      "id": "sc-blox-1",
+      "mode": "link",
+      "title": "Blox Fruits Auto Farm",
+      "subtitle": "🔗 Vượt link lấy Script",
+      "value": "https://link4m.com/blox-fruits-auto-farm",
+      "badge": "LINK4M",
+      "image": "",
+      "defaultIcon": "gamepad"
+    },
+    {
+      "id": "sc-redz-2",
+      "mode": "link",
+      "title": "Redz Hub Update",
+      "subtitle": "🔗 Vượt link lấy Script",
+      "value": "https://link4m.com/redz-hub-update",
+      "badge": "HOT",
+      "image": "",
+      "defaultIcon": "gamepad"
+    },
+    {
+      "id": "sc-waves-3",
+      "mode": "copy",
+      "title": "Fix Lag Xóa Sóng Biển",
+      "subtitle": "📋 Chạm để Copy Script",
+      "value": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/gaming-fixlag/scripts/main/xoa-song-bien.lua\"))()",
+      "badge": "MỚI",
+      "image": "",
+      "defaultIcon": "code"
+    }
+  ],
+  "appItems": [
+    {
+      "id": "app-brotox-1",
+      "mode": "link",
+      "title": "Brotox V9",
+      "subtitle": "⚡ Tối ưu FPS",
+      "value": "https://link4m.com/brotox-v9",
+      "badge": "HOT",
+      "image": "",
+      "defaultIcon": "brotox"
+    },
+    {
+      "id": "app-fps-2",
+      "mode": "link",
+      "title": "Tăng Tốc FPS Pro",
+      "subtitle": "⚡ Tối ưu FPS",
+      "value": "https://link4m.com/tang-toc-fps-pro",
+      "badge": "VIP FREE",
+      "image": "",
+      "defaultIcon": "bolt"
+    }
+  ]
+}
