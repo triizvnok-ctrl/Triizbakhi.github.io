@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Trang Bio Gaming &amp; Fix Lag</title>
+
+  <!-- Google Fonts: Be Vietnam Pro & Inter cho tiếng Việt sắc nét -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styles (ID cố định để giữ nguyên khi xuất file độc lập) -->
+  <style id="custom-bio-styles">
+    :root {
+      --bg-dark: #070b14;
+      --accent-sky: #38bdf8;
+      --accent-blue: #0ea5e9;
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #070b14;
+      color: #f1f5f9;
+      font-family: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Nền lưới mờ + quầng sáng xanh trời */
+    .bg-grid-pattern {
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 84% 28%, rgba(14, 165, 233, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(56, 189, 248, 0.10) 0%, transparent 48%),
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    /* Hiệu ứng Glassmorphism cao cấp */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .glass-card-hover {
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .glass-card-hover:hover {
+      border-color: rgba(56, 189, 248, 0.42);
+      background: rgba(15, 23, 42, 0.82);
+      box-shadow: 0 12px 34px -10px rgba(14, 165, 233, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card-hover:active {
+      transform: scale(0.985);
+    }
+
+    /* Viền sáng xoay quanh Avatar */
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .avatar-glow-ring {
+      background: conic-gradient(
+        from 0deg,
+        #38bdf8,
+        #0ea5e9,
+        #22d3ee,
+        rgba(56, 189, 248, 0.15),
+        #38bdf8
+      );
+      animation: spinRing 6s linear infinite;
+    }
+
+    /* Hiệu ứng đĩa nhạc xoay */
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .vinyl-spinning {
+      animation: spinVinyl 5s linear infinite;
+    }
+
+    .vinyl-paused {
+      animation: spinVinyl 5s linear infinite;
+      animation-play-state: paused;
+    }
+
+    /* Sóng nhạc Equalizer */
+    @keyframes eqBounce1 { 0%, 100% { height: 28%; } 50% { height: 95%; } }
+    @keyframes eqBounce2 { 0%, 100% { height: 85%; } 50% { height: 30%; } }
+    @keyframes eqBounce3 { 0%, 100% { height: 42%; } 50% { height: 100%; } }
+    @keyframes eqBounce4 { 0%, 100% { height: 65%; } 50% { height: 22%; } }
+
+    .eq-active .eq-bar-1 { animation: eqBounce1 0.65s ease-in-out infinite; }
+    .eq-active .eq-bar-2 { animation: eqBounce2 0.52s ease-in-out infinite; }
+    .eq-active .eq-bar-3 { animation: eqBounce3 0.74s ease-in-out infinite; }
+    .eq-active .eq-bar-4 { animation: eqBounce4 0.58s ease-in-out infinite; }
+
+    /* Hiệu ứng xuất hiện danh sách */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-card-in {
+      animation: fadeSlideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Hiệu ứng trượt lên cho Modal trên điện thoại */
+    @keyframes slideUpSheet {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-sheet-in {
+      animation: slideUpSheet 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Thanh cuộn tinh tế */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.35);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+
+<body id="body-root" class="bg-[#070b14] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-sky-200 relative">
+
+  <!-- Canvas hạt ánh sáng nền nhẹ nhàng -->
+  <canvas id="bg-particles" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-75"></canvas>
+
+  <!-- Lớp nền lưới + quầng sáng -->
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+
+  <!-- Container Toast Thông Báo -->
+  <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 w-[92%] max-w-[400px] pointer-events-none"></div>
+
+  <!-- Nội dung chính chuẩn giao diện Mobile (max-width 440px) -->
+  <main class="relative z-10 w-full max-w-[440px] mx-auto px-4 pt-8 pb-12 min-h-screen flex flex-col">
+
+    <!-- ================= 1. PROFILE HEADER ================= -->
+    <header class="flex flex-col items-center text-center mb-5">
+      <!-- Avatar tròn với viền phát sáng & nút ẩn chạm 5 lần -->
+      <div id="avatar-trigger" class="relative group cursor-pointer select-none mb-3.5" title="Chạm 5 lần nhanh để mở Quản lý">
+        <div class="absolute -inset-2 rounded-full bg-sky-400/20 blur-xl group-hover:bg-sky-400/30 transition-all duration-300"></div>
+        <div class="relative p-[3px] rounded-full avatar-glow-ring shadow-lg shadow-sky-500/25">
+          <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-900 border-2 border-[#070b14] flex items-center justify-center relative">
+            <img
+              id="profile-avatar-img"
+              src=""
+              alt="Avatar"
+              class="w-full h-full object-cover hidden"
+            />
+            <!-- SVG dự phòng cực đẹp khi chưa cài ảnh đại diện -->
+            <div id="profile-avatar-fallback" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900">
+              <svg class="w-12 h-12 text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.65)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="4"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <circle cx="15.5" cy="11" r="1" fill="currentColor"></circle>
+                <circle cx="17.5" cy="13" r="1" fill="currentColor"></circle>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Chấm trạng thái online -->
+        <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#070b14] shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
+      </div>
+
+      <!-- Tên hiển thị + Tích xanh -->
+      <div class="flex items-center justify-center gap-1.5 mb-1.5">
+        <h1 id="profile-name" class="text-[22px] font-extrabold tracking-tight text-white">
+          Gaming &amp; Fix Lag
+        </h1>
+        <!-- Badge xác minh tích xanh -->
+        <svg class="w-5 h-5 text-sky-400 shrink-0 drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" viewBox="0 0 24 24" fill="currentColor" aria-label="Đã xác minh">
+          <path d="M12 2L14.8 4.2L18.3 4.1L19.4 7.5L22.2 9.6L21.1 13L22.2 16.4L19.4 18.5L18.3 21.9L14.8 21.8L12 24L9.2 21.8L5.7 21.9L4.6 18.5L1.8 16.4L2.9 13L1.8 9.6L4.6 7.5L5.7 4.1L9.2 4.2L12 2Z" />
+          <path d="M9.2 12.6L11.1 14.5L15.3 10.3" stroke="#070b14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+      </div>
+
+      <!-- Mô tả ngắn -->
+      <p id="profile-bio" class="text-[13.5px] text-slate-300/90 leading-relaxed max-w-[330px] mb-4">
+        Chia sẻ Script Roblox mượt &amp; App Fix Lag tối ưu FPS
+      </p>
+
+      <!-- Hàng nút Mạng xã hội -->
+      <div id="social-row" class="flex flex-wrap items-center justify-center gap-2"></div>
+    </header>
+
+    <!-- ================= 2. TRÌNH PHÁT NHẠC TÍCH HỢP ================= -->
+    <section aria-label="Trình phát nhạc" class="glass-card rounded-2xl p-3.5 mb-5 relative overflow-hidden">
+      <!-- Ánh sáng trang trí góc -->
+      <div class="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-sky-500/15 blur-2xl pointer-events-none"></div>
+
+      <div class="flex items-center gap-3 relative z-10">
+        <!-- Đĩa nhạc xoay -->
+        <div id="vinyl-disc" class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 via-slate-900 to-black border border-sky-400/40 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(14,165,233,0.28)] vinyl-paused relative">
+          <!-- Rãnh đĩa -->
+          <div class="w-8 h-8 rounded-full border border-slate-700/70 flex items-center justify-center">
+            <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-sky-500 to-cyan-300 flex items-center justify-center">
+              <div class="w-1.5 h-1.5 rounded-full bg-[#070b14]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tên bài hát & sóng nhạc -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <p id="track-title" class="text-[13.5px] font-bold text-white truncate">
+              Midnight Lo-Fi Chill
+            </p>
+            <!-- Sóng nhạc Equalizer -->
+            <div id="music-eq" class="flex items-end gap-[2px] h-3.5 shrink-0">
+              <span class="eq-bar-1 w-[3px] h-[30%] bg-sky-400 rounded-full transition-all"></span>
+              <span class="eq-bar-2 w-[3px] h-[60%] bg-cyan-300 rounded-full transition-all"></span>
+              <span class="eq-bar-3 w-[3px] h-[40%] bg-sky-400 rounded-full transition-all"></span>
+              <span class="eq-bar-4 w-[3px] h-[50%] bg-sky-300 rounded-full transition-all"></span>
+            </div>
+          </div>
+          <p id="track-artist" class="text-[11.5px] text-slate-400 truncate mt-0.5">
+            Gaming Beats • Nhạc có sẵn
+          </p>
+        </div>
+
+        <!-- Nút điều khiển nhạc (Prev / Play-Pause / Next) -->
+        <div class="flex items-center gap-1 shrink-0">
+          <button
+            id="btn-prev-track"
+            type="button"
+            aria-label="Bài trước"
+            class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800/80 active:scale-90 transition"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+          </button>
+
+          <button
+            id="btn-play-pause"
+            type="button"
+            aria-label="Phát hoặc tạm dừng nhạc"
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-cyan-400 text-slate-950 flex items-center justify-center shadow-[0_0_18px_rgba(56,189,248,0.5)] hover:brightness-110 active:scale-90 transition"
+          >
+            <!-- Icon Play -->
+            <svg id="icon-play" class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <!-- Icon Pause -->
+            <svg id="icon-pause" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+          </button>
+
+          <button
+            id="btn-next-track"
+            type="button"
+            aria-label="Bài tiếp theo"
+            class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800/80 active:scale-90 transition"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Thanh tiến trình nhạc -->
+      <div class="mt-3 flex items-center gap-2.5">
+        <span id="music-current-time" class="text-[10.5px] font-medium text-slate-400 tabular-nums w-8">0:00</span>
+        <div id="music-progress-bar" class="flex-1 h-1.5 bg-slate-800/90 rounded-full overflow-hidden cursor-pointer relative group">
+          <div id="music-progress-fill" class="h-full w-0 bg-gradient-to-r from-sky-500 to-cyan-300 rounded-full transition-all duration-150"></div>
+        </div>
+        <span id="music-duration" class="text-[10.5px] font-medium text-slate-400 tabular-nums w-8 text-right">1:30</span>
+      </div>
+
+      <!-- Thẻ audio ẩn để phát link MP3 trực tiếp -->
+      <audio id="html-audio-player" preload="none" crossorigin="anonymous"></audio>
+    </section>
+
+    <!-- ================= 3. THANH CHUYỂN 2 PHẦN ================= -->
+    <nav aria-label="Chọn danh mục" class="glass-card p-1.5 rounded-2xl mb-4 grid grid-cols-2 gap-1.5 relative">
+      <button
+        id="tab-btn-script"
+        type="button"
+        class="tab-switch-btn relative z-10 py-2.5 px-3 rounded-xl text-[13.5px] font-bold flex items-center justify-center gap-1.5 transition-all duration-200 bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 shadow-[0_4px_18px_rgba(14,165,233,0.38)]"
+      >
+        <span>🎮</span>
+        <span>Script Roblox</span>
+        <span id="count-script" class="text-[11px] px-1.5 py-0.5 rounded-full bg-slate-950/20 font-extrabold">3</span>
+      </button>
+
+      <button
+        id="tab-btn-fixlag"
+        type="button"
+        class="tab-switch-btn relative z-10 py-2.5 px-3 rounded-xl text-[13.5px] font-bold flex items-center justify-center gap-1.5 transition-all duration-200 text-slate-300 hover:text-white"
+      >
+        <span>⚡</span>
+        <span>App Fix Lag</span>
+        <span id="count-fixlag" class="text-[11px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-bold">3</span>
+      </button>
+    </nav>
+
+    <!-- ================= 4. DANH SÁCH NỘI DUNG ================= -->
+    <section id="links-container" class="flex flex-col gap-3 flex-1">
+      <!-- Các thẻ Script Roblox / App Fix Lag sẽ được render tự động tại đây -->
+    </section>
+
+    <!-- ================= 5. CHÂN TRANG & NÚT QUẢN LÝ ================= -->
+    <footer class="mt-8 pt-4 border-t border-slate-800/70 flex flex-col items-center gap-3 text-center">
+      <button
+        id="btn-open-admin"
+        type="button"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-sky-500/25 hover:border-sky-400/50 text-[12.5px] font-semibold text-sky-300 transition active:scale-95 shadow-lg shadow-black/40"
+      >
+        <span>⚙️</span>
+        <span>Quản lý &amp; Thêm Link</span>
+      </button>
+
+      <p class="text-[11.5px] text-slate-500">
+        Tối ưu cho Mobile • Chạm vào nút để tải hoặc copy nhanh
+      </p>
+    </footer>
+  </main>
+
+  <!-- ================= 6. MODAL QUẢN LÝ DÀNH CHO CHỦ KÊNH ================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm p-0 sm:p-4">
+    <div class="w-full max-w-[480px] max-h-[92vh] bg-[#0b1222] border-t sm:border border-sky-500/25 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-sheet-in">
+
+      <!-- Header Modal -->
+      <div class="px-5 py-4 border-b border-slate-800/90 flex items-center justify-between bg-slate-900/70 shrink-0">
+        <div>
+          <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+            <span class="text-sky-400">⚙️</span> Bảng Quản Lý Bio
+          </h2>
+          <p class="text-[11.5px] text-slate-400 mt-0.5">Tự thêm link, sửa nhạc &amp; xuất file ngay trên điện thoại</p>
+        </div>
+        <button
+          id="btn-close-admin"
+          type="button"
+          aria-label="Đóng bảng quản lý"
+          class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-90"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Thanh Tab bên trong Modal Quản lý -->
+      <div class="px-4 pt-3 pb-2 bg-slate-900/40 border-b border-slate-800/80 grid grid-cols-3 gap-1.5 shrink-0">
+        <button data-admin-tab="links" type="button" class="admin-tab-btn py-2 px-2 rounded-xl text-[12px] font-bold transition bg-sky-500 text-slate-950">
+          ➕ Thêm/Sửa Link
+        </button>
+        <button data-admin-tab="profile" type="button" class="admin-tab-btn py-2 px-2 rounded-xl text-[12px] font-bold transition bg-slate-800/80 text-slate-300 hover:text-white">
+          🎵 Hồ sơ &amp; Nhạc
+        </button>
+        <button data-admin-tab="export" type="button" class="admin-tab-btn py-2 px-2 rounded-xl text-[12px] font-bold transition bg-slate-800/80 text-slate-300 hover:text-white">
+          🚀 Xuất Web
+        </button>
+      </div>
+
+      <!-- Nội dung cuộn bên trong Modal -->
+      <div class="p-4 overflow-y-auto flex-1 space-y-4">
+
+        <!-- ========== ADMIN TAB 1: THÊM / SỬA LINK ========== -->
+        <div id="admin-panel-links" class="space-y-4">
+          <!-- Bộ chọn danh mục quản lý -->
+          <div class="flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+            <button id="admin-cat-script" type="button" class="flex-1 py-2 rounded-lg text-[12.5px] font-bold transition bg-sky-500/20 text-sky-300 border border-sky-400/40">
+              🎮 Script Roblox
+            </button>
+            <button id="admin-cat-fixlag" type="button" class="flex-1 py-2 rounded-lg text-[12.5px] font-bold transition text-slate-400 hover:text-white border border-transparent">
+              ⚡ App Fix Lag
+            </button>
+          </div>
+
+          <!-- Form Thêm / Chỉnh sửa mục -->
+          <form id="item-form" class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 id="item-form-heading" class="text-[13px] font-bold text-sky-300">
+                + Thêm mục mới
+              </h3>
+              <button id="btn-cancel-edit" type="button" class="hidden text-[11.5px] text-rose-400 hover:underline font-semibold">
+                Huỷ chỉnh sửa
+              </button>
+            </div>
+
+            <input type="hidden" id="edit-item-id" value="" />
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Tên hiển thị *</label>
+              <input
+                id="input-item-title"
+                type="text"
+                required
+                placeholder="VD: App Fix Lag Pro v4.0 hoặc Script Blox Fruits..."
+                class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+              />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Mô tả ngắn</label>
+              <input
+                id="input-item-desc"
+                type="text"
+                placeholder="VD: Giảm giật lag cực mượt cho máy yếu..."
+                class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+              />
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5">
+              <div>
+                <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Nhãn nổi bật (tuỳ chọn)</label>
+                <input
+                  id="input-item-badge"
+                  type="text"
+                  placeholder="HOT, MỚI, v3.2..."
+                  class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Kiểu hành động</label>
+                <select
+                  id="input-item-action"
+                  class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white focus:outline-none focus:border-sky-400"
+                >
+                  <option value="link">🔗 Mở Link / Tải App</option>
+                  <option value="copy">📋 Copy Script Lua</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Nút chọn nhanh nhãn Badge trên điện thoại -->
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="text-[11px] text-slate-400">Chọn nhanh nhãn:</span>
+              <button type="button" data-quick-badge="HOT" class="quick-badge-btn px-2 py-0.5 rounded-md bg-rose-500/15 text-rose-300 border border-rose-500/30 text-[11px] font-bold">HOT</button>
+              <button type="button" data-quick-badge="MỚI" class="quick-badge-btn px-2 py-0.5 rounded-md bg-sky-500/15 text-sky-300 border border-sky-500/30 text-[11px] font-bold">MỚI</button>
+              <button type="button" data-quick-badge="VIP FREE" class="quick-badge-btn px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">VIP FREE</button>
+              <button type="button" data-quick-badge="" class="quick-badge-btn px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 text-[11px]">Xoá nhãn</button>
+            </div>
+
+            <div>
+              <label id="label-item-value" class="block text-[11.5px] font-semibold text-slate-300 mb-1">
+                Đường dẫn Link (URL) *
+              </label>
+              <textarea
+                id="input-item-value"
+                rows="2"
+                required
+                placeholder="https://..."
+                class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono"
+              ></textarea>
+            </div>
+
+            <button
+              id="btn-save-item"
+              type="submit"
+              class="w-full py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 font-extrabold text-[13.5px] shadow-lg shadow-sky-500/25 active:scale-[0.98] transition"
+            >
+              ➕ Thêm vào danh sách
+            </button>
+          </form>
+
+          <!-- Danh sách các mục hiện có để sắp xếp / sửa / xoá -->
+          <div>
+            <h4 class="text-[12px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+              Danh sách hiện tại (Bấm ↑ ↓ để đổi vị trí)
+            </h4>
+            <div id="admin-items-list" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- ========== ADMIN TAB 2: HỒ SƠ & NHẠC ========== -->
+        <div id="admin-panel-profile" class="hidden space-y-5">
+          <!-- Sửa thông tin Hồ sơ -->
+          <form id="profile-form" class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3.5 space-y-3">
+            <h3 class="text-[13px] font-bold text-sky-300">👤 Thông tin hồ sơ</h3>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Tên hiển thị</label>
+              <input id="input-profile-name" type="text" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Dòng mô tả (Bio)</label>
+              <input id="input-profile-bio" type="text" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-slate-300 mb-1">Link ảnh đại diện (Avatar URL)</label>
+              <input id="input-profile-avatar" type="url" placeholder="Để trống sẽ dùng icon tay cầm mặc định" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div class="pt-1 border-t border-slate-800/80 space-y-2.5">
+              <p class="text-[11.5px] font-bold text-slate-400">Liên kết Mạng xã hội (để trống sẽ tự ẩn)</p>
+              <input id="input-social-tiktok" type="text" placeholder="Link TikTok (VD: https://tiktok.com/@tenban)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+              <input id="input-social-youtube" type="text" placeholder="Link YouTube (VD: https://youtube.com/@tenban)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+              <input id="input-social-discord" type="text" placeholder="Link Discord hoặc Nhóm Zalo" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-[13px] transition active:scale-[0.98]">
+              💾 Lưu thông tin hồ sơ
+            </button>
+          </form>
+
+          <!-- Quản lý danh sách Nhạc -->
+          <div class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3.5 space-y-3">
+            <div>
+              <h3 class="text-[13px] font-bold text-sky-300">🎵 Danh sách phát nhạc</h3>
+              <p class="text-[11.5px] text-slate-400 mt-0.5">
+                Có sẵn 2 bài nhạc điện tử chill không bao giờ lỗi. Bạn có thể thêm link file <span class="text-sky-300 font-semibold">.mp3</span> trực tiếp bên dưới.
+              </p>
+            </div>
+
+            <form id="music-form" class="space-y-2.5">
+              <input id="input-song-title" type="text" required placeholder="Tên bài hát (VD: Nhạc Chill Gaming)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+              <input id="input-song-artist" type="text" placeholder="Tên ca sĩ / Nguồn (tuỳ chọn)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+              <input id="input-song-url" type="url" required placeholder="Link nhạc trực tiếp (.mp3)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700/80 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+              <button type="submit" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-500/30 text-sky-300 font-bold text-[12.5px] transition active:scale-[0.98]">
+                ➕ Thêm bài hát MP3
+              </button>
+            </form>
+
+            <div id="admin-music-list" class="space-y-2 pt-2 border-t border-slate-800/80"></div>
+          </div>
+        </div>
+
+        <!-- ========== ADMIN TAB 3: XUẤT WEB (ĐĂNG LÊN MẠNG) ========== -->
+        <div id="admin-panel-export" class="hidden space-y-4">
+          <div class="bg-sky-500/10 border border-sky-400/30 rounded-2xl p-3.5 text-[12.5px] text-slate-200 leading-relaxed">
+            <p class="font-bold text-sky-300 mb-1">💡 Cách đưa trang Bio này lên TikTok:</p>
+            <p>
+              Mọi thay đổi bạn sửa đang được lưu tự động trên điện thoại này. Khi ưng ý, bấm <strong>Tải file index.html</strong> rồi tải lên web miễn phí như <strong>Tiiny.host</strong>, <strong>Netlify Drop</strong> hoặc <strong>GitHub Pages</strong> để lấy link gắn vào tiểu sử TikTok!
+            </p>
+          </div>
+
+          <!-- Tuỳ chọn ẩn nút quản lý cho người xem -->
+          <label class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 cursor-pointer select-none">
+            <input
+              id="chk-hide-admin-btn"
+              type="checkbox"
+              checked
+              class="mt-0.5 w-5 h-5 rounded accent-sky-400 shrink-0"
+            />
+            <span class="text-[12.5px] text-slate-200 leading-snug">
+              <strong>Ẩn nút Quản lý ở cuối trang khi xuất file</strong>
+              <span class="block text-[11.5px] text-slate-400 mt-0.5">
+                Người xem sẽ không thấy nút chỉnh sửa. Riêng bạn vẫn mở lại được bằng cách <strong>chạm 5 lần vào ảnh đại diện</strong>.
+              </span>
+            </span>
+          </label>
+
+          <!-- Nút xuất file chính -->
+          <div class="space-y-2.5">
+            <button
+              id="btn-download-html"
+              type="button"
+              class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 font-extrabold text-[14px] shadow-[0_6px_24px_rgba(14,165,233,0.4)] hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+              <span>📥</span>
+              <span>Tải file index.html về máy</span>
+            </button>
+
+            <button
+              id="btn-copy-html"
+              type="button"
+              class="w-full py-3 px-4 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700 text-slate-100 font-bold text-[13px] active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+              <span>📋</span>
+              <span>Copy toàn bộ code HTML</span>
+            </button>
+          </div>
+
+          <!-- Hướng dẫn ngắn gọn 3 bước cho người dùng điện thoại -->
+          <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-3.5 space-y-2 text-[12px] text-slate-300">
+            <p class="font-bold text-white">📱 Đăng web miễn phí bằng điện thoại (1 phút):</p>
+            <ol class="list-decimal list-inside space-y-1.5 text-slate-300/90">
+              <li>Bấm <strong>Tải file index.html về máy</strong> ở nút xanh phía trên.</li>
+              <li>Mở trình duyệt điện thoại vào <strong>tiiny.host</strong> hoặc <strong>app.netlify.com/drop</strong>.</li>
+              <li>Chọn tải lên file <strong>index.html</strong> vừa lưu &rarr; nhận ngay đường link đẹp gắn lên Bio TikTok!</li>
+            </ol>
+          </div>
+
+          <!-- Nút khôi phục mặc định -->
+          <div class="pt-2 border-t border-slate-800">
+            <button
+              id="btn-reset-default"
+              type="button"
+              class="w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 font-bold text-[12.5px] transition active:scale-[0.98]"
+            >
+              🔄 Khôi phục dữ liệu mẫu mặc định
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 7. MODAL XÁC NHẬN (KHÔNG DÙNG confirm()) ================= -->
+  <div id="confirm-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="w-full max-w-[340px] bg-[#0f172a] border border-sky-500/30 rounded-2xl p-5 shadow-2xl animate-sheet-in">
+      <h3 id="confirm-title" class="text-base font-extrabold text-white mb-1.5">Xác nhận</h3>
+      <p id="confirm-message" class="text-[13px] text-slate-300 leading-relaxed mb-5">Bạn có chắc chắn muốn thực hiện thao tác này?</p>
+      <div class="flex items-center gap-2.5">
+        <button id="confirm-cancel" type="button" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[13px] transition">
+          Huỷ
+        </button>
+        <button id="confirm-ok" type="button" class="flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-[13px] transition">
+          Đồng ý
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 8. TOÀN BỘ LOGIC JAVASCRIPT ================= -->
+  <script id="bio-app-script">
+    // =========================================================================
+    // DỮ LIỆU GỐC (Được tự động cập nhật khi bạn bấm Xuất file index.html)
+    // =========================================================================
+    /* __BIO_DATA_START__ */
+    const DEFAULT_DATA = {
+      exportVersion: 1,
+      hideFooterAdminBtn: false,
+      profile: {
+        name: "Gaming & Fix Lag",
+        bio: "Chia sẻ Script Roblox mượt & App Fix Lag tối ưu FPS",
+        avatarUrl: "",
+        socials: {
+          tiktok: "https://www.tiktok.com",
+          youtube: "https://www.youtube.com",
+          discord: "https://discord.com"
+        }
+      },
+      music: [
+        {
+          id: "synth-lofi",
+          title: "Midnight Lo-Fi Chill",
+          artist: "Gaming Beats • Nhạc có sẵn",
+          audioUrl: "",
+          synthType: "lofi",
+          duration: 90
+        },
+        {
+          id: "synth-cyber",
+          title: "Cyber Neon Drift",
+          artist: "Synthwave • Nhạc có sẵn",
+          audioUrl: "",
+          synthType: "cyber",
+          duration: 96
+        }
+      ],
+      items: [
+        // --- 3 Mục mẫu Script Roblox ---
+        {
+          id: "sc-1",
+          category: "script",
+          title: "Script Blox Fruits Giảm Lag",
+          desc: "Xoá hiệu ứng thừa, giảm giật tối đa khi farm & đi raid trên máy yếu.",
+          badge: "HOT",
+          actionType: "copy",
+          value: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/gaming-fixlag/scripts/main/bloxfruits-lite.lua"))()'
+        },
+        {
+          id: "sc-2",
+          category: "script",
+          title: "Script Xoá Sóng & Hiệu Ứng",
+          desc: "Tắt nước biển động, mây, bóng đổ giúp tăng +20 đến +30 FPS ổn định.",
+          badge: "MỚI",
+          actionType: "copy",
+          value: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/gaming-fixlag/scripts/main/boost-fps-nowaves.lua"))()'
+        },
+        {
+          id: "sc-3",
+          category: "script",
+          title: "Script Auto Farm Mượt",
+          desc: "Tổng hợp bản script siêu nhẹ, hạn chế văng game, cập nhật mỗi tuần.",
+          badge: "VIP FREE",
+          actionType: "link",
+          value: "https://roblox.com"
+        },
+        // --- 3 Mục mẫu App Fix Lag ---
+        {
+          id: "fl-1",
+          category: "fixlag",
+          title: "App Fix Lag Siêu Nhẹ",
+          desc: "Dọn RAM tự động, tối ưu độ phân giải cho máy Android cấu hình yếu.",
+          badge: "v3.2 • HOT",
+          actionType: "link",
+          value: "https://play.google.com"
+        },
+        {
+          id: "fl-2",
+          category: "fixlag",
+          title: "Tool Tối Ưu FPS Gaming",
+          desc: "Giữ ổn định 60 FPS, giảm nóng máy và hạn chế tụt khung hình khi combat.",
+          badge: "MỚI",
+          actionType: "link",
+          value: "https://play.google.com"
+        },
+        {
+          id: "fl-3",
+          category: "fixlag",
+          title: "Bộ Config Giảm Giật Lag",
+          desc: "Cấu hình đồ hoạ siêu mượt tối ưu cho Roblox & game sinh tồn.",
+          badge: "VIP FREE",
+          actionType: "link",
+          value: "https://play.google.com"
+        }
+      ]
+    };
+    /* __BIO_DATA_END__ */
+
+    const STORAGE_KEY = "gaming_fixlag_bio_data_v1";
+
+    // =========================================================================
+    // TRẠNG THÁI ỨNG DỤNG
+    // =========================================================================
+    let appData = null;
+    let activeMainTab = "script"; // 'script' | 'fixlag'
+    let activeAdminTab = "links"; // 'links' | 'profile' | 'export'
+    let activeAdminCat = "script"; // 'script' | 'fixlag'
+
+    // Biến xử lý chạm 5 lần vào Avatar
+    let avatarTapCount = 0;
+    let avatarTapTimer = null;
+
+    // Biến xử lý Modal xác nhận
+    let confirmCallback = null;
+
+    // =========================================================================
+    // HÀM TIỆN ÍCH (LOCALSTORAGE, COPY, TOAST, URL, HTML ESCAPE)
+    // =========================================================================
+    function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
+    function loadData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          // Nếu file HTML mới xuất có exportVersion mới hơn, ưu tiên dữ liệu mới xuất
+          if (parsed && parsed.baseExportVersion === DEFAULT_DATA.exportVersion && parsed.data) {
+            return parsed.data;
+          }
+        }
+      } catch (e) {
+        console.warn("Không thể đọc localStorage:", e);
+      }
+      return deepClone(DEFAULT_DATA);
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            baseExportVersion: DEFAULT_DATA.exportVersion,
+            data: appData
+          })
+        );
+      } catch (e) {
+        console.warn("Không thể lưu localStorage:", e);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function normalizeUrl(url) {
+      const trimmed = (url || "").trim();
+      if (!trimmed) return "";
+      if (/^javascript:/i.test(trimmed)) return "";
+      if (/^https?:\/\//i.test(trimmed)) return trimmed;
+      return "https://" + trimmed;
+    }
+
+    // Copy văn bản chuẩn tương thích tốt cả trên iOS, Android và iFrame
+    function copyToClipboard(text) {
+      return new Promise((resolve) => {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.top = "0";
+          ta.style.left = "-9999px";
+          ta.style.fontSize = "16px"; // Chống tự zoom trên iOS Safari
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          ta.setSelectionRange(0, text.length);
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          if (ok) {
+            resolve(true);
+            return;
+          }
+        } catch (err) {
+          console.warn("execCommand copy fallback:", err);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => resolve(true)).catch(() => resolve(false));
+        } else {
+          resolve(false);
+        }
+      });
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+
+      const colors = {
+        success: "bg-emerald-500/95 text-slate-950 border-emerald-300/60",
+        error: "bg-rose-500/95 text-white border-rose-300/50",
+        info: "bg-slate-900/95 text-sky-200 border-sky-400/40"
+      };
+
+      const toast = document.createElement("div");
+      toast.className = `px-4 py-2.5 rounded-2xl border text-[13px] font-bold shadow-xl backdrop-blur-md transition-all duration-300 transform -translate-y-2 opacity-0 ${colors[type] || colors.info}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove("-translate-y-2", "opacity-0");
+      });
+
+      setTimeout(() => {
+        toast.classList.add("-translate-y-2", "opacity-0");
+        setTimeout(() => toast.remove(), 300);
+      }, 2400);
+    }
+
+    function openConfirm(title, message, onConfirm) {
+      document.getElementById("confirm-title").textContent = title;
+      document.getElementById("confirm-message").textContent = message;
+      confirmCallback = onConfirm;
+      document.getElementById("confirm-modal").classList.remove("hidden");
+    }
+
+    function closeConfirm() {
+      document.getElementById("confirm-modal").classList.add("hidden");
+      confirmCallback = null;
+    }
+
+    function formatTime(seconds) {
+      if (!isFinite(seconds) || seconds < 0) return "0:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+    }
+
+    // =========================================================================
+    // TRÌNH PHÁT NHẠC (WEB AUDIO API SYNTH TÍCH HỢP + HTML5 AUDIO CHO MP3)
+    // =========================================================================
+    const MusicEngine = {
+      currentIndex: 0,
+      isPlaying: false,
+      audioEl: null,
+      audioCtx: null,
+      masterGain: null,
+      synthTimer: null,
+      progressTimer: null,
+      synthStep: 0,
+      synthElapsed: 0,
+
+      init() {
+        this.audioEl = document.getElementById("html-audio-player");
+
+        this.audioEl.addEventListener("timeupdate", () => {
+          if (!this.isCurrentSynth() && this.isPlaying) {
+            const cur = this.audioEl.currentTime || 0;
+            const dur = this.audioEl.duration || 0;
+            this.updateProgressUI(cur, dur);
+          }
+        });
+
+        this.audioEl.addEventListener("loadedmetadata", () => {
+          if (!this.isCurrentSynth()) {
+            this.updateProgressUI(this.audioEl.currentTime || 0, this.audioEl.duration || 0);
+          }
+        });
+
+        this.audioEl.addEventListener("ended", () => {
+          this.next(true);
+        });
+
+        this.audioEl.addEventListener("error", () => {
+          if (!this.isCurrentSynth() && this.isPlaying) {
+            this.pause();
+            showToast("Link MP3 này không phát được, hãy kiểm tra lại link trực tiếp (.mp3)!", "error");
+          }
+        });
+
+        this.updateTrackInfoUI();
+      },
+
+      getTrack() {
+        if (!appData.music || appData.music.length === 0) return null;
+        if (this.currentIndex >= appData.music.length) this.currentIndex = 0;
+        if (this.currentIndex < 0) this.currentIndex = appData.music.length - 1;
+        return appData.music[this.currentIndex];
+      },
+
+      isCurrentSynth() {
+        const track = this.getTrack();
+        return !track || !track.audioUrl || !track.audioUrl.trim();
+      },
+
+      ensureAudioContext() {
+        if (!this.audioCtx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return false;
+          this.audioCtx = new AudioCtx();
+          this.masterGain = this.audioCtx.createGain();
+          this.masterGain.gain.value = 0.28;
+          this.masterGain.connect(this.audioCtx.destination);
+        }
+        if (this.audioCtx.state === "suspended") {
+          this.audioCtx.resume();
+        }
+        return true;
+      },
+
+      // Tạo nốt nhạc êm dịu bằng Web Audio API
+      playTone(freq, startTime, duration, type = "triangle", gainVal = 0.22, filterFreq = 1600) {
+        if (!this.audioCtx || !this.masterGain) return;
+        const osc = this.audioCtx.createOscillator();
+        const filter = this.audioCtx.createBiquadFilter();
+        const gain = this.audioCtx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(filterFreq, startTime);
+
+        gain.gain.setValueAtTime(0.001, startTime);
+        gain.gain.linearRampToValueAtTime(gainVal, startTime + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0008, startTime + duration);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.masterGain);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration + 0.02);
+      },
+
+      // Tạo tiếng trống kick trầm ấm
+      playKick(startTime, punch = 135) {
+        if (!this.audioCtx || !this.masterGain) return;
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(punch, startTime);
+        osc.frequency.exponentialRampToValueAtTime(42, startTime + 0.14);
+
+        gain.gain.setValueAtTime(0.55, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.22);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(startTime);
+        osc.stop(startTime + 0.24);
+      },
+
+      // Tạo tiếng hi-hat / snare nhẹ bằng noise
+      playHat(startTime, dur = 0.045, vol = 0.08) {
+        if (!this.audioCtx || !this.masterGain) return;
+        const bufferSize = Math.floor(this.audioCtx.sampleRate * dur);
+        const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+        }
+
+        const noise = this.audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const hp = this.audioCtx.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 5500;
+
+        const gain = this.audioCtx.createGain();
+        gain.gain.value = vol;
+
+        noise.connect(hp);
+        hp.connect(gain);
+        gain.connect(this.masterGain);
+        noise.start(startTime);
+      },
+
+      startSynth(synthType) {
+        this.stopSynth();
+        if (!this.ensureAudioContext()) {
+          showToast("Trình duyệt không hỗ trợ phát nhạc tích hợp.", "error");
+          return;
+        }
+
+        const isCyber = synthType === "cyber";
+        const stepMs = isCyber ? 288 : 365; // Cyber ~104 BPM, Lo-Fi ~82 BPM
+
+        // Hợp âm Lo-Fi Chill (Dm9 - G13 - Cmaj9 - Am9)
+        const lofiChords = [
+          [293.66, 349.23, 440.0, 523.25],
+          [196.0, 329.63, 392.0, 493.88],
+          [261.63, 329.63, 392.0, 493.88],
+          [220.0, 261.63, 329.63, 392.0]
+        ];
+        const lofiBass = [146.83, 98.0, 130.81, 110.0];
+        const lofiMelody = [587.33, 0, 523.25, 440.0, 0, 493.88, 523.25, 0, 659.25, 0, 587.33, 523.25, 440.0, 0, 392.0, 0];
+
+        // Giai điệu Cyber Neon Synthwave (Am - F - C - G)
+        const cyberArps = [
+          [220.0, 261.63, 329.63, 440.0],
+          [174.61, 220.0, 261.63, 349.23],
+          [261.63, 329.63, 392.0, 523.25],
+          [196.0, 246.94, 293.66, 392.0]
+        ];
+        const cyberBass = [110.0, 87.31, 130.81, 98.0];
+
+        const tick = () => {
+          if (!this.isPlaying || !this.audioCtx) return;
+          const now = this.audioCtx.currentTime;
+          const s = this.synthStep;
+          const bar = Math.floor(s / 4) % 4;
+          const beat = s % 4;
+
+          if (!isCyber) {
+            // Lo-Fi Chill Beat
+            if (beat === 0) {
+              lofiChords[bar].forEach((freq, idx) => {
+                this.playTone(freq, now + idx * 0.02, 1.35, "triangle", 0.13, 1100);
+              });
+              this.playTone(lofiBass[bar], now, 1.2, "sine", 0.26, 450);
+              this.playKick(now, 115);
+            }
+            if (beat === 2) {
+              this.playHat(now, 0.11, 0.13);
+            }
+            if (beat === 1 || beat === 3) {
+              this.playHat(now, 0.035, 0.06);
+            }
+            const melNote = lofiMelody[s % lofiMelody.length];
+            if (melNote > 0) {
+              this.playTone(melNote, now + 0.03, 0.55, "sine", 0.11, 1800);
+            }
+          } else {
+            // Cyber Neon Drift
+            const arp = cyberArps[bar];
+            const note = arp[beat];
+            this.playTone(note * 2, now, 0.25, "sawtooth", 0.075, 1900);
+            this.playTone(cyberBass[bar], now, 0.24, "triangle", 0.24, 650);
+
+            if (beat === 0 || beat === 2) {
+              this.playKick(now, 150);
+            }
+            if (beat === 1 || beat === 3) {
+              this.playHat(now, 0.06, 0.11);
+            }
+            if (beat === 0) {
+              arp.forEach((f) => this.playTone(f, now, 1.05, "sine", 0.08, 1200));
+            }
+          }
+
+          this.synthStep++;
+        };
+
+        tick();
+        this.synthTimer = setInterval(tick, stepMs);
+
+        const track = this.getTrack();
+        const totalDur = (track && track.duration) || 90;
+        this.progressTimer = setInterval(() => {
+          if (!this.isPlaying) return;
+          this.synthElapsed += 0.25;
+          if (this.synthElapsed >= totalDur) {
+            this.synthElapsed = 0;
+            this.next(true);
+            return;
+          }
+          this.updateProgressUI(this.synthElapsed, totalDur);
+        }, 250);
+      },
+
+      stopSynth() {
+        if (this.synthTimer) {
+          clearInterval(this.synthTimer);
+          this.synthTimer = null;
+        }
+        if (this.progressTimer) {
+          clearInterval(this.progressTimer);
+          this.progressTimer = null;
+        }
+      },
+
+      play() {
+        const track = this.getTrack();
+        if (!track) {
+          showToast("Chưa có bài hát nào trong danh sách!", "info");
+          return;
+        }
+
+        this.stopSynth();
+        this.audioEl.pause();
+        this.isPlaying = true;
+        this.updatePlayingUI();
+
+        if (this.isCurrentSynth()) {
+          this.startSynth(track.synthType || "lofi");
+        } else {
+          const url = normalizeUrl(track.audioUrl);
+          if (this.audioEl.src !== url) {
+            this.audioEl.src = url;
+          }
+          const playPromise = this.audioEl.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              this.pause();
+              showToast("Không phát được link MP3 này. Hãy thử link .mp3 trực tiếp khác!", "error");
+            });
+          }
+        }
+      },
+
+      pause() {
+        this.isPlaying = false;
+        this.stopSynth();
+        if (this.audioEl) this.audioEl.pause();
+        this.updatePlayingUI();
+      },
+
+      toggle() {
+        if (this.isPlaying) {
+          this.pause();
+        } else {
+          this.play();
+        }
+      },
+
+      next(autoPlay = null) {
+        if (!appData.music || appData.music.length === 0) return;
+        const shouldPlay = autoPlay !== null ? autoPlay : this.isPlaying;
+        this.pause();
+        this.currentIndex = (this.currentIndex + 1) % appData.music.length;
+        this.synthStep = 0;
+        this.synthElapsed = 0;
+        this.updateTrackInfoUI();
+        if (shouldPlay) this.play();
+      },
+
+      prev() {
+        if (!appData.music || appData.music.length === 0) return;
+        const shouldPlay = this.isPlaying;
+        this.pause();
+        this.currentIndex = (this.currentIndex - 1 + appData.music.length) % appData.music.length;
+        this.synthStep = 0;
+        this.synthElapsed = 0;
+        this.updateTrackInfoUI();
+        if (shouldPlay) this.play();
+      },
+
+      selectAndPlay(index) {
+        this.pause();
+        this.currentIndex = index;
+        this.synthStep = 0;
+        this.synthElapsed = 0;
+        this.updateTrackInfoUI();
+        this.play();
+      },
+
+      seek(percent) {
+        const track = this.getTrack();
+        if (!track) return;
+        const clamped = Math.max(0, Math.min(1, percent));
+        if (this.isCurrentSynth()) {
+          const dur = track.duration || 90;
+          this.synthElapsed = clamped * dur;
+          this.updateProgressUI(this.synthElapsed, dur);
+        } else if (this.audioEl && isFinite(this.audioEl.duration) && this.audioEl.duration > 0) {
+          this.audioEl.currentTime = clamped * this.audioEl.duration;
+          this.updateProgressUI(this.audioEl.currentTime, this.audioEl.duration);
+        }
+      },
+
+      updateTrackInfoUI() {
+        const track = this.getTrack();
+        const titleEl = document.getElementById("track-title");
+        const artistEl = document.getElementById("track-artist");
+        if (!track) {
+          titleEl.textContent = "Chưa có bài hát";
+          artistEl.textContent = "Thêm nhạc trong mục Quản lý";
+          this.updateProgressUI(0, 0);
+          return;
+        }
+        titleEl.textContent = track.title || "Bài hát không tên";
+        artistEl.textContent = track.artist || (track.audioUrl ? "Nhạc MP3 tuỳ chỉnh" : "Nhạc có sẵn");
+        this.updateProgressUI(this.isCurrentSynth() ? this.synthElapsed : 0, track.duration || 0);
+      },
+
+      updatePlayingUI() {
+        const disc = document.getElementById("vinyl-disc");
+        const eq = document.getElementById("music-eq");
+        const playIcon = document.getElementById("icon-play");
+        const pauseIcon = document.getElementById("icon-pause");
+
+        if (this.isPlaying) {
+          disc.classList.remove("vinyl-paused");
+          disc.classList.add("vinyl-spinning");
+          eq.classList.add("eq-active");
+          playIcon.classList.add("hidden");
+          pauseIcon.classList.remove("hidden");
+        } else {
+          disc.classList.remove("vinyl-spinning");
+          disc.classList.add("vinyl-paused");
+          eq.classList.remove("eq-active");
+          playIcon.classList.remove("hidden");
+          pauseIcon.classList.add("hidden");
+        }
+      },
+
+      updateProgressUI(cur, dur) {
+        document.getElementById("music-current-time").textContent = formatTime(cur);
+        document.getElementById("music-duration").textContent = dur > 0 ? formatTime(dur) : "--:--";
+        const pct = dur > 0 ? Math.min(100, (cur / dur) * 100) : 0;
+        document.getElementById("music-progress-fill").style.width = `${pct}%`;
+      }
+    };
+
+    // =========================================================================
+    // RENDER GIAO DIỆN CHÍNH (HỒ SƠ, MẠNG XÃ HỘI, 2 TAB SCRIPT & FIX LAG)
+    // =========================================================================
+    function renderProfile() {
+      const p = appData.profile;
+      document.getElementById("profile-name").textContent = p.name || "Gaming & Fix Lag";
+      document.getElementById("profile-bio").textContent = p.bio || "";
+      document.title = `${p.name || "Gaming & Fix Lag"} • Trang Bio`;
+
+      const img = document.getElementById("profile-avatar-img");
+      const fallback = document.getElementById("profile-avatar-fallback");
+
+      if (p.avatarUrl && p.avatarUrl.trim()) {
+        img.src = normalizeUrl(p.avatarUrl);
+        img.onload = () => {
+          img.classList.remove("hidden");
+          fallback.classList.add("hidden");
+        };
+        img.onerror = () => {
+          img.classList.add("hidden");
+          fallback.classList.remove("hidden");
+        };
+      } else {
+        img.removeAttribute("src");
+        img.classList.add("hidden");
+        fallback.classList.remove("hidden");
+      }
+
+      // Render hàng mạng xã hội
+      const socialRow = document.getElementById("social-row");
+      socialRow.innerHTML = "";
+
+      const socialConfigs = [
+        {
+          key: "tiktok",
+          label: "TikTok",
+          icon: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>`
+        },
+        {
+          key: "youtube",
+          label: "YouTube",
+          icon: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>`
+        },
+        {
+          key: "discord",
+          label: "Discord / Zalo",
+          icon: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3a13.4 13.4 0 0 0-.6 1.2 18.4 18.4 0 0 0-5.6 0A12.3 12.3 0 0 0 8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9.1-.2 13.7.2 18.2a19.9 19.9 0 0 0 6 3 14.8 14.8 0 0 0 1.3-2.1 12.7 12.7 0 0 1-2-1c.2-.1.3-.3.5-.4a14.1 14.1 0 0 0 12 0l.5.4a12.7 12.7 0 0 1-2 1 14.8 14.8 0 0 0 1.3 2.1 19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.5-13.8zM8 15.5c-1.2 0-2.1-1.1-2.1-2.4S6.8 10.7 8 10.7s2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4zm8 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4z"/></svg>`
+        }
+      ];
+
+      socialConfigs.forEach((sc) => {
+        const rawUrl = p.socials && p.socials[sc.key];
+        const url = normalizeUrl(rawUrl);
+        if (!url) return;
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 hover:bg-sky-500/20 border border-slate-700/80 hover:border-sky-400/50 text-[12px] font-semibold text-slate-200 hover:text-sky-300 transition active:scale-95";
+        a.innerHTML = `${sc.icon}<span>${sc.label}</span>`;
+        socialRow.appendChild(a);
+      });
+
+      // Ẩn hoặc hiện nút Quản lý ở chân trang theo cấu hình
+      const adminBtn = document.getElementById("btn-open-admin");
+      if (appData.hideFooterAdminBtn) {
+        adminBtn.classList.add("hidden");
+      } else {
+        adminBtn.classList.remove("hidden");
+      }
+    }
+
+    function getBadgeStyle(badgeText) {
+      const upper = (badgeText || "").toUpperCase();
+      if (upper.includes("HOT")) {
+        return "bg-rose-500/20 text-rose-300 border-rose-500/40";
+      }
+      if (upper.includes("VIP") || upper.includes("FREE")) {
+        return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+      }
+      return "bg-sky-500/20 text-sky-300 border-sky-400/40";
+    }
+
+    function renderMainTabs() {
+      const scriptBtn = document.getElementById("tab-btn-script");
+      const fixlagBtn = document.getElementById("tab-btn-fixlag");
+
+      const scriptCount = appData.items.filter((i) => i.category === "script").length;
+      const fixlagCount = appData.items.filter((i) => i.category === "fixlag").length;
+
+      document.getElementById("count-script").textContent = scriptCount;
+      document.getElementById("count-fixlag").textContent = fixlagCount;
+
+      const activeClasses = ["bg-gradient-to-r", "from-sky-500", "to-cyan-400", "text-slate-950", "shadow-[0_4px_18px_rgba(14,165,233,0.38)]"];
+      const inactiveClasses = ["text-slate-300", "hover:text-white"];
+
+      if (activeMainTab === "script") {
+        scriptBtn.classList.add(...activeClasses);
+        scriptBtn.classList.remove(...inactiveClasses);
+        fixlagBtn.classList.remove(...activeClasses);
+        fixlagBtn.classList.add(...inactiveClasses);
+        document.getElementById("count-script").className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-950/20 font-extrabold";
+        document.getElementById("count-fixlag").className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-bold";
+      } else {
+        fixlagBtn.classList.add(...activeClasses);
+        fixlagBtn.classList.remove(...inactiveClasses);
+        scriptBtn.classList.remove(...activeClasses);
+        scriptBtn.classList.add(...inactiveClasses);
+        document.getElementById("count-fixlag").className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-950/20 font-extrabold";
+        document.getElementById("count-script").className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-bold";
+      }
+    }
+
+    function renderLinksList() {
+      renderMainTabs();
+      const container = document.getElementById("links-container");
+      container.innerHTML = "";
+
+      const filtered = appData.items.filter((i) => i.category === activeMainTab);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-2xl p-7 text-center animate-card-in">
+            <div class="text-3xl mb-2">${activeMainTab === "script" ? "🎮" : "⚡"}</div>
+            <p class="text-[14px] font-bold text-white">Chưa có mục nào ở đây</p>
+            <p class="text-[12.5px] text-slate-400 mt-1">Bấm <strong>Quản lý &amp; Thêm Link</strong> để thêm ngay!</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((item, index) => {
+        const isCopy = item.actionType === "copy";
+        const isScriptTab = item.category === "script";
+
+        const card = document.createElement("article");
+        card.className = "glass-card glass-card-hover rounded-2xl p-4 animate-card-in";
+        card.style.animationDelay = `${index * 45}ms`;
+
+        const badgeHtml = item.badge
+          ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-extrabold border tracking-wide shrink-0 ${getBadgeStyle(item.badge)}">${escapeHtml(item.badge)}</span>`
+          : "";
+
+        const iconSvg = isScriptTab
+          ? (isCopy
+            ? `<svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`
+            : `<svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"></rect><path d="M6 12h4"></path><path d="M8 10v4"></path><circle cx="15.5" cy="11" r="1" fill="currentColor"></circle><circle cx="17.5" cy="13" r="1" fill="currentColor"></circle></svg>`)
+          : `<svg class="w-5 h-5 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`;
+
+        const btnLabel = isCopy
+          ? "Copy Script"
+          : (isScriptTab ? "Mở Link" : "Tải App");
+
+        const btnIcon = isCopy
+          ? `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`
+          : (isScriptTab
+            ? `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
+            : `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`);
+
+        const scriptPreviewHtml = isCopy
+          ? `<div class="mt-2.5 px-3 py-2 rounded-xl bg-slate-950/85 border border-slate-800/90 text-[11px] font-mono text-sky-300/80 truncate">${escapeHtml(item.value)}</div>`
+          : "";
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 flex items-center justify-center shrink-0 mt-0.5">
+              ${iconSvg}
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="text-[15px] font-bold text-white leading-snug">${escapeHtml(item.title)}</h3>
+                ${badgeHtml}
+              </div>
+              ${item.desc ? `<p class="text-[12.5px] text-slate-300/85 mt-1 leading-relaxed">${escapeHtml(item.desc)}</p>` : ""}
+              ${scriptPreviewHtml}
+            </div>
+          </div>
+
+          <div class="mt-3.5 flex items-center justify-end">
+            <button
+              type="button"
+              class="card-action-btn w-full py-2.5 px-4 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition active:scale-[0.98] ${
+                isCopy
+                  ? "bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/40 text-sky-300"
+                  : "bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 shadow-[0_4px_16px_rgba(14,165,233,0.3)] hover:brightness-110"
+              }"
+            >
+              ${btnIcon}
+              <span>${btnLabel}</span>
+            </button>
+          </div>
+        `;
+
+        const actionBtn = card.querySelector(".card-action-btn");
+        actionBtn.addEventListener("click", async () => {
+          if (isCopy) {
+            const ok = await copyToClipboard(item.value || "");
+            if (ok) {
+              showToast("Đã copy script!", "success");
+              const originalHtml = actionBtn.innerHTML;
+              actionBtn.innerHTML = `<span>✓</span><span>Đã copy script!</span>`;
+              actionBtn.classList.add("bg-emerald-500/25", "border-emerald-400/60", "text-emerald-300");
+              setTimeout(() => {
+                actionBtn.innerHTML = originalHtml;
+                actionBtn.classList.remove("bg-emerald-500/25", "border-emerald-400/60", "text-emerald-300");
+              }, 1600);
+            } else {
+              showToast("Không copy được, hãy thử lại!", "error");
+            }
+          } else {
+            const targetUrl = normalizeUrl(item.value);
+            if (!targetUrl) {
+              showToast("Link chưa hợp lệ, hãy cập nhật trong mục Quản lý!", "error");
+              return;
+            }
+            window.open(targetUrl, "_blank", "noopener,noreferrer");
+          }
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // QUẢN LÝ ADMIN MODAL (THÊM / SỬA / XOÁ / SẮP XẾP / HỒ SƠ / NHẠC / XUẤT WEB)
+    // =========================================================================
+    function openAdminModal() {
+      document.getElementById("admin-modal").classList.remove("hidden");
+      document.getElementById("body-root").classList.add("overflow-hidden");
+      syncAdminProfileForm();
+      renderAdminItemsList();
+      renderAdminMusicList();
+      switchAdminTab(activeAdminTab);
+    }
+
+    function closeAdminModal() {
+      document.getElementById("admin-modal").classList.add("hidden");
+      document.getElementById("body-root").classList.remove("overflow-hidden");
+      resetItemForm();
+    }
+
+    function switchAdminTab(tabName) {
+      activeAdminTab = tabName;
+      document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
+        const isCurrent = btn.dataset.adminTab === tabName;
+        if (isCurrent) {
+          btn.className = "admin-tab-btn py-2 px-2 rounded-xl text-[12px] font-bold transition bg-sky-500 text-slate-950";
+        } else {
+          btn.className = "admin-tab-btn py-2 px-2 rounded-xl text-[12px] font-bold transition bg-slate-800/80 text-slate-300 hover:text-white";
+        }
+      });
+
+      document.getElementById("admin-panel-links").classList.toggle("hidden", tabName !== "links");
+      document.getElementById("admin-panel-profile").classList.toggle("hidden", tabName !== "profile");
+      document.getElementById("admin-panel-export").classList.toggle("hidden", tabName !== "export");
+    }
+
+    function switchAdminCategory(cat) {
+      activeAdminCat = cat;
+      const btnScript = document.getElementById("admin-cat-script");
+      const btnFixlag = document.getElementById("admin-cat-fixlag");
+
+      if (cat === "script") {
+        btnScript.className = "flex-1 py-2 rounded-lg text-[12.5px] font-bold transition bg-sky-500/20 text-sky-300 border border-sky-400/40";
+        btnFixlag.className = "flex-1 py-2 rounded-lg text-[12.5px] font-bold transition text-slate-400 hover:text-white border border-transparent";
+      } else {
+        btnFixlag.className = "flex-1 py-2 rounded-lg text-[12.5px] font-bold transition bg-sky-500/20 text-sky-300 border border-sky-400/40";
+        btnScript.className = "flex-1 py-2 rounded-lg text-[12.5px] font-bold transition text-slate-400 hover:text-white border border-transparent";
+      }
+
+      // Khi thêm mới, gợi ý kiểu hành động phù hợp
+      if (!document.getElementById("edit-item-id").value) {
+        const actionSelect = document.getElementById("input-item-action");
+        actionSelect.value = cat === "script" ? "copy" : "link";
+        updateValueInputLabels();
+      }
+
+      renderAdminItemsList();
+    }
+
+    function updateValueInputLabels() {
+      const actionType = document.getElementById("input-item-action").value;
+      const label = document.getElementById("label-item-value");
+      const input = document.getElementById("input-item-value");
+      if (actionType === "copy") {
+        label.textContent = "Đoạn mã Script Roblox (Lua) *";
+        input.placeholder = 'loadstring(game:HttpGet("https://..."))()';
+      } else {
+        label.textContent = "Đường dẫn Link tải App / Web (URL) *";
+        input.placeholder = "https://...";
+      }
+    }
+
+    function resetItemForm() {
+      document.getElementById("edit-item-id").value = "";
+      document.getElementById("input-item-title").value = "";
+      document.getElementById("input-item-desc").value = "";
+      document.getElementById("input-item-badge").value = "";
+      document.getElementById("input-item-value").value = "";
+      document.getElementById("input-item-action").value = activeAdminCat === "script" ? "copy" : "link";
+      document.getElementById("item-form-heading").textContent = "+ Thêm mục mới";
+      document.getElementById("btn-save-item").textContent = "➕ Thêm vào danh sách";
+      document.getElementById("btn-cancel-edit").classList.add("hidden");
+      updateValueInputLabels();
+    }
+
+    function startEditItem(itemId) {
+      const item = appData.items.find((i) => i.id === itemId);
+      if (!item) return;
+
+      activeAdminCat = item.category;
+      switchAdminCategory(item.category);
+
+      document.getElementById("edit-item-id").value = item.id;
+      document.getElementById("input-item-title").value = item.title || "";
+      document.getElementById("input-item-desc").value = item.desc || "";
+      document.getElementById("input-item-badge").value = item.badge || "";
+      document.getElementById("input-item-action").value = item.actionType || "link";
+      document.getElementById("input-item-value").value = item.value || "";
+
+      document.getElementById("item-form-heading").textContent = "✏️ Đang chỉnh sửa mục";
+      document.getElementById("btn-save-item").textContent = "💾 Lưu thay đổi";
+      document.getElementById("btn-cancel-edit").classList.remove("hidden");
+      updateValueInputLabels();
+
+      // Cuộn lên đầu form để dễ sửa trên điện thoại
+      document.getElementById("item-form").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function moveItem(itemId, direction) {
+      // Lấy danh sách các index thuộc cùng danh mục
+      const catIndices = [];
+      appData.items.forEach((it, idx) => {
+        if (it.category === activeAdminCat) catIndices.push(idx);
+      });
+
+      const currentIdxInAll = appData.items.findIndex((i) => i.id === itemId);
+      const posInCat = catIndices.indexOf(currentIdxInAll);
+      const targetPosInCat = posInCat + direction;
+
+      if (posInCat === -1 || targetPosInCat < 0 || targetPosInCat >= catIndices.length) return;
+
+      const swapIdxInAll = catIndices[targetPosInCat];
+      const temp = appData.items[currentIdxInAll];
+      appData.items[currentIdxInAll] = appData.items[swapIdxInAll];
+      appData.items[swapIdxInAll] = temp;
+
+      saveData();
+      renderLinksList();
+      renderAdminItemsList();
+    }
+
+    function renderAdminItemsList() {
+      const listEl = document.getElementById("admin-items-list");
+      listEl.innerHTML = "";
+
+      const items = appData.items.filter((i) => i.category === activeAdminCat);
+      if (items.length === 0) {
+        listEl.innerHTML = `<p class="text-[12.5px] text-slate-500 text-center py-4">Chưa có mục nào trong danh mục này.</p>`;
+        return;
+      }
+
+      items.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-2.5";
+
+        row.innerHTML = `
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <p class="text-[13px] font-bold text-white truncate">${escapeHtml(item.title)}</p>
+              ${item.badge ? `<span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold shrink-0">${escapeHtml(item.badge)}</span>` : ""}
+            </div>
+            <p class="text-[11px] text-slate-400 truncate mt-0.5">
+              ${item.actionType === "copy" ? "📋 Copy Script" : "🔗 Mở Link"} • ${escapeHtml(item.value)}
+            </p>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" data-move-up="${item.id}" ${idx === 0 ? "disabled" : ""} class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 hover:text-white disabled:opacity-30 text-xs font-bold flex items-center justify-center">↑</button>
+            <button type="button" data-move-down="${item.id}" ${idx === items.length - 1 ? "disabled" : ""} class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 hover:text-white disabled:opacity-30 text-xs font-bold flex items-center justify-center">↓</button>
+            <button type="button" data-edit="${item.id}" class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 text-xs flex items-center justify-center">✏️</button>
+            <button type="button" data-del="${item.id}" class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs flex items-center justify-center">🗑️</button>
+          </div>
+        `;
+
+        row.querySelector(`[data-move-up]`).addEventListener("click", () => moveItem(item.id, -1));
+        row.querySelector(`[data-move-down]`).addEventListener("click", () => moveItem(item.id, 1));
+        row.querySelector(`[data-edit]`).addEventListener("click", () => startEditItem(item.id));
+        row.querySelector(`[data-del]`).addEventListener("click", () => {
+          openConfirm("Xoá mục này?", `Bạn có chắc muốn xoá "${item.title}" khỏi trang Bio không?`, () => {
+            appData.items = appData.items.filter((x) => x.id !== item.id);
+            saveData();
+            renderLinksList();
+            renderAdminItemsList();
+            showToast("Đã xoá mục thành công!", "info");
+          });
+        });
+
+        listEl.appendChild(row);
+      });
+    }
+
+    function syncAdminProfileForm() {
+      const p = appData.profile;
+      document.getElementById("input-profile-name").value = p.name || "";
+      document.getElementById("input-profile-bio").value = p.bio || "";
+      document.getElementById("input-profile-avatar").value = p.avatarUrl || "";
+      document.getElementById("input-social-tiktok").value = (p.socials && p.socials.tiktok) || "";
+      document.getElementById("input-social-youtube").value = (p.socials && p.socials.youtube) || "";
+      document.getElementById("input-social-discord").value = (p.socials && p.socials.discord) || "";
+    }
+
+    function renderAdminMusicList() {
+      const listEl = document.getElementById("admin-music-list");
+      listEl.innerHTML = "";
+
+      if (!appData.music || appData.music.length === 0) {
+        listEl.innerHTML = `<p class="text-[12px] text-slate-500 text-center py-2">Danh sách nhạc đang trống.</p>`;
+        return;
+      }
+
+      appData.music.forEach((track, idx) => {
+        const isSynth = !track.audioUrl;
+        const row = document.createElement("div");
+        row.className = "p-2.5 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center gap-2";
+
+        row.innerHTML = `
+          <button type="button" class="play-preview-btn w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 flex items-center justify-center text-xs shrink-0">▶</button>
+          <div class="flex-1 min-w-0">
+            <p class="text-[12.5px] font-bold text-white truncate">${escapeHtml(track.title)}</p>
+            <p class="text-[11px] text-slate-400 truncate">
+              ${isSynth ? "✨ Nhạc có sẵn (luôn phát được)" : "🎵 MP3 • " + escapeHtml(track.audioUrl)}
+            </p>
+          </div>
+          <button type="button" class="del-song-btn w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs flex items-center justify-center shrink-0">🗑️</button>
+        `;
+
+        row.querySelector(".play-preview-btn").addEventListener("click", () => {
+          MusicEngine.selectAndPlay(idx);
+          showToast(`Đang phát: ${track.title}`, "info");
+        });
+
+        row.querySelector(".del-song-btn").addEventListener("click", () => {
+          openConfirm("Xoá bài hát?", `Xoá "${track.title}" khỏi trình phát nhạc?`, () => {
+            const wasPlaying = MusicEngine.isPlaying;
+            MusicEngine.pause();
+            appData.music.splice(idx, 1);
+            if (MusicEngine.currentIndex >= appData.music.length) {
+              MusicEngine.currentIndex = 0;
+            }
+            saveData();
+            MusicEngine.updateTrackInfoUI();
+            renderAdminMusicList();
+            if (wasPlaying && appData.music.length > 0) MusicEngine.play();
+            showToast("Đã xoá bài hát!", "info");
+          });
+        });
+
+        listEl.appendChild(row);
+      });
+    }
+
+    // =========================================================================
+    // XUẤT FILE INDEX.HTML ĐỘC LẬP (NHÚNG SẴN TOÀN BỘ DỮ LIỆU NGƯỜI DÙNG)
+    // =========================================================================
+    function generateStandaloneHTML() {
+      const hideFooter = document.getElementById("chk-hide-admin-btn").checked;
+      const exportData = deepClone(appData);
+      exportData.hideFooterAdminBtn = hideFooter;
+      exportData.exportVersion = Date.now();
+
+      // Thoát chuỗi </script> an toàn để không bao giờ phá vỡ thẻ script
+      const safeJson = JSON.stringify(exportData, null, 2).replace(/<\/script>/gi, "<\\/script>");
+
+      // Nhân bản toàn bộ tài liệu hiện tại và làm sạch các trạng thái tạm
+      const docClone = document.documentElement.cloneNode(true);
+
+      // Xoá các thẻ <style> runtime do Tailwind CDN chèn vào để file tải mới sạch sẽ
+      docClone.querySelectorAll("head style").forEach((styleEl) => {
+        if (styleEl.id !== "custom-bio-styles") {
+          styleEl.remove();
+        }
+      });
+
+      // Làm sạch nội dung động (sẽ được render tự động từ DEFAULT_DATA khi mở trang)
+      const clearIds = ["links-container", "social-row", "toast-container", "admin-items-list", "admin-music-list"];
+      clearIds.forEach((id) => {
+        const el = docClone.querySelector(`#${id}`);
+        if (el) el.innerHTML = "";
+      });
+
+      // Đóng các modal & trạng thái cuộn trong bản xuất
+      const adminModal = docClone.querySelector("#admin-modal");
+      if (adminModal) adminModal.classList.add("hidden");
+      const confirmModal = docClone.querySelector("#confirm-modal");
+      if (confirmModal) confirmModal.classList.add("hidden");
+      const bodyRoot = docClone.querySelector("#body-root");
+      if (bodyRoot) bodyRoot.classList.remove("overflow-hidden");
+
+      // Đặt lại trạng thái nút phát nhạc về tạm dừng
+      const disc = docClone.querySelector("#vinyl-disc");
+      if (disc) {
+        disc.classList.remove("vinyl-spinning");
+        disc.classList.add("vinyl-paused");
+      }
+      const eq = docClone.querySelector("#music-eq");
+      if (eq) eq.classList.remove("eq-active");
+      const iconPlay = docClone.querySelector("#icon-play");
+      const iconPause = docClone.querySelector("#icon-pause");
+      if (iconPlay) iconPlay.classList.remove("hidden");
+      if (iconPause) iconPause.classList.add("hidden");
+      const progFill = docClone.querySelector("#music-progress-fill");
+      if (progFill) progFill.style.width = "0%";
+
+      // Cập nhật DEFAULT_DATA bên trong thẻ script chính (dùng hàm callback tránh lỗi ký tự $)
+      const scriptEl = docClone.querySelector("#bio-app-script");
+      if (scriptEl) {
+        scriptEl.textContent = scriptEl.textContent.replace(
+          /\/\* __BIO_DATA_START__ \*\/[\s\S]*?\/\* __BIO_DATA_END__ \*\//,
+          () => `/* __BIO_DATA_START__ */\n    const DEFAULT_DATA = ${safeJson};\n    /* __BIO_DATA_END__ */`
+        );
+      }
+
+      return "<!DOCTYPE html>\n" + docClone.outerHTML;
+    }
+
+    function downloadStandaloneHTML() {
+      try {
+        const htmlContent = generateStandaloneHTML();
+        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "index.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+        showToast("Đã tải file index.html về máy!", "success");
+      } catch (err) {
+        console.error(err);
+        showToast("Có lỗi khi xuất file, bạn thử bấm Copy toàn bộ code HTML nhé!", "error");
+      }
+    }
+
+    // =========================================================================
+    // HIỆU ỨNG HẠT ÁNH SÁNG NỀN (CANVAS RESPONSIVE NHẸ MÁY CHO ĐIỆN THOẠI)
+    // =========================================================================
+    function initParticlesCanvas() {
+      const canvas = document.getElementById("bg-particles");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let w = 0;
+      let h = 0;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        const count = Math.min(34, Math.max(16, Math.floor((w * h) / 26000)));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.8 + 0.6,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.28 - 0.08,
+          alpha: Math.random() * 0.45 + 0.15
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener("resize", resize);
+      draw();
+    }
+
+    // =========================================================================
+    // GẮN SỰ KIỆN & KHỞI CHẠY ỨNG DỤNG
+    // =========================================================================
+    function bindEvents() {
+      // 1. Chuyển 2 Tab chính: Script Roblox / App Fix Lag
+      document.getElementById("tab-btn-script").addEventListener("click", () => {
+        activeMainTab = "script";
+        renderLinksList();
+      });
+
+      document.getElementById("tab-btn-fixlag").addEventListener("click", () => {
+        activeMainTab = "fixlag";
+        renderLinksList();
+      });
+
+      // 2. Điều khiển trình phát nhạc
+      document.getElementById("btn-play-pause").addEventListener("click", () => MusicEngine.toggle());
+      document.getElementById("btn-next-track").addEventListener("click", () => MusicEngine.next());
+      document.getElementById("btn-prev-track").addEventListener("click", () => MusicEngine.prev());
+
+      document.getElementById("music-progress-bar").addEventListener("click", (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        MusicEngine.seek(pct);
+      });
+
+      // 3. Lối tắt bí mật: Chạm 5 lần vào Avatar để mở bảng Quản lý
+      document.getElementById("avatar-trigger").addEventListener("click", () => {
+        avatarTapCount++;
+        clearTimeout(avatarTapTimer);
+        if (avatarTapCount >= 5) {
+          avatarTapCount = 0;
+          showToast("Đã mở bảng Quản lý Bio!", "info");
+          openAdminModal();
+        } else {
+          avatarTapTimer = setTimeout(() => {
+            avatarTapCount = 0;
+          }, 1400);
+        }
+      });
+
+      // 4. Nút mở / đóng Modal Quản lý
+      document.getElementById("btn-open-admin").addEventListener("click", openAdminModal);
+      document.getElementById("btn-close-admin").addEventListener("click", closeAdminModal);
+      document.getElementById("admin-modal").addEventListener("click", (e) => {
+        if (e.target.id === "admin-modal") closeAdminModal();
+      });
+
+      // 5. Tab bên trong Modal Quản lý
+      document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => switchAdminTab(btn.dataset.adminTab));
+      });
+
+      document.getElementById("admin-cat-script").addEventListener("click", () => switchAdminCategory("script"));
+      document.getElementById("admin-cat-fixlag").addEventListener("click", () => switchAdminCategory("fixlag"));
+
+      document.getElementById("input-item-action").addEventListener("change", updateValueInputLabels);
+
+      // Nút chọn nhanh Badge
+      document.querySelectorAll(".quick-badge-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.getElementById("input-item-badge").value = btn.dataset.quickBadge;
+        });
+      });
+
+      document.getElementById("btn-cancel-edit").addEventListener("click", resetItemForm);
+
+      // 6. Lưu thêm mới / cập nhật mục Link hoặc Script
+      document.getElementById("item-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const editId = document.getElementById("edit-item-id").value;
+        const title = document.getElementById("input-item-title").value.trim();
+        const desc = document.getElementById("input-item-desc").value.trim();
+        const badge = document.getElementById("input-item-badge").value.trim();
+        const actionType = document.getElementById("input-item-action").value;
+        const value = document.getElementById("input-item-value").value.trim();
+
+        if (!title || !value) {
+          showToast("Vui lòng nhập đầy đủ Tên và Link/Script!", "error");
+          return;
+        }
+
+        if (editId) {
+          const idx = appData.items.findIndex((i) => i.id === editId);
+          if (idx !== -1) {
+            appData.items[idx] = {
+              ...appData.items[idx],
+              category: activeAdminCat,
+              title,
+              desc,
+              badge,
+              actionType,
+              value
+            };
+          }
+          showToast("Đã cập nhật thành công!", "success");
+        } else {
+          appData.items.unshift({
+            id: "item-" + Date.now(),
+            category: activeAdminCat,
+            title,
+            desc,
+            badge,
+            actionType,
+            value
+          });
+          showToast("Đã thêm mục mới vào trang Bio!", "success");
+        }
+
+        saveData();
+        activeMainTab = activeAdminCat;
+        renderLinksList();
+        renderAdminItemsList();
+        resetItemForm();
+      });
+
+      // 7. Lưu thông tin Hồ sơ
+      document.getElementById("profile-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        appData.profile.name = document.getElementById("input-profile-name").value.trim() || "Gaming & Fix Lag";
+        appData.profile.bio = document.getElementById("input-profile-bio").value.trim();
+        appData.profile.avatarUrl = document.getElementById("input-profile-avatar").value.trim();
+        appData.profile.socials = {
+          tiktok: document.getElementById("input-social-tiktok").value.trim(),
+          youtube: document.getElementById("input-social-youtube").value.trim(),
+          discord: document.getElementById("input-social-discord").value.trim()
+        };
+
+        saveData();
+        renderProfile();
+        showToast("Đã lưu thông tin hồ sơ!", "success");
+      });
+
+      // 8. Thêm bài hát MP3 mới
+      document.getElementById("music-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = document.getElementById("input-song-title").value.trim();
+        const artist = document.getElementById("input-song-artist").value.trim();
+        const url = document.getElementById("input-song-url").value.trim();
+
+        if (!title || !url) {
+          showToast("Vui lòng nhập Tên bài hát và Link MP3!", "error");
+          return;
+        }
+
+        appData.music.push({
+          id: "song-" + Date.now(),
+          title,
+          artist: artist || "Nhạc của bạn",
+          audioUrl: url,
+          synthType: "",
+          duration: 0
+        });
+
+        saveData();
+        document.getElementById("input-song-title").value = "";
+        document.getElementById("input-song-artist").value = "";
+        document.getElementById("input-song-url").value = "";
+
+        renderAdminMusicList();
+        MusicEngine.updateTrackInfoUI();
+        showToast("Đã thêm bài hát mới!", "success");
+      });
+
+      // 9. Xuất file index.html / Copy HTML / Khôi phục mặc định
+      document.getElementById("btn-download-html").addEventListener("click", downloadStandaloneHTML);
+
+      document.getElementById("btn-copy-html").addEventListener("click", async () => {
+        const htmlContent = generateStandaloneHTML();
+        const ok = await copyToClipboard(htmlContent);
+        if (ok) {
+          showToast("Đã copy toàn bộ code HTML!", "success");
+        } else {
+          showToast("Không copy được, hãy dùng nút Tải file index.html!", "error");
+        }
+      });
+
+      document.getElementById("btn-reset-default").addEventListener("click", () => {
+        openConfirm(
+          "Khôi phục mặc định?",
+          "Toàn bộ link và thay đổi tạm trên máy này sẽ quay về bản mẫu ban đầu.",
+          () => {
+            MusicEngine.pause();
+            appData = deepClone(DEFAULT_DATA);
+            appData.hideFooterAdminBtn = false;
+            saveData();
+            renderProfile();
+            renderLinksList();
+            syncAdminProfileForm();
+            renderAdminItemsList();
+            renderAdminMusicList();
+            MusicEngine.currentIndex = 0;
+            MusicEngine.updateTrackInfoUI();
+            showToast("Đã khôi phục dữ liệu mẫu!", "info");
+          }
+        );
+      });
+
+      // 10. Nút xác nhận trong Confirm Modal
+      document.getElementById("confirm-cancel").addEventListener("click", closeConfirm);
+      document.getElementById("confirm-ok").addEventListener("click", () => {
+        const cb = confirmCallback;
+        closeConfirm();
+        if (typeof cb === "function") cb();
+      });
+      document.getElementById("confirm-modal").addEventListener("click", (e) => {
+        if (e.target.id === "confirm-modal") closeConfirm();
+      });
+    }
+
+    function initApp() {
+      appData = loadData();
+      initParticlesCanvas();
+      renderProfile();
+      renderLinksList();
+      MusicEngine.init();
+      bindEvents();
+      switchAdminCategory("script");
+    }
+
+    document.addEventListener("DOMContentLoaded", initApp);
+  </script>
+</body>
+</html>
