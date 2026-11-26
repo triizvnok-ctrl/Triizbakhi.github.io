@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": "2026-11-26T11:34:52.456Z",
+  "updatedAt": "2026-11-26T11:37:00.355Z",
   "pin": "911213",
   "searchEnabled": true,
   "profile": {
@@ -42,57 +42,16 @@
       "duration": 96
     }
   ],
-  "scriptItems": [
-    {
-      "id": "sc-blox-1",
-      "mode": "link",
-      "title": "Blox Fruits Auto Farm",
-      "subtitle": "🔗 Vượt link lấy Script",
-      "value": "https://link4m.com/blox-fruits-auto-farm",
-      "badge": "LINK4M",
-      "image": "",
-      "defaultIcon": "gamepad"
-    },
-    {
-      "id": "sc-redz-2",
-      "mode": "link",
-      "title": "Redz Hub Update",
-      "subtitle": "🔗 Vượt link lấy Script",
-      "value": "https://link4m.com/redz-hub-update",
-      "badge": "HOT",
-      "image": "",
-      "defaultIcon": "gamepad"
-    },
-    {
-      "id": "sc-waves-3",
-      "mode": "copy",
-      "title": "Fix Lag Xóa Sóng Biển",
-      "subtitle": "📋 Chạm để Copy Script",
-      "value": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/gaming-fixlag/scripts/main/xoa-song-bien.lua\"))()",
-      "badge": "MỚI",
-      "image": "",
-      "defaultIcon": "code"
-    }
-  ],
+  "scriptItems": [],
   "appItems": [
     {
-      "id": "app-brotox-1",
+      "id": "app-1795693015775",
       "mode": "link",
-      "title": "Brotox V9",
-      "subtitle": "⚡ Tối ưu FPS",
-      "value": "https://link4m.com/brotox-v9",
-      "badge": "HOT",
-      "image": "",
-      "defaultIcon": "brotox"
-    },
-    {
-      "id": "app-fps-2",
-      "mode": "link",
-      "title": "Tăng Tốc FPS Pro",
-      "subtitle": "⚡ Tối ưu FPS",
-      "value": "https://link4m.com/tang-toc-fps-pro",
-      "badge": "VIP FREE",
-      "image": "",
+      "title": "BROTOX V9",
+      "subtitle": "⚡ App Tăng Hiệu Năng Máy Siêu Ngon",
+      "value": "https://link4m.org/LIiqT7",
+      "badge": "LINK4M",
+      "image": "data:image/webp;base64,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",
       "defaultIcon": "bolt"
     }
   ]
