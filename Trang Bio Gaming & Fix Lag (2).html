@@ -1,0 +1,3757 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaming &amp; Fix Lag • Bio</title>
+
+  <!-- Google Fonts: Be Vietnam Pro & Inter hiển thị tiếng Việt sắc nét trên Mobile -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS tối ưu cho giao diện Gaming Sky Blue, Thanh Tìm Kiếm & Thẻ nổi 3D Brotox V9 -->
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #070b14;
+      color: #f1f5f9;
+      font-family: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Nền tối gaming cao cấp (#070b14) với lưới nhẹ & quầng sáng Sky Blue */
+    .bg-gaming-sky {
+      background-color: #070b14;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.22) 0%, transparent 42%),
+        radial-gradient(circle at 86% 24%, rgba(14, 165, 233, 0.20) 0%, transparent 44%),
+        radial-gradient(circle at 50% 90%, rgba(56, 189, 248, 0.14) 0%, transparent 48%),
+        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    /* Khung Glassmorphism sang trọng */
+    .glass-panel {
+      background: rgba(11, 20, 38, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    /* Thanh tìm kiếm kính mờ phát sáng viền Sky Blue khi bấm vào */
+    .search-glass-box {
+      background: rgba(11, 20, 38, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(56, 189, 248, 0.28);
+      box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .search-glass-box:focus-within {
+      border-color: #38bdf8;
+      background: rgba(13, 25, 48, 0.94);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22), 0 12px 30px -8px rgba(14, 165, 233, 0.35);
+    }
+
+    /* Thẻ Link kiểu Brotox V9 nổi 3D - Ảnh tròn 76px nằm chính giữa phía trên chữ */
+    .brotox-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding: 24px 16px 18px;
+      background: linear-gradient(180deg, #f5fbff 0%, #eef7ff 100%);
+      border: 2.5px solid #0b4f8c;
+      border-radius: 24px;
+      box-shadow: 0 5px 0 #0a3d6b, 0 14px 26px -10px rgba(0, 0, 0, 0.65);
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 5px;
+      transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.12s ease, background 0.2s ease;
+    }
+
+    .brotox-card:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #eef7ff 100%);
+    }
+
+    .brotox-card:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #0a3d6b, 0 6px 14px -6px rgba(0, 0, 0, 0.55);
+    }
+
+    .brotox-avatar-wrap {
+      width: 76px;
+      height: 76px;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 3px solid #0b4f8c;
+      background: #0b1322;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(11, 79, 140, 0.30), 0 0 0 3px rgba(56, 189, 248, 0.28);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .brotox-title {
+      color: #0b5ca8;
+      font-weight: 800;
+      font-size: 18.5px;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+      word-break: break-word;
+      max-width: 96%;
+    }
+
+    .brotox-sub-pill {
+      margin-top: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background-color: #d9eeff;
+      color: #0b5ca8;
+      border: 1.5px solid rgba(11, 92, 168, 0.22);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .brotox-card.copied-state .brotox-sub-pill {
+      background-color: #10b981;
+      color: #ffffff;
+      border-color: #059669;
+    }
+
+    /* Vòng sáng xanh da trời xoay nhẹ quanh Avatar */
+    @keyframes spinRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .avatar-ring-glow {
+      background: conic-gradient(
+        from 0deg,
+        #38bdf8,
+        #0ea5e9,
+        #7dd3fc,
+        rgba(56, 189, 248, 0.15),
+        #38bdf8
+      );
+      animation: spinRing 5.5s linear infinite;
+    }
+
+    /* Đĩa nhạc xoay mượt */
+    .vinyl-playing {
+      animation: spinRing 5s linear infinite;
+    }
+
+    .vinyl-paused {
+      animation: spinRing 5s linear infinite;
+      animation-play-state: paused;
+    }
+
+    /* Sóng nhạc Equalizer */
+    @keyframes eqA { 0%, 100% { height: 28%; } 50% { height: 95%; } }
+    @keyframes eqB { 0%, 100% { height: 78%; } 50% { height: 22%; } }
+    @keyframes eqC { 0%, 100% { height: 40%; } 50% { height: 100%; } }
+    @keyframes eqD { 0%, 100% { height: 64%; } 50% { height: 25%; } }
+
+    .eq-running .eq-1 { animation: eqA 0.56s ease-in-out infinite; }
+    .eq-running .eq-2 { animation: eqB 0.46s ease-in-out infinite; }
+    .eq-running .eq-3 { animation: eqC 0.66s ease-in-out infinite; }
+    .eq-running .eq-4 { animation: eqD 0.50s ease-in-out infinite; }
+
+    /* Thanh trượt âm lượng Sky Blue */
+    input[type="range"].sky-range {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    input[type="range"].sky-range::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    input[type="range"].sky-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background: #38bdf8;
+      border: 2px solid #f0f9ff;
+      margin-top: -7px;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.85);
+    }
+
+    input[type="range"].sky-range::-moz-range-track {
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    input[type="range"].sky-range::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background: #38bdf8;
+      border: 2px solid #f0f9ff;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.85);
+    }
+
+    /* Hiệu ứng trượt lên mượt mà */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-card {
+      animation: fadeUp 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes modalUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-modal {
+      animation: modalUp 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(7, 11, 20, 0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.38); border-radius: 9999px; }
+  </style>
+</head>
+
+<body id="body-root" class="text-slate-100 antialiased selection:bg-sky-400/30 selection:text-sky-100 relative">
+
+  <!-- Nền Gaming Sky Blue cố định -->
+  <div class="fixed inset-0 bg-gaming-sky pointer-events-none z-0"></div>
+
+  <!-- Khung thông báo Toast nổi phía trên -->
+  <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[120] flex flex-col items-center gap-2 w-[92%] max-w-[420px] pointer-events-none"></div>
+
+  <!-- ================= GIAO DIỆN CHÍNH MOBILE-FIRST (MAX 460PX) ================= -->
+  <main class="relative z-10 w-full max-w-[460px] mx-auto px-4 pt-8 pb-12 min-h-screen flex flex-col">
+
+    <!-- ================= 1. HEADER & HỒ SƠ ================= -->
+    <header class="flex flex-col items-center text-center mb-5">
+      <!-- Avatar vòng sáng xoay — Chạm 5 lần liên tiếp trong 3 giây để mở bảng PIN Chủ Web -->
+      <div id="avatar-secret-trigger" class="relative group cursor-pointer select-none mb-3.5" title="Ảnh đại diện">
+        <div class="absolute -inset-2.5 rounded-full bg-sky-400/25 blur-xl group-hover:bg-sky-400/35 transition duration-300"></div>
+        <div class="relative p-[3px] rounded-full avatar-ring-glow shadow-[0_0_24px_rgba(56,189,248,0.45)]">
+          <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-950 border-2 border-[#070b14] flex items-center justify-center relative">
+            <img id="profile-avatar-img" src="" alt="Avatar" class="w-full h-full object-cover hidden" />
+            <div id="profile-avatar-fallback" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0b1f3a] via-[#0ea5e9] to-[#070b14]">
+              <svg class="w-12 h-12 text-sky-200 drop-shadow-[0_0_10px_rgba(56,189,248,0.85)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="4"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <circle cx="15.5" cy="11" r="1" fill="currentColor"></circle>
+                <circle cx="17.5" cy="13" r="1" fill="currentColor"></circle>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Chấm trạng thái online -->
+        <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#070b14] shadow-[0_0_10px_rgba(52,211,153,0.9)]"></span>
+      </div>
+
+      <!-- Tên kênh + Tích xanh xác minh -->
+      <div class="flex items-center justify-center gap-1.5 mb-1">
+        <h1 id="profile-name" class="text-[22px] font-extrabold tracking-tight text-white">
+          Gaming &amp; Fix Lag
+        </h1>
+        <svg id="profile-verified-badge" class="w-5 h-5 text-sky-400 shrink-0 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" viewBox="0 0 24 24" fill="currentColor" aria-label="Đã xác minh">
+          <path d="M12 2L14.8 4.2L18.3 4.1L19.4 7.5L22.2 9.6L21.1 13L22.2 16.4L19.4 18.5L18.3 21.9L14.8 21.8L12 24L9.2 21.8L5.7 21.9L4.6 18.5L1.8 16.4L2.9 13L1.8 9.6L4.6 7.5L5.7 4.1L9.2 4.2L12 2Z" />
+          <path d="M9.2 12.6L11.1 14.5L15.3 10.3" stroke="#070b14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+      </div>
+
+      <!-- Mô tả bio -->
+      <p id="profile-bio" class="text-[13.5px] text-sky-100/80 leading-relaxed max-w-[350px]">
+        Chia sẻ Script Roblox mượt &amp; App Fix Lag tăng FPS cực đã cho điện thoại
+      </p>
+    </header>
+
+    <!-- ================= 2. TRÌNH PHÁT NHẠC GLASSMORPHISM ================= -->
+    <section id="music-player-section" aria-label="Trình phát nhạc" class="glass-panel rounded-3xl p-3.5 mb-4 relative overflow-hidden">
+      <div class="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-sky-400/20 blur-2xl pointer-events-none"></div>
+
+      <div class="flex items-center gap-3 relative z-10">
+        <!-- Đĩa nhạc / Ảnh bìa xoay tròn -->
+        <div id="vinyl-disc" class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 via-slate-900 to-black border-2 border-sky-400/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(56,189,248,0.38)] overflow-hidden relative vinyl-paused">
+          <img id="track-cover-img" src="" alt="Ảnh bìa" class="w-full h-full object-cover hidden" />
+          <div id="track-cover-default" class="w-full h-full flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full border border-slate-700/90 flex items-center justify-center">
+              <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-[#0ea5e9] to-[#38bdf8] flex items-center justify-center">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#070b14]"></div>
+              </div>
+            </div>
+          </div>
+          <div id="track-cover-dot" class="hidden absolute w-3 h-3 rounded-full bg-[#070b14]/90 border border-sky-300/80 pointer-events-none"></div>
+        </div>
+
+        <!-- Tên bài hát + Nghệ sĩ + Sóng nhạc -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <p id="track-title" class="text-[13.5px] font-bold text-white truncate">Midnight Lo-Fi Chill</p>
+            <div id="music-eq" class="flex items-end gap-[2px] h-3.5 shrink-0">
+              <span class="eq-1 w-[3px] h-[30%] bg-sky-400 rounded-full"></span>
+              <span class="eq-2 w-[3px] h-[68%] bg-cyan-300 rounded-full"></span>
+              <span class="eq-3 w-[3px] h-[42%] bg-sky-400 rounded-full"></span>
+              <span class="eq-4 w-[3px] h-[56%] bg-sky-300 rounded-full"></span>
+            </div>
+          </div>
+          <p id="track-artist" class="text-[11.5px] text-sky-200/75 truncate mt-0.5">Gaming Beats • Nhạc tích hợp</p>
+        </div>
+
+        <!-- Các nút điều khiển: Trước / Phát-Dừng / Sau / Loa -->
+        <div class="flex items-center gap-0.5 shrink-0">
+          <button id="btn-prev-track" type="button" aria-label="Bài trước" class="w-7 h-8 rounded-xl flex items-center justify-center text-sky-200 hover:text-white hover:bg-sky-400/20 active:scale-90 transition">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+          </button>
+
+          <button id="btn-play-pause" type="button" aria-label="Phát hoặc tạm dừng" class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0ea5e9] to-[#38bdf8] text-slate-950 flex items-center justify-center shadow-[0_0_18px_rgba(56,189,248,0.55)] hover:brightness-110 active:scale-90 transition mx-0.5">
+            <svg id="icon-play" class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icon-pause" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+          </button>
+
+          <button id="btn-next-track" type="button" aria-label="Bài tiếp theo" class="w-7 h-8 rounded-xl flex items-center justify-center text-sky-200 hover:text-white hover:bg-sky-400/20 active:scale-90 transition">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
+
+          <button id="btn-mute-toggle" type="button" aria-label="Tắt hoặc mở tiếng" class="w-8 h-8 rounded-xl flex items-center justify-center text-sky-200 hover:text-white hover:bg-sky-400/20 active:scale-90 transition">
+            <svg id="icon-vol-on" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <svg id="icon-vol-off" class="w-4 h-4 hidden text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Thanh tiến trình tua nhạc -->
+      <div class="mt-3 flex items-center gap-2.5 relative z-10">
+        <span id="music-current-time" class="text-[10.5px] font-semibold text-sky-200/80 tabular-nums w-9">0:00</span>
+        <div class="flex-1 relative flex items-center h-5">
+          <div class="w-full h-1.5 bg-slate-950/90 rounded-full overflow-hidden border border-sky-400/20 pointer-events-none">
+            <div id="music-progress-fill" class="h-full w-0 bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] rounded-full"></div>
+          </div>
+          <input id="music-seek-slider" type="range" min="0" max="1000" value="0" aria-label="Tua nhạc" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+        </div>
+        <span id="music-duration" class="text-[10.5px] font-semibold text-sky-200/80 tabular-nums w-9 text-right">1:30</span>
+      </div>
+
+      <audio id="html-audio-player" preload="metadata" crossorigin="anonymous"></audio>
+    </section>
+
+    <!-- ================= 3. THANH TÌM KIẾM THÔNG MINH (XUYÊN SUỐT 2 MỤC + KHÔNG DẤU) ================= -->
+    <section id="search-bar-section" aria-label="Tìm kiếm nhanh" class="mb-4">
+      <div class="search-glass-box rounded-2xl flex items-center px-3.5 py-2.5 gap-2.5">
+        <!-- Icon kính lúp bên trái -->
+        <svg class="w-5 h-5 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <path d="M20 20l-3.6-3.6"></path>
+        </svg>
+
+        <!-- Ô nhập từ khóa tìm kiếm thời gian thực -->
+        <input
+          id="public-search-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          enterkeyhint="search"
+          placeholder="🔍 Tìm nhanh Script, App Fix Lag (VD: Brotox, Blox...)"
+          aria-label="Tìm kiếm Script Roblox và App Fix Lag"
+          class="w-full bg-transparent text-[13.5px] font-medium text-white placeholder-sky-200/55 focus:outline-none min-w-0"
+        />
+
+        <!-- Nút X xóa nhanh bên phải -->
+        <button
+          id="btn-clear-search"
+          type="button"
+          aria-label="Xóa từ khóa tìm kiếm"
+          class="hidden w-7 h-7 rounded-full bg-sky-400/20 hover:bg-sky-400/35 text-sky-200 hover:text-white flex items-center justify-center shrink-0 active:scale-90 transition"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Thanh trạng thái số kết quả khi đang tìm kiếm -->
+      <div id="search-status-bar" class="hidden mt-2.5 px-3.5 py-2 rounded-2xl glass-panel flex items-center justify-between gap-2 anim-card">
+        <p id="search-status-text" class="text-[12px] font-semibold text-sky-100 truncate">
+          Tìm thấy 0 kết quả
+        </p>
+        <button
+          id="btn-reset-search-status"
+          type="button"
+          class="text-[11.5px] font-extrabold text-sky-300 hover:text-white px-2.5 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/35 shrink-0 active:scale-95 transition"
+        >
+          Xóa tìm kiếm
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= 4. THANH CHUYỂN 2 TAB CHÍNH (HIỆN KHI Ô TÌM KIẾM TRỐNG) ================= -->
+    <nav id="main-tabs-nav" aria-label="Danh mục chính" class="glass-panel p-1.5 rounded-full mb-5 grid grid-cols-2 gap-1.5">
+      <button id="tab-btn-script" type="button" class="py-3 px-3 rounded-full text-[13.5px] font-extrabold flex items-center justify-center gap-1.5 transition-all duration-200">
+        <span>🎮</span>
+        <span>Script Roblox</span>
+        <span id="count-script" class="text-[11px] px-1.5 py-0.5 rounded-full font-extrabold">0</span>
+      </button>
+
+      <button id="tab-btn-fixlag" type="button" class="py-3 px-3 rounded-full text-[13.5px] font-extrabold flex items-center justify-center gap-1.5 transition-all duration-200">
+        <span>⚡</span>
+        <span>App Fix Lag</span>
+        <span id="count-fixlag" class="text-[11px] px-1.5 py-0.5 rounded-full font-extrabold">0</span>
+      </button>
+    </nav>
+
+    <!-- ================= 5. DANH SÁCH THẺ LINK KIỂU BROTOX V9 ================= -->
+    <section id="links-container" class="flex flex-col gap-3.5 flex-1"></section>
+
+    <!-- ================= 6. CHÂN TRANG (ẨN TUYỆT ĐỐI NÚT QUẢN LÝ KHI CHẠY ONLINE) ================= -->
+    <footer class="mt-9 pt-4 border-t border-sky-400/15 flex flex-col items-center gap-3 text-center">
+      <!-- Nút này CHỈ hiện ở chế độ xem thử cục bộ/preview, tự động ẩn hoàn toàn trên GitHub Pages & tên miền công khai -->
+      <button
+        id="btn-open-admin"
+        type="button"
+        style="display: none;"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/45 text-[13px] font-bold text-sky-200 transition active:scale-95 shadow-lg shadow-black/40"
+      >
+        <span>⚙️</span>
+        <span>Quản lý &amp; Thêm Link</span>
+      </button>
+
+      <p class="text-[11.5px] text-sky-200/45">
+        Chạm vào thẻ để mở link tải hoặc copy nhanh
+      </p>
+    </footer>
+  </main>
+
+  <!-- ================= 7. MODAL NHẬP MÃ PIN CHỦ WEB ================= -->
+  <div id="pin-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div class="w-full max-w-[340px] bg-[#0b1528] border border-sky-400/35 rounded-3xl p-5 shadow-2xl anim-modal">
+      <div class="text-center mb-4">
+        <div class="w-12 h-12 rounded-2xl bg-sky-500/20 border border-sky-400/40 text-2xl flex items-center justify-center mx-auto mb-2.5">🔐</div>
+        <h3 class="text-[17px] font-extrabold text-white">Mã PIN Chủ Web</h3>
+        <p class="text-[12px] text-sky-200/75 mt-1">Nhập Mã PIN để mở Bảng Quản Lý</p>
+      </div>
+
+      <form id="pin-form" class="space-y-3">
+        <input
+          id="input-pin-code"
+          type="password"
+          inputmode="numeric"
+          autocomplete="off"
+          maxlength="8"
+          placeholder="Nhập PIN (mặc định: 1234)"
+          class="w-full px-4 py-3 rounded-2xl bg-slate-950 border border-sky-500/35 text-center text-[18px] tracking-[0.35em] font-extrabold text-white placeholder-slate-500 placeholder:tracking-normal placeholder:text-[13px] placeholder:font-medium focus:outline-none focus:border-sky-400"
+        />
+        <p id="pin-error-msg" class="hidden text-[12px] font-bold text-rose-400 text-center">Mã PIN chưa đúng, bạn thử lại nhé!</p>
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button id="btn-pin-cancel" type="button" class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[13px] transition">
+            Đóng
+          </button>
+          <button type="submit" class="py-2.5 rounded-xl bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 font-extrabold text-[13px] transition active:scale-95">
+            Mở khóa
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= 8. MODAL QUẢN LÝ CHỦ WEB (5 TAB + THANH LƯU THẲNG LÊN WEB CỐ ĐỊNH) ================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-sm p-0 sm:p-4">
+    <div class="w-full max-w-[520px] h-[94vh] sm:max-h-[92vh] bg-[#091224] border-t sm:border border-sky-400/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden anim-modal">
+
+      <!-- Header Modal -->
+      <div class="px-4 py-3 border-b border-sky-400/15 flex items-center justify-between bg-[#0d1930] shrink-0">
+        <div class="min-w-0">
+          <h2 class="text-[15.5px] font-extrabold text-white flex items-center gap-1.5 truncate">
+            <span>⚙️</span> Quản Lý Bio Cloud
+          </h2>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <span id="gh-status-dot" class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+            <p id="gh-status-text" class="text-[11px] text-sky-200/75 truncate">Chưa gắn Token GitHub</p>
+          </div>
+        </div>
+        <button id="btn-close-admin" type="button" aria-label="Đóng" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 flex items-center justify-center active:scale-90 transition shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Banner nhắc nhở khi có thay đổi chưa lưu lên Web -->
+      <div id="unsaved-banner" class="hidden px-3.5 py-2 bg-amber-500/20 border-b border-amber-400/35 flex items-center justify-between gap-2 shrink-0">
+        <p class="text-[11.5px] font-bold text-amber-200 leading-tight">
+          ⚠️ Bạn có thay đổi chưa lưu lên Web
+        </p>
+        <button id="btn-banner-save-now" type="button" class="px-3 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-extrabold text-[11.5px] shrink-0 active:scale-95 transition shadow">
+          ☁️ Lưu ngay
+        </button>
+      </div>
+
+      <!-- 5 Tab điều hướng tối ưu điện thoại -->
+      <div class="px-2 py-2 bg-[#0b162b] border-b border-sky-400/15 grid grid-cols-5 gap-1 shrink-0">
+        <button data-admin-tab="script" type="button" class="admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+          <span class="text-[15px] leading-none">🎮</span>
+          <span class="leading-tight truncate max-w-full">Script</span>
+        </button>
+        <button data-admin-tab="fixlag" type="button" class="admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+          <span class="text-[15px] leading-none">⚡</span>
+          <span class="leading-tight truncate max-w-full">Fix Lag</span>
+        </button>
+        <button data-admin-tab="music" type="button" class="admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+          <span class="text-[15px] leading-none">🎵</span>
+          <span class="leading-tight truncate max-w-full">Nhạc</span>
+        </button>
+        <button data-admin-tab="profile" type="button" class="admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+          <span class="text-[15px] leading-none">👤</span>
+          <span class="leading-tight truncate max-w-full">Hồ sơ</span>
+        </button>
+        <button data-admin-tab="github" type="button" class="admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+          <span class="text-[15px] leading-none">☁️</span>
+          <span class="leading-tight truncate max-w-full">GitHub</span>
+        </button>
+      </div>
+
+      <!-- Nội dung cuộn của 5 Tab -->
+      <div id="admin-scroll-body" class="p-4 overflow-y-auto flex-1 space-y-4">
+
+        <!-- ========== TAB 1: 🎮 SCRIPT ROBLOX ========== -->
+        <div id="admin-panel-script" class="space-y-4">
+          <form id="script-form" class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-3.5">
+            <div class="flex items-center justify-between">
+              <h3 id="script-form-heading" class="text-[14px] font-extrabold text-sky-300">➕ Thêm Script Roblox mới</h3>
+              <button id="btn-cancel-script-edit" type="button" class="hidden text-[12px] font-bold text-rose-400 hover:underline">Hủy sửa</button>
+            </div>
+            <input type="hidden" id="edit-script-id" value="" />
+
+            <!-- Nút chuyển chế độ: Mặc định Gắn Link (Link4m / Vượt link) -->
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1.5">Kiểu chia sẻ Script</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="btn-script-mode-link" type="button" class="py-2.5 px-2 rounded-2xl text-[11.5px] font-extrabold border-2 transition flex flex-col items-center justify-center gap-1 text-center">
+                  <span class="text-base leading-none">🔗</span>
+                  <span class="leading-tight">Gắn Link<br/>(Link4m / Vượt link)</span>
+                </button>
+                <button id="btn-script-mode-copy" type="button" class="py-2.5 px-2 rounded-2xl text-[11.5px] font-extrabold border-2 transition flex flex-col items-center justify-center gap-1 text-center">
+                  <span class="text-base leading-none">📋</span>
+                  <span class="leading-tight">Dán Code Script<br/>(Copy 1 chạm)</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Tiêu đề Script *</label>
+              <input id="input-script-title" type="text" required placeholder="VD: Blox Fruits Auto Farm" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <!-- Ô nhập URL Link4m -->
+            <div id="script-link-box">
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Đường dẫn Link4m / URL *</label>
+              <input id="input-script-url" type="text" placeholder="https://link4m.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono" />
+            </div>
+
+            <!-- Ô nhập Code Lua -->
+            <div id="script-code-box" class="hidden">
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Đoạn mã Script Lua *</label>
+              <textarea id="input-script-code" rows="3" placeholder='loadstring(game:HttpGet("https://..."))()' class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Mô tả phụ trên thẻ</label>
+              <input id="input-script-subtitle" type="text" value="🔗 Vượt link lấy Script" placeholder="🔗 Vượt link lấy Script" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1.5">Nhãn nổi bật góc trên phải</label>
+              <input type="hidden" id="input-script-badge" value="LINK4M" />
+              <div id="script-badge-group" class="flex flex-wrap gap-1.5">
+                <button type="button" data-badge="LINK4M" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">LINK4M</button>
+                <button type="button" data-badge="HOT" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">HOT</button>
+                <button type="button" data-badge="MỚI" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">MỚI</button>
+                <button type="button" data-badge="VIP FREE" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">VIP FREE</button>
+                <button type="button" data-badge="" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">Không</button>
+              </div>
+            </div>
+
+            <!-- Chọn ảnh hiển thị phía trên chữ -->
+            <div class="p-3 rounded-2xl bg-slate-950/80 border border-sky-400/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[12px] font-bold text-sky-300">🖼️ Ảnh hiển thị phía trên chữ</span>
+                <button id="btn-clear-script-img" type="button" class="text-[11.5px] font-bold text-rose-400 hover:underline">Xóa ảnh</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sky-400/60 bg-slate-900 flex items-center justify-center shrink-0">
+                  <img id="preview-script-img" src="" alt="" class="w-full h-full object-cover hidden" />
+                  <span id="placeholder-script-img" class="text-2xl">🎮</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <input id="file-script-img" type="file" accept="image/*" class="hidden" />
+                  <button id="btn-pick-script-img" type="button" class="w-full py-2.5 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/45 text-sky-200 font-bold text-[12px] transition active:scale-95">
+                    📷 Chọn ảnh từ điện thoại
+                  </button>
+                  <p id="info-script-img" class="text-[10.5px] text-sky-200/55 mt-1">Tự cắt vuông &amp; nén siêu nhẹ (&lt;30KB)</p>
+                </div>
+              </div>
+            </div>
+
+            <button id="btn-submit-script" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 font-extrabold text-[13.5px] shadow-lg shadow-sky-500/25 active:scale-[0.98] transition">
+              ➕ Thêm Script vào danh sách
+            </button>
+          </form>
+
+          <div>
+            <h4 class="text-[12px] font-bold text-sky-200/75 uppercase tracking-wider mb-2">Danh sách Script Roblox</h4>
+            <div id="admin-script-list" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+        <!-- ========== TAB 2: ⚡ APP FIX LAG ========== -->
+        <div id="admin-panel-fixlag" class="hidden space-y-4">
+          <form id="fixlag-form" class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-3.5">
+            <div class="flex items-center justify-between">
+              <h3 id="fixlag-form-heading" class="text-[14px] font-extrabold text-sky-300">➕ Thêm App Fix Lag mới</h3>
+              <button id="btn-cancel-fixlag-edit" type="button" class="hidden text-[12px] font-bold text-rose-400 hover:underline">Hủy sửa</button>
+            </div>
+            <input type="hidden" id="edit-fixlag-id" value="" />
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Tên App Fix Lag *</label>
+              <input id="input-fixlag-title" type="text" required placeholder="VD: Brotox V9" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Link tải App / Link4m *</label>
+              <input id="input-fixlag-url" type="text" required placeholder="https://link4m.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Mô tả phụ trên thẻ</label>
+              <input id="input-fixlag-subtitle" type="text" value="⚡ Tối ưu FPS" placeholder="⚡ Tối ưu FPS" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1.5">Nhãn nổi bật góc trên phải</label>
+              <input type="hidden" id="input-fixlag-badge" value="HOT" />
+              <div id="fixlag-badge-group" class="flex flex-wrap gap-1.5">
+                <button type="button" data-badge="HOT" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">HOT</button>
+                <button type="button" data-badge="MỚI" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">MỚI</button>
+                <button type="button" data-badge="VIP FREE" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">VIP FREE</button>
+                <button type="button" data-badge="LINK4M" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">LINK4M</button>
+                <button type="button" data-badge="" class="badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition">Không</button>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-slate-950/80 border border-sky-400/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[12px] font-bold text-sky-300">🖼️ Ảnh hiển thị phía trên chữ</span>
+                <button id="btn-clear-fixlag-img" type="button" class="text-[11.5px] font-bold text-rose-400 hover:underline">Xóa ảnh</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sky-400/60 bg-slate-900 flex items-center justify-center shrink-0">
+                  <img id="preview-fixlag-img" src="" alt="" class="w-full h-full object-cover hidden" />
+                  <span id="placeholder-fixlag-img" class="text-2xl">⚡</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <input id="file-fixlag-img" type="file" accept="image/*" class="hidden" />
+                  <button id="btn-pick-fixlag-img" type="button" class="w-full py-2.5 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/45 text-sky-200 font-bold text-[12px] transition active:scale-95">
+                    📷 Chọn ảnh từ điện thoại
+                  </button>
+                  <p id="info-fixlag-img" class="text-[10.5px] text-sky-200/55 mt-1">Tự cắt vuông &amp; nén siêu nhẹ (&lt;30KB)</p>
+                </div>
+              </div>
+            </div>
+
+            <button id="btn-submit-fixlag" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 font-extrabold text-[13.5px] shadow-lg shadow-sky-500/25 active:scale-[0.98] transition">
+              ➕ Thêm App Fix Lag vào danh sách
+            </button>
+          </form>
+
+          <div>
+            <h4 class="text-[12px] font-bold text-sky-200/75 uppercase tracking-wider mb-2">Danh sách App Fix Lag</h4>
+            <div id="admin-fixlag-list" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+        <!-- ========== TAB 3: 🎵 CHỈNH NHẠC ========== -->
+        <div id="admin-panel-music" class="hidden space-y-4">
+          <div class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-3.5">
+            <h3 class="text-[13.5px] font-extrabold text-sky-300">🎛️ Cài đặt trình phát nhạc</h3>
+
+            <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/75 border border-sky-400/15">
+              <div>
+                <p class="text-[13px] font-bold text-white">Hiển thị khung phát nhạc</p>
+                <p class="text-[11px] text-sky-200/65">Bật hoặc ẩn thanh nhạc ngoài trang chính</p>
+              </div>
+              <button id="toggle-music-visible" type="button" role="switch" aria-checked="true" class="w-12 h-7 rounded-full p-1 transition-colors duration-200 bg-sky-400 flex items-center shrink-0">
+                <span id="toggle-music-knob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200 translate-x-5"></span>
+              </button>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-950/75 border border-sky-400/15 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[12.5px] font-bold text-white">🔊 Âm lượng mặc định</span>
+                <span id="label-default-volume" class="text-[12.5px] font-extrabold text-sky-300 tabular-nums">75%</span>
+              </div>
+              <input id="slider-default-volume" type="range" min="0" max="100" value="75" class="w-full sky-range" />
+            </div>
+
+            <div class="space-y-1.5">
+              <span class="block text-[12px] font-semibold text-sky-100/85">Chế độ phát khi hết bài</span>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="btn-mode-next" type="button" class="py-2.5 px-2.5 rounded-xl text-[12px] font-bold border transition">
+                  🔁 Tự chuyển bài
+                </button>
+                <button id="btn-mode-repeat" type="button" class="py-2.5 px-2.5 rounded-xl text-[12px] font-bold border transition">
+                  🔂 Lặp 1 bài
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <form id="music-form" class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 id="music-form-heading" class="text-[13.5px] font-extrabold text-sky-300">➕ Thêm bài hát mới</h3>
+              <button id="btn-cancel-music-edit" type="button" class="hidden text-[12px] font-bold text-rose-400 hover:underline">Hủy sửa</button>
+            </div>
+            <input type="hidden" id="edit-music-id" value="" />
+
+            <div class="grid grid-cols-2 gap-1.5 bg-slate-950 p-1 rounded-xl border border-sky-400/20">
+              <button id="btn-src-url" type="button" class="py-2 px-2 rounded-lg text-[11.5px] font-bold transition">
+                🔗 Dán link MP3
+              </button>
+              <button id="btn-src-file" type="button" class="py-2 px-2 rounded-lg text-[11.5px] font-bold transition">
+                📂 Chọn file từ máy
+              </button>
+            </div>
+
+            <div id="music-synth-note" class="hidden p-2.5 rounded-xl bg-sky-500/15 border border-sky-400/30 text-[11.5px] text-sky-200">
+              ✨ Đang sửa bài nhạc tích hợp sẵn. Bạn có thể đổi tên, nghệ sĩ, ảnh bìa hoặc chọn nguồn ở trên để thay bằng MP3 riêng.
+            </div>
+
+            <div id="music-source-url-box" class="space-y-1.5">
+              <label class="block text-[11.5px] font-semibold text-sky-100/85">Link nhạc (.mp3 / .m4a / .ogg) *</label>
+              <input id="input-music-url" type="text" placeholder="https://files.catbox.moe/abc123.mp3" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono" />
+              <p class="text-[11px] text-sky-200/75 leading-relaxed bg-sky-500/10 border border-sky-400/20 rounded-xl px-2.5 py-2">
+                💡 <strong>Mẹo siêu nhẹ:</strong> Vào <span class="text-sky-300 font-bold">catbox.moe</span> trên điện thoại, tải bài <code>.mp3</code> lên rồi dán link vào đây để web tải cực nhanh!
+              </p>
+            </div>
+
+            <div id="music-source-file-box" class="hidden space-y-2">
+              <input id="file-music-audio" type="file" accept="audio/*" class="hidden" />
+              <button id="btn-pick-music-file" type="button" class="w-full py-3 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-dashed border-sky-400/60 text-sky-200 font-bold text-[12.5px] transition active:scale-95 flex items-center justify-center gap-2">
+                <span>📂</span>
+                <span>Chọn file nhạc (.mp3 / .m4a) từ điện thoại</span>
+              </button>
+              <div id="music-file-status" class="hidden p-2.5 rounded-xl bg-slate-950 border border-emerald-400/35 text-[12px] text-emerald-300 flex items-center justify-between gap-2">
+                <span id="music-file-info-text" class="truncate font-semibold"></span>
+                <button id="btn-clear-music-file" type="button" class="text-[11px] font-bold text-rose-400 shrink-0">Xóa</button>
+              </div>
+              <div id="music-file-size-warn" class="hidden p-2.5 rounded-xl bg-amber-500/15 border border-amber-400/40 text-[11.5px] text-amber-200 leading-relaxed">
+                ⚠️ File nhạc lớn hơn <strong>4MB</strong> sẽ làm file <code>data.json</code> nặng và tải chậm hơn. Khuyên bạn up lên <strong>catbox.moe</strong> rồi dán link nhé!
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Tên bài hát *</label>
+              <input id="input-music-title" type="text" required placeholder="VD: Phonk Gaming Remix" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Nghệ sĩ / Mô tả</label>
+              <input id="input-music-artist" type="text" placeholder="VD: Nhạc chiến Roblox" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white placeholder-slate-500 focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div class="p-3 rounded-2xl bg-slate-950/80 border border-sky-400/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[12px] font-bold text-sky-300">🖼️ Ảnh bìa đĩa nhạc (tùy chọn)</span>
+                <button id="btn-clear-cover-img" type="button" class="text-[11.5px] font-bold text-rose-400 hover:underline">Xóa bìa</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-sky-400/60 bg-slate-900 flex items-center justify-center shrink-0">
+                  <img id="preview-cover-img" src="" alt="" class="w-full h-full object-cover hidden" />
+                  <span id="placeholder-cover-img" class="text-xl">💿</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <input id="file-cover-img" type="file" accept="image/*" class="hidden" />
+                  <button id="btn-pick-cover-img" type="button" class="w-full py-2 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 font-bold text-[12px] transition active:scale-95">
+                    📷 Chọn ảnh bìa từ máy
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button id="btn-submit-music" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 font-extrabold text-[13.5px] shadow-lg shadow-sky-500/25 active:scale-[0.98] transition">
+              ➕ Thêm vào Playlist
+            </button>
+          </form>
+
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <h4 class="text-[12px] font-bold text-sky-200/75 uppercase tracking-wider">Danh sách Playlist</h4>
+              <button id="btn-restore-builtin-music" type="button" class="text-[11px] font-bold text-sky-400 hover:underline">
+                + Nạp lại 2 bài mặc định
+              </button>
+            </div>
+            <div id="admin-music-list" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+        <!-- ========== TAB 4: 👤 HỒ SƠ ========== -->
+        <div id="admin-panel-profile" class="hidden space-y-4">
+          <form id="profile-form" class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-3.5">
+            <h3 class="text-[14px] font-extrabold text-sky-300">👤 Chỉnh sửa Hồ sơ Bio</h3>
+
+            <div class="p-3 rounded-2xl bg-slate-950/80 border border-sky-400/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[12px] font-bold text-sky-200">Ảnh đại diện (Avatar)</span>
+                <button id="btn-clear-avatar" type="button" class="text-[11.5px] font-bold text-rose-400 hover:underline">Xóa ảnh</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sky-400/60 bg-slate-900 flex items-center justify-center shrink-0">
+                  <img id="preview-avatar-img" src="" alt="" class="w-full h-full object-cover hidden" />
+                  <span id="placeholder-avatar-img" class="text-2xl">🎮</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <input id="file-avatar-img" type="file" accept="image/*" class="hidden" />
+                  <button id="btn-pick-avatar-img" type="button" class="w-full py-2.5 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/45 text-sky-200 font-bold text-[12px] transition active:scale-95">
+                    📷 Chọn Avatar từ điện thoại
+                  </button>
+                  <p class="text-[10.5px] text-sky-200/55 mt-1">Tự cắt tròn &amp; nén nhẹ (&lt;30KB)</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Tên kênh Bio *</label>
+              <input id="input-profile-name" type="text" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white focus:outline-none focus:border-sky-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/85 mb-1">Mô tả ngắn</label>
+              <textarea id="input-profile-bio" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13px] text-white focus:outline-none focus:border-sky-400"></textarea>
+            </div>
+
+            <!-- Công tắc Bật/Tắt Thanh tìm kiếm thông minh (mặc định Bật) -->
+            <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/75 border border-sky-400/15">
+              <div>
+                <p class="text-[13px] font-bold text-white">🔍 Hiển thị thanh tìm kiếm</p>
+                <p class="text-[11px] text-sky-200/65">Cho phép khách tìm nhanh Script &amp; App Fix Lag</p>
+              </div>
+              <button id="toggle-search-visible" type="button" role="switch" aria-checked="true" class="w-12 h-7 rounded-full p-1 transition-colors duration-200 bg-sky-400 flex items-center shrink-0">
+                <span id="toggle-search-knob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200 translate-x-5"></span>
+              </button>
+            </div>
+
+            <!-- Công tắc bật/tắt tích xanh -->
+            <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/75 border border-sky-400/15">
+              <div>
+                <p class="text-[13px] font-bold text-white">Hiển thị tích xanh xác minh</p>
+                <p class="text-[11px] text-sky-200/65">Biểu tượng tích xanh cạnh tên kênh</p>
+              </div>
+              <button id="toggle-verified-badge" type="button" role="switch" aria-checked="true" class="w-12 h-7 rounded-full p-1 transition-colors duration-200 bg-sky-400 flex items-center shrink-0">
+                <span id="toggle-verified-knob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200 translate-x-5"></span>
+              </button>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-[13px] transition active:scale-95">
+              💾 Áp dụng Hồ sơ
+            </button>
+          </form>
+
+          <!-- Đổi Mã PIN chủ web -->
+          <form id="pin-change-form" class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-4 space-y-2.5">
+            <h3 class="text-[13.5px] font-extrabold text-sky-300">🔐 Đổi Mã PIN Chủ Web</h3>
+            <p class="text-[11.5px] text-sky-200/70 leading-relaxed">
+              Trên web thật, nút Quản lý luôn ẩn hoàn toàn. Bạn mở bằng cách <strong>chạm 5 lần vào Ảnh đại diện</strong> (trong 3 giây) rồi nhập Mã PIN này.
+            </p>
+            <div class="flex gap-2">
+              <input id="input-new-pin" type="text" maxlength="8" placeholder="4-8 ký tự (VD: 1234)" class="flex-1 px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-[13.5px] font-bold tracking-widest text-white placeholder-slate-500 placeholder:tracking-normal placeholder:font-normal focus:outline-none focus:border-sky-400" />
+              <button type="submit" class="px-4 py-2.5 rounded-xl bg-sky-500/25 hover:bg-sky-500/35 border border-sky-400/45 text-sky-200 font-bold text-[12.5px] shrink-0 active:scale-95 transition">
+                Đổi PIN
+              </button>
+            </div>
+          </form>
+
+          <div>
+            <button id="btn-reset-default" type="button" class="w-full py-2.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/35 text-rose-300 font-bold text-[12.5px] active:scale-95 transition">
+              🔄 Khôi phục dữ liệu mẫu mặc định
+            </button>
+          </div>
+        </div>
+
+        <!-- ========== TAB 5: ☁️ KẾT NỐI GITHUB CLOUD SYNC ========== -->
+        <div id="admin-panel-github" class="hidden space-y-4">
+          <div class="bg-gradient-to-br from-[#0e2242] to-[#0b1830] border border-sky-400/40 rounded-2xl p-4 space-y-3.5">
+            <div>
+              <h3 class="text-[14.5px] font-extrabold text-sky-300 flex items-center gap-1.5">
+                <span>☁️</span> Đồng bộ thẳng lên GitHub Pages
+              </h3>
+              <p class="text-[12px] text-sky-100/80 leading-relaxed mt-1">
+                Chỉ cần dán <strong>GitHub Token</strong> 1 lần duy nhất trên máy bạn. Về sau mỗi lần thêm link hay đổi ảnh chỉ cần bấm <strong>☁️ Lưu thẳng lên Web</strong>!
+              </p>
+            </div>
+
+            <!-- Thông tin kho GitHub điền sẵn -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div>
+                <label class="block text-[11px] font-semibold text-sky-100/85 mb-1">Username (Owner)</label>
+                <input id="input-gh-owner" type="text" value="triizvnok-ctrl" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white font-mono focus:outline-none focus:border-sky-400" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-sky-100/85 mb-1">Repo</label>
+                <input id="input-gh-repo" type="text" value="Triizbakhi.github.io" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white font-mono focus:outline-none focus:border-sky-400" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-sky-100/85 mb-1">Branch</label>
+                <input id="input-gh-branch" type="text" value="main" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white font-mono focus:outline-none focus:border-sky-400" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-sky-100/85 mb-1">File dữ liệu</label>
+                <input id="input-gh-path" type="text" value="data.json" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-[12.5px] text-white font-mono focus:outline-none focus:border-sky-400" />
+              </div>
+            </div>
+
+            <!-- Ô nhập GitHub Personal Access Token (CHỈ lưu localStorage máy này) -->
+            <div>
+              <label class="block text-[11.5px] font-semibold text-sky-100/90 mb-1">
+                🔑 GitHub Token (Personal Access Token)
+              </label>
+              <div class="relative flex items-center">
+                <input
+                  id="input-gh-token"
+                  type="password"
+                  autocomplete="off"
+                  placeholder="Dán mã github_pat_... hoặc ghp_..."
+                  class="w-full pl-3 pr-11 py-2.5 rounded-xl bg-slate-950 border border-sky-500/35 text-[12.5px] text-white placeholder-slate-500 font-mono focus:outline-none focus:border-sky-400"
+                />
+                <button id="btn-toggle-token-vis" type="button" aria-label="Ẩn hoặc hiện Token" class="absolute right-2 px-2 py-1 rounded-lg text-[12px] font-bold text-sky-300 hover:bg-sky-500/15">
+                  👁️
+                </button>
+              </div>
+              <p class="text-[10.5px] text-emerald-300/85 mt-1.5 leading-relaxed">
+                🔒 An toàn 100%: Token chỉ lưu riêng trên điện thoại này, <strong>tuyệt đối không</strong> bị đẩy vào file <code>data.json</code>.
+              </p>
+            </div>
+
+            <!-- Kết quả kiểm tra kết nối / log lưu -->
+            <div id="gh-result-box" class="hidden p-3 rounded-xl text-[12px] font-semibold leading-relaxed border"></div>
+
+            <!-- Nút Kiểm tra & Lưu ngay -->
+            <div class="grid grid-cols-1 gap-2.5 pt-0.5">
+              <button id="btn-gh-test" type="button" class="w-full py-2.5 px-4 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-bold text-[13px] active:scale-[0.98] transition flex items-center justify-center gap-2">
+                <span>🔍</span>
+                <span>Kiểm tra kết nối GitHub</span>
+              </button>
+
+              <button id="btn-gh-push-tab" type="button" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-sky-400 text-slate-950 font-extrabold text-[14px] shadow-[0_6px_22px_rgba(16,185,129,0.35)] active:scale-[0.98] transition flex items-center justify-center gap-2">
+                <span>☁️</span>
+                <span>Lưu thẳng lên Web ngay</span>
+              </button>
+            </div>
+
+            <!-- Hướng dẫn ngắn lấy Token ngay trong tab -->
+            <div class="bg-slate-950/75 border border-sky-400/15 rounded-xl p-3 text-[11.5px] text-sky-100/80 space-y-1.5">
+              <p class="font-extrabold text-white">⚡ Cách lấy Token GitHub trong 1 phút:</p>
+              <ol class="list-decimal list-inside space-y-1 leading-relaxed">
+                <li>Vào <strong>github.com/settings/personal-access-tokens/new</strong> (đăng nhập tài khoản GitHub của bạn).</li>
+                <li>Đặt tên tùy ý (VD: <code>BioAdmin</code>), mục <strong>Expiration</strong> chọn <strong>No expiration</strong> (hoặc 1 năm).</li>
+                <li>Mục <strong>Repository access</strong> chọn <strong>Only select repositories</strong> &rarr; tích chọn kho <strong>Triizbakhi.github.io</strong>.</li>
+                <li>Bấm <strong>Repository permissions</strong> &rarr; tìm mục <strong>Contents</strong> &rarr; đổi thành <strong>Read and write</strong>.</li>
+                <li>Kéo xuống bấm <strong>Generate token</strong> &rarr; Copy mã dán vào ô trên rồi bấm <strong>Kiểm tra kết nối GitHub</strong>!</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Mục thu gọn: Sao lưu / Nhập file thủ công -->
+          <details class="bg-[#0e1b33] border border-sky-400/20 rounded-2xl p-3.5">
+            <summary class="text-[12.5px] font-bold text-sky-200 cursor-pointer select-none flex items-center justify-between">
+              <span>📦 Sao lưu / Tải file data.json thủ công</span>
+              <span class="text-[11px] text-sky-400">Mở rộng ▾</span>
+            </summary>
+            <div class="mt-3 pt-3 border-t border-sky-400/15 space-y-2.5">
+              <p id="data-size-label" class="text-[11.5px] text-sky-200/75">Dung lượng dữ liệu: ~0 KB</p>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="btn-download-json" type="button" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-400/25 text-sky-100 font-bold text-[12px] active:scale-95 transition">
+                  📥 Tải data.json
+                </button>
+                <button id="btn-import-json" type="button" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-400/25 text-sky-100 font-bold text-[12px] active:scale-95 transition">
+                  📤 Nhập data.json
+                </button>
+                <input id="file-import-json" type="file" accept=".json,application/json" class="hidden" />
+              </div>
+            </div>
+          </details>
+        </div>
+
+      </div>
+
+      <!-- THANH LƯU THẲNG LÊN WEB CỐ ĐỊNH Ở ĐÁY MODAL -->
+      <div class="px-4 py-3 border-t border-sky-400/20 bg-[#0d1930] shrink-0 flex items-center gap-2.5">
+        <button id="btn-global-push-web" type="button" class="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-400 text-slate-950 font-extrabold text-[13.5px] shadow-[0_6px_22px_rgba(16,185,129,0.35)] active:scale-[0.98] transition flex items-center justify-center gap-2">
+          <span id="global-push-icon">☁️</span>
+          <span id="global-push-text">Lưu thẳng lên Web</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 9. MODAL XÁC NHẬN TÙY CHỈNH (KHÔNG DÙNG CONFIRM/ALERT) ================= -->
+  <div id="confirm-modal" class="fixed inset-0 z-[95] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div class="w-full max-w-[330px] bg-[#0d1930] border border-sky-400/35 rounded-3xl p-5 shadow-2xl anim-modal">
+      <h3 id="confirm-title" class="text-[16px] font-extrabold text-white mb-1.5">Xác nhận</h3>
+      <p id="confirm-message" class="text-[13px] text-sky-100/80 leading-relaxed mb-5">Bạn có chắc chắn muốn thực hiện?</p>
+      <div class="grid grid-cols-2 gap-2.5">
+        <button id="confirm-cancel" type="button" class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[13px] transition">
+          Hủy
+        </button>
+        <button id="confirm-ok" type="button" class="py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-[13px] transition">
+          Đồng ý
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 10. JAVASCRIPT ĐẦY ĐỦ: TÌM KIẾM THÔNG MINH + NHẠC + GITHUB CLOUD ================= -->
+  <script>
+    (function () {
+      "use strict";
+
+      // Khóa lưu trữ cục bộ tách biệt hoàn toàn giữa bản nháp Bio và Token GitHub
+      const DRAFT_DATA_KEY = "bio_gaming_cloud_draft_v6";
+      const DRAFT_META_KEY = "bio_gaming_cloud_meta_v6";
+      const GH_CONFIG_KEY = "bio_gaming_gh_auth_v5";
+
+      // =========================================================================
+      // DỮ LIỆU MẪU MẶC ĐỊNH
+      // =========================================================================
+      function createBuiltInTracks() {
+        return [
+          {
+            id: "builtin-lofi",
+            title: "Midnight Lo-Fi Chill",
+            artist: "Gaming Beats • Nhạc tích hợp",
+            sourceType: "builtin",
+            synthType: "lofi",
+            audioUrl: "",
+            audioData: "",
+            fileName: "",
+            fileSize: 0,
+            cover: "",
+            duration: 90
+          },
+          {
+            id: "builtin-phonk",
+            title: "Neon Phonk Drift",
+            artist: "Phonk Gaming • Nhạc tích hợp",
+            sourceType: "builtin",
+            synthType: "phonk",
+            audioUrl: "",
+            audioData: "",
+            fileName: "",
+            fileSize: 0,
+            cover: "",
+            duration: 96
+          }
+        ];
+      }
+
+      function createDefaultBioData() {
+        return {
+          version: 1,
+          updatedAt: new Date().toISOString(),
+          pin: "1234",
+          searchEnabled: true,
+          profile: {
+            name: "Gaming & Fix Lag",
+            bio: "Chia sẻ Script Roblox mượt & App Fix Lag tăng FPS cực đã cho điện thoại",
+            avatar: "",
+            verified: true
+          },
+          musicSettings: {
+            enabled: true,
+            volume: 75,
+            playMode: "next"
+          },
+          playlist: createBuiltInTracks(),
+          scriptItems: [
+            {
+              id: "sc-blox-1",
+              mode: "link",
+              title: "Blox Fruits Auto Farm",
+              subtitle: "🔗 Vượt link lấy Script",
+              value: "https://link4m.com/blox-fruits-auto-farm",
+              badge: "LINK4M",
+              image: "",
+              defaultIcon: "gamepad"
+            },
+            {
+              id: "sc-redz-2",
+              mode: "link",
+              title: "Redz Hub Update",
+              subtitle: "🔗 Vượt link lấy Script",
+              value: "https://link4m.com/redz-hub-update",
+              badge: "HOT",
+              image: "",
+              defaultIcon: "gamepad"
+            },
+            {
+              id: "sc-waves-3",
+              mode: "copy",
+              title: "Fix Lag Xóa Sóng Biển",
+              subtitle: "📋 Chạm để Copy Script",
+              value: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/gaming-fixlag/scripts/main/xoa-song-bien.lua"))()',
+              badge: "MỚI",
+              image: "",
+              defaultIcon: "code"
+            }
+          ],
+          appItems: [
+            {
+              id: "app-brotox-1",
+              mode: "link",
+              title: "Brotox V9",
+              subtitle: "⚡ Tối ưu FPS",
+              value: "https://link4m.com/brotox-v9",
+              badge: "HOT",
+              image: "",
+              defaultIcon: "brotox"
+            },
+            {
+              id: "app-fps-2",
+              mode: "link",
+              title: "Tăng Tốc FPS Pro",
+              subtitle: "⚡ Tối ưu FPS",
+              value: "https://link4m.com/tang-toc-fps-pro",
+              badge: "VIP FREE",
+              image: "",
+              defaultIcon: "bolt"
+            }
+          ]
+        };
+      }
+
+      function createDefaultGhConfig() {
+        return {
+          owner: "triizvnok-ctrl",
+          repo: "Triizbakhi.github.io",
+          branch: "main",
+          path: "data.json",
+          token: ""
+        };
+      }
+
+      function normalizeBioData(raw) {
+        const fb = createDefaultBioData();
+        if (!raw || typeof raw !== "object") return fb;
+        return {
+          version: Number(raw.version) || 1,
+          updatedAt: raw.updatedAt || fb.updatedAt,
+          pin: (raw.pin && String(raw.pin).trim()) || "1234",
+          searchEnabled: typeof raw.searchEnabled === "boolean" ? raw.searchEnabled : true,
+          profile: {
+            name: (raw.profile && raw.profile.name) || fb.profile.name,
+            bio: (raw.profile && typeof raw.profile.bio === "string") ? raw.profile.bio : fb.profile.bio,
+            avatar: (raw.profile && raw.profile.avatar) || "",
+            verified: (raw.profile && typeof raw.profile.verified === "boolean") ? raw.profile.verified : true
+          },
+          musicSettings: {
+            enabled: (raw.musicSettings && typeof raw.musicSettings.enabled === "boolean") ? raw.musicSettings.enabled : true,
+            volume: (raw.musicSettings && typeof raw.musicSettings.volume === "number") ? Math.max(0, Math.min(100, raw.musicSettings.volume)) : 75,
+            playMode: (raw.musicSettings && raw.musicSettings.playMode === "repeat") ? "repeat" : "next"
+          },
+          playlist: Array.isArray(raw.playlist) ? raw.playlist : fb.playlist,
+          scriptItems: Array.isArray(raw.scriptItems) ? raw.scriptItems : fb.scriptItems,
+          appItems: Array.isArray(raw.appItems) ? raw.appItems : fb.appItems
+        };
+      }
+
+      // Kiểm tra môi trường xem thử cục bộ / preview vs tên miền công khai (*.github.io,...)
+      function isLocalPreviewEnv() {
+        try {
+          const proto = (window.location.protocol || "").toLowerCase();
+          const host = (window.location.hostname || "").toLowerCase();
+          const href = (window.location.href || "").toLowerCase();
+
+          // Chắc chắn ẨN trên GitHub Pages
+          if (host.endsWith(".github.io")) {
+            return false;
+          }
+
+          if (
+            proto === "file:" ||
+            proto === "blob:" ||
+            proto === "about:" ||
+            proto === "data:" ||
+            href.indexOf("about:srcdoc") === 0 ||
+            host === "" ||
+            host === "localhost" ||
+            host === "127.0.0.1" ||
+            host === "[::1]" ||
+            host.indexOf("googleusercontent.com") !== -1
+          ) {
+            return true;
+          }
+          return false;
+        } catch (err) {
+          return false;
+        }
+      }
+
+      // =========================================================================
+      // TRẠNG THÁI ỨNG DỤNG
+      // =========================================================================
+      let bioData = createDefaultBioData();
+      let ghConfig = createDefaultGhConfig();
+      let hasUnsavedChanges = false;
+      let isPushingToGitHub = false;
+
+      let activeMainTab = "script";
+      let activeAdminTab = "script";
+      let ownerUnlocked = false;
+      let searchQuery = "";
+
+      // Trạng thái tạm trong các form Admin
+      let scriptFormMode = "link"; // Mặc định Gắn Link (Link4m)
+      let tempScriptImg = "";
+      let tempFixlagImg = "";
+      let tempAvatarImg = "";
+      let tempCoverImg = "";
+      let tempMusicSource = "url";
+      let tempMusicAudioData = "";
+      let tempMusicFileName = "";
+      let tempMusicFileSize = 0;
+
+      // Chạm 5 lần trong 3 giây vào Avatar
+      let avatarTapCount = 0;
+      let avatarTapTimer = null;
+
+      // Callback Modal xác nhận
+      let confirmCallback = null;
+
+      // =========================================================================
+      // CHUẨN HÓA TIẾNG VIỆT KHÔNG DẤU CHO TÌM KIẾM THÔNG MINH
+      // =========================================================================
+      function normalizeVietnamese(str) {
+        if (!str) return "";
+        return String(str)
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/đ/g, "d")
+          .replace(/Đ/g, "D")
+          .toLowerCase()
+          .trim();
+      }
+
+      function matchesSearchQuery(item, categoryType, normalizedQuery) {
+        if (!normalizedQuery) return true;
+        const categoryKeywords = categoryType === "script"
+          ? "script roblox lua copy link4m"
+          : "app fix lag fps tang toc giam ping";
+
+        const haystack = normalizeVietnamese(
+          [
+            item.title || "",
+            item.subtitle || "",
+            item.badge || "",
+            categoryKeywords
+          ].join(" ")
+        );
+
+        // Hỗ trợ gõ nhiều từ cách nhau (VD: "blox farm" vẫn khớp "Blox Fruits Auto Farm")
+        const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+        return tokens.every((tk) => haystack.indexOf(tk) !== -1);
+      }
+
+      // =========================================================================
+      // LƯU & ĐỌC CẤU HÌNH GITHUB + BẢN NHÁP LOCALSTORAGE
+      // =========================================================================
+      function loadGhConfig() {
+        const def = createDefaultGhConfig();
+        try {
+          const raw = localStorage.getItem(GH_CONFIG_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            return {
+              owner: (parsed.owner || def.owner).trim(),
+              repo: (parsed.repo || def.repo).trim(),
+              branch: (parsed.branch || def.branch).trim(),
+              path: (parsed.path || def.path).trim(),
+              token: (parsed.token || "").trim()
+            };
+          }
+        } catch (err) {
+          console.warn("Lỗi đọc cấu hình GitHub:", err);
+        }
+        return def;
+      }
+
+      function saveGhConfig() {
+        try {
+          localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(ghConfig));
+        } catch (err) {
+          console.warn("Không lưu được cấu hình GitHub:", err);
+        }
+        updateGitHubStatusUI();
+      }
+
+      function markUnsavedAndCache() {
+        hasUnsavedChanges = true;
+        bioData.updatedAt = new Date().toISOString();
+        try {
+          localStorage.setItem(DRAFT_DATA_KEY, JSON.stringify(bioData));
+          localStorage.setItem(DRAFT_META_KEY, JSON.stringify({ hasUnsaved: true, savedAt: Date.now() }));
+        } catch (err) {
+          showToast("Bộ nhớ tạm trình duyệt gần đầy — hãy bấm ☁️ Lưu thẳng lên Web ngay nhé!", "info");
+        }
+        updateUnsavedUI();
+        updateDataSizeLabel();
+      }
+
+      function clearUnsavedFlag() {
+        hasUnsavedChanges = false;
+        try {
+          localStorage.setItem(DRAFT_DATA_KEY, JSON.stringify(bioData));
+          localStorage.setItem(DRAFT_META_KEY, JSON.stringify({ hasUnsaved: false, savedAt: Date.now() }));
+        } catch (err) {
+          // Bỏ qua nếu đầy bộ nhớ tạm
+        }
+        updateUnsavedUI();
+      }
+
+      function loadLocalDraftIfUnsaved() {
+        try {
+          const metaRaw = localStorage.getItem(DRAFT_META_KEY);
+          const dataRaw = localStorage.getItem(DRAFT_DATA_KEY);
+          if (metaRaw && dataRaw) {
+            const meta = JSON.parse(metaRaw);
+            if (meta && meta.hasUnsaved === true) {
+              return normalizeBioData(JSON.parse(dataRaw));
+            }
+          }
+        } catch (err) {
+          console.warn("Bỏ qua bản nháp lỗi:", err);
+        }
+        return null;
+      }
+
+      // Tự động fetch ./data.json mới nhất khi trang tải lên
+      async function bootstrapBioData() {
+        ghConfig = loadGhConfig();
+
+        if (isLocalPreviewEnv()) {
+          try {
+            const localRaw = localStorage.getItem(DRAFT_DATA_KEY);
+            if (localRaw) {
+              bioData = normalizeBioData(JSON.parse(localRaw));
+              const metaRaw = localStorage.getItem(DRAFT_META_KEY);
+              if (metaRaw) {
+                hasUnsavedChanges = Boolean(JSON.parse(metaRaw).hasUnsaved);
+              }
+            }
+          } catch (err) {
+            bioData = createDefaultBioData();
+          }
+          renderAllPublicUI();
+          return;
+        }
+
+        const unsavedDraft = loadLocalDraftIfUnsaved();
+
+        try {
+          const res = await fetch("./data.json?t=" + Date.now(), { cache: "no-store" });
+          if (res.ok) {
+            const remoteJson = await res.json();
+            bioData = normalizeBioData(remoteJson);
+          } else {
+            bioData = createDefaultBioData();
+          }
+        } catch (err) {
+          bioData = createDefaultBioData();
+        }
+
+        if (unsavedDraft) {
+          bioData = unsavedDraft;
+          hasUnsavedChanges = true;
+        }
+
+        renderAllPublicUI();
+      }
+
+      // =========================================================================
+      // TIỆN ÍCH AN TOÀN (ESCAPE, BASE64 UTF-8 CHUNKED, NÉN ẢNH < 30KB, COPY)
+      // =========================================================================
+      function escapeHtml(val) {
+        if (val === null || val === undefined) return "";
+        return String(val)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function normalizeUrl(raw) {
+        const str = (raw || "").trim();
+        if (!str) return "";
+        if (/^javascript:/i.test(str)) return "";
+        if (/^data:(image|audio)\//i.test(str)) return str;
+        if (/^https?:\/\//i.test(str)) return str;
+        return "https://" + str;
+      }
+
+      function formatTime(sec) {
+        if (!isFinite(sec) || sec < 0) return "0:00";
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return m + ":" + (s < 10 ? "0" : "") + s;
+      }
+
+      function formatFileSize(bytes) {
+        if (!bytes || bytes <= 0) return "0 KB";
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      // Mã hóa UTF-8 sang Base64 theo từng chunk 8KB an toàn cho tiếng Việt
+      function utf8ToBase64Chunked(str) {
+        const bytes = new TextEncoder().encode(str);
+        const chunkSize = 0x2000;
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += chunkSize) {
+          const slice = bytes.subarray(i, i + chunkSize);
+          binary += String.fromCharCode.apply(null, slice);
+        }
+        return btoa(binary);
+      }
+
+      // Copy tương thích 100% trình duyệt điện thoại & iframe
+      function copyToClipboard(text) {
+        return new Promise((resolve) => {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.top = "0";
+            ta.style.left = "-9999px";
+            ta.style.fontSize = "16px";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            ta.setSelectionRange(0, text.length);
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            if (ok) {
+              resolve(true);
+              return;
+            }
+          } catch (err) {
+            console.warn("Fallback copy:", err);
+          }
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => resolve(true)).catch(() => resolve(false));
+          } else {
+            resolve(false);
+          }
+        });
+      }
+
+      function showToast(message, type) {
+        const container = document.getElementById("toast-container");
+        if (!container) return;
+
+        const styles = {
+          success: "bg-emerald-500 text-slate-950 border-emerald-300",
+          error: "bg-rose-500 text-white border-rose-300",
+          info: "bg-[#0d1f3c] text-sky-200 border-sky-400/55"
+        };
+
+        const toast = document.createElement("div");
+        toast.className = "px-4 py-2.5 rounded-2xl border text-[12.5px] font-bold shadow-xl backdrop-blur-md transition-all duration-300 -translate-y-2 opacity-0 text-center leading-snug " + (styles[type] || styles.info);
+        toast.textContent = message;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove("-translate-y-2", "opacity-0");
+        });
+
+        setTimeout(() => {
+          toast.classList.add("-translate-y-2", "opacity-0");
+          setTimeout(() => toast.remove(), 260);
+        }, 2800);
+      }
+
+      function openConfirm(title, message, onOk) {
+        document.getElementById("confirm-title").textContent = title;
+        document.getElementById("confirm-message").textContent = message;
+        confirmCallback = onOk;
+        document.getElementById("confirm-modal").classList.remove("hidden");
+      }
+
+      function closeConfirm() {
+        document.getElementById("confirm-modal").classList.add("hidden");
+        confirmCallback = null;
+      }
+
+      // Cắt vuông & nén ảnh siêu nhẹ (<30KB) dạng base64
+      function compressSquareImage(file, maxDim) {
+        const targetDim = maxDim || 240;
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error("Không đọc được file ảnh"));
+          reader.onload = (ev) => {
+            const img = new Image();
+            img.onerror = () => reject(new Error("Ảnh không hợp lệ"));
+            img.onload = () => {
+              const side = Math.min(img.width, img.height);
+              const sx = (img.width - side) / 2;
+              const sy = (img.height - side) / 2;
+              const size = Math.min(targetDim, side);
+
+              const canvas = document.createElement("canvas");
+              canvas.width = size;
+              canvas.height = size;
+              const ctx = canvas.getContext("2d");
+              ctx.fillStyle = "#0b1322";
+              ctx.fillRect(0, 0, size, size);
+              ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+
+              let best = "";
+              const formats = ["image/webp", "image/jpeg"];
+              const qualities = [0.80, 0.66, 0.52];
+
+              for (let f = 0; f < formats.length; f++) {
+                const mime = formats[f];
+                for (let q = 0; q < qualities.length; q++) {
+                  const dataUrl = canvas.toDataURL(mime, qualities[q]);
+                  if (mime === "image/webp" && dataUrl.indexOf("data:image/webp") !== 0) {
+                    break;
+                  }
+                  const approxBytes = Math.round(dataUrl.length * 0.75);
+                  if (!best || dataUrl.length < best.length) {
+                    best = dataUrl;
+                  }
+                  if (approxBytes <= 28 * 1024) {
+                    resolve({ dataUrl, bytes: approxBytes });
+                    return;
+                  }
+                }
+              }
+              resolve({ dataUrl: best, bytes: Math.round(best.length * 0.75) });
+            };
+            img.src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Icon SVG sắc nét mặc định cho thẻ (có logo chữ X kiểu Brotox V9)
+      function getDefaultIconSvg(iconName, isScript) {
+        if (iconName === "brotox") {
+          return (
+            '<svg class="w-12 h-12" viewBox="0 0 64 64" fill="none">' +
+              '<rect width="64" height="64" rx="32" fill="#0d1320"/>' +
+              '<path d="M17.5 15.5H27L34.5 27.2L42.2 15.5H47.2L37.1 31.2L47.8 48.5H38.5L30.8 36L22.3 48.5H17.2L28.1 31.8L17.5 15.5Z" fill="#ffffff"/>' +
+              '<path d="M21.8 18.4H24.9L42 45.6H38.9L21.8 18.4Z" fill="#0d1320"/>' +
+            "</svg>"
+          );
+        }
+        if (iconName === "code") {
+          return (
+            '<svg class="w-9 h-9 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+              '<polyline points="16 18 22 12 16 6"></polyline>' +
+              '<polyline points="8 6 2 12 8 18"></polyline>' +
+            "</svg>"
+          );
+        }
+        if (iconName === "gamepad" || isScript) {
+          return (
+            '<svg class="w-9 h-9 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+              '<rect x="2" y="6" width="20" height="12" rx="4"></rect>' +
+              '<path d="M6 12h4"></path>' +
+              '<path d="M8 10v4"></path>' +
+              '<circle cx="15.5" cy="11" r="1" fill="currentColor"></circle>' +
+              '<circle cx="17.5" cy="13" r="1" fill="currentColor"></circle>' +
+            "</svg>"
+          );
+        }
+        return (
+          '<svg class="w-9 h-9 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>' +
+          "</svg>"
+        );
+      }
+
+      // =========================================================================
+      // ĐỒNG BỘ ĐÁM MÂY GITHUB REST API (GET SHA -> PUT data.json)
+      // =========================================================================
+      function readGhInputsToConfig() {
+        ghConfig = {
+          owner: document.getElementById("input-gh-owner").value.trim(),
+          repo: document.getElementById("input-gh-repo").value.trim(),
+          branch: document.getElementById("input-gh-branch").value.trim() || "main",
+          path: document.getElementById("input-gh-path").value.trim() || "data.json",
+          token: document.getElementById("input-gh-token").value.trim()
+        };
+        saveGhConfig();
+      }
+
+      function syncGhInputsFromConfig() {
+        document.getElementById("input-gh-owner").value = ghConfig.owner || "triizvnok-ctrl";
+        document.getElementById("input-gh-repo").value = ghConfig.repo || "Triizbakhi.github.io";
+        document.getElementById("input-gh-branch").value = ghConfig.branch || "main";
+        document.getElementById("input-gh-path").value = ghConfig.path || "data.json";
+        document.getElementById("input-gh-token").value = ghConfig.token || "";
+        updateGitHubStatusUI();
+      }
+
+      function showGhResultBox(message, isSuccess) {
+        const box = document.getElementById("gh-result-box");
+        if (!box) return;
+        box.classList.remove("hidden");
+        box.className = isSuccess
+          ? "p-3 rounded-xl text-[12px] font-semibold leading-relaxed border bg-emerald-500/15 border-emerald-400/40 text-emerald-200"
+          : "p-3 rounded-xl text-[12px] font-semibold leading-relaxed border bg-rose-500/15 border-rose-400/40 text-rose-200";
+        box.textContent = message;
+      }
+
+      function updateGitHubStatusUI() {
+        const dot = document.getElementById("gh-status-dot");
+        const txt = document.getElementById("gh-status-text");
+        if (!dot || !txt) return;
+
+        if (ghConfig.token && ghConfig.owner && ghConfig.repo) {
+          dot.className = "w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] shrink-0";
+          txt.textContent = "Đã sẵn sàng lưu vào " + ghConfig.owner + "/" + ghConfig.repo;
+        } else {
+          dot.className = "w-2 h-2 rounded-full bg-amber-400 shrink-0";
+          txt.textContent = "Chưa nhập Token GitHub (vào tab ☁️ GitHub)";
+        }
+      }
+
+      function updateUnsavedUI() {
+        const banner = document.getElementById("unsaved-banner");
+        const globalText = document.getElementById("global-push-text");
+        if (banner) {
+          banner.classList.toggle("hidden", !hasUnsavedChanges);
+        }
+        if (globalText && !isPushingToGitHub) {
+          globalText.textContent = hasUnsavedChanges ? "Lưu thẳng lên Web (Có thay đổi mới)" : "Lưu thẳng lên Web";
+        }
+      }
+
+      // Tạo payload sạch đẩy lên data.json (TUYỆT ĐỐI KHÔNG chứa Token GitHub)
+      function buildCleanPublicPayload() {
+        return {
+          version: (Number(bioData.version) || 1) + 1,
+          updatedAt: new Date().toISOString(),
+          pin: (bioData.pin && String(bioData.pin).trim()) || "1234",
+          searchEnabled: bioData.searchEnabled !== false,
+          profile: {
+            name: (bioData.profile && bioData.profile.name) || "Gaming & Fix Lag",
+            bio: (bioData.profile && bioData.profile.bio) || "",
+            avatar: (bioData.profile && bioData.profile.avatar) || "",
+            verified: (bioData.profile && typeof bioData.profile.verified === "boolean") ? bioData.profile.verified : true
+          },
+          musicSettings: {
+            enabled: (bioData.musicSettings && typeof bioData.musicSettings.enabled === "boolean") ? bioData.musicSettings.enabled : true,
+            volume: (bioData.musicSettings && typeof bioData.musicSettings.volume === "number") ? bioData.musicSettings.volume : 75,
+            playMode: (bioData.musicSettings && bioData.musicSettings.playMode === "repeat") ? "repeat" : "next"
+          },
+          playlist: Array.isArray(bioData.playlist) ? bioData.playlist : [],
+          scriptItems: Array.isArray(bioData.scriptItems) ? bioData.scriptItems : [],
+          appItems: Array.isArray(bioData.appItems) ? bioData.appItems : []
+        };
+      }
+
+      function updateDataSizeLabel() {
+        const el = document.getElementById("data-size-label");
+        if (!el) return;
+        try {
+          const jsonStr = JSON.stringify(buildCleanPublicPayload());
+          const bytes = new TextEncoder().encode(jsonStr).length;
+          el.textContent = "Dung lượng file data.json hiện tại: " + formatFileSize(bytes);
+        } catch (err) {
+          el.textContent = "";
+        }
+      }
+
+      function explainGitHubError(status, detail) {
+        if (status === 401) {
+          return "❌ Lỗi 401: GitHub Token sai hoặc đã hết hạn. Bạn hãy tạo lại Token mới và dán đúng toàn bộ mã nhé!";
+        }
+        if (status === 403) {
+          return "❌ Lỗi 403: Token chưa được cấp quyền ghi! Khi tạo Token hãy chọn kho " + ghConfig.repo + " và bật quyền Contents = Read and write.";
+        }
+        if (status === 404) {
+          return "❌ Lỗi 404: Không tìm thấy kho " + ghConfig.owner + "/" + ghConfig.repo + " hoặc nhánh '" + ghConfig.branch + "'.";
+        }
+        if (status === 409) {
+          return "❌ Lỗi 409: Dữ liệu vừa thay đổi song song trên GitHub. Bạn bấm Lưu lại một lần nữa nhé!";
+        }
+        if (status === 422) {
+          return "❌ Lỗi 422: Dữ liệu hoặc nhánh không hợp lệ (" + (detail || "kiểm tra lại nhánh main") + ").";
+        }
+        return "❌ Lỗi kết nối (" + status + "): " + (detail || "Không thể kết nối tới GitHub, kiểm tra lại mạng nhé!");
+      }
+
+      async function testGitHubConnection() {
+        readGhInputsToConfig();
+        if (!ghConfig.owner || !ghConfig.repo) {
+          showGhResultBox("⚠️ Vui lòng nhập đầy đủ Username và Repo!", false);
+          return;
+        }
+        if (!ghConfig.token) {
+          showGhResultBox("⚠️ Bạn chưa dán GitHub Token vào ô bên trên!", false);
+          return;
+        }
+
+        const btn = document.getElementById("btn-gh-test");
+        const oldHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "<span>⏳</span><span>Đang kiểm tra kết nối...</span>";
+
+        try {
+          const url = "https://api.github.com/repos/" + encodeURIComponent(ghConfig.owner) + "/" + encodeURIComponent(ghConfig.repo);
+          const res = await fetch(url, {
+            method: "GET",
+            cache: "no-store",
+            headers: {
+              "Authorization": "Bearer " + ghConfig.token,
+              "Accept": "application/vnd.github+json"
+            }
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok) {
+            const msg = explainGitHubError(res.status, data.message);
+            showGhResultBox(msg, false);
+            showToast("Kiểm tra kết nối thất bại!", "error");
+            return;
+          }
+
+          const canPush = data.permissions && data.permissions.push === true;
+          if (canPush) {
+            showGhResultBox("✅ Kết nối thành công với kho " + data.full_name + "! Token có đủ quyền lưu thẳng lên Web.", true);
+            showToast("✅ Kết nối GitHub thành công!", "success");
+          } else {
+            showGhResultBox("⚠️ Đã tìm thấy kho " + data.full_name + " nhưng Token có thể chưa bật quyền Contents: Read and write. Hãy thử bấm 'Lưu thẳng lên Web ngay' để kiểm tra!", false);
+          }
+        } catch (err) {
+          showGhResultBox("❌ Lỗi mạng: Không gọi được tới GitHub API. Kiểm tra lại Wi-Fi/4G nhé!", false);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = oldHtml;
+        }
+      }
+
+      async function pushDataToGitHub(isRetry) {
+        if (isPushingToGitHub && !isRetry) return;
+
+        if (activeAdminTab === "github") {
+          readGhInputsToConfig();
+        }
+
+        if (!ghConfig.token || !ghConfig.owner || !ghConfig.repo) {
+          switchAdminTab("github");
+          showGhResultBox("⚠️ Bạn cần dán GitHub Token 1 lần duy nhất ở đây để bật tính năng Lưu thẳng lên Web!", false);
+          showToast("Hãy nhập GitHub Token trong tab ☁️ GitHub nhé!", "info");
+          setTimeout(() => document.getElementById("input-gh-token").focus(), 150);
+          return;
+        }
+
+        isPushingToGitHub = true;
+        const globalBtn = document.getElementById("btn-global-push-web");
+        const tabBtn = document.getElementById("btn-gh-push-tab");
+        const globalIcon = document.getElementById("global-push-icon");
+        const globalText = document.getElementById("global-push-text");
+
+        globalBtn.disabled = true;
+        tabBtn.disabled = true;
+        globalIcon.textContent = "⏳";
+        globalText.textContent = "Đang lưu lên GitHub...";
+        tabBtn.innerHTML = "<span>⏳</span><span>Đang đẩy data.json lên Web...</span>";
+
+        try {
+          const cleanPath = ghConfig.path.replace(/^\/+/, "");
+          const encodedPath = cleanPath.split("/").map(encodeURIComponent).join("/");
+          const baseUrl = "https://api.github.com/repos/" + encodeURIComponent(ghConfig.owner) + "/" + encodeURIComponent(ghConfig.repo) + "/contents/" + encodedPath;
+
+          // Bước 1: GET lấy sha hiện tại nếu file data.json đã tồn tại
+          let currentSha = null;
+          const getRes = await fetch(baseUrl + "?ref=" + encodeURIComponent(ghConfig.branch) + "&t=" + Date.now(), {
+            method: "GET",
+            cache: "no-store",
+            headers: {
+              "Authorization": "Bearer " + ghConfig.token,
+              "Accept": "application/vnd.github+json"
+            }
+          });
+
+          if (getRes.ok) {
+            const fileMeta = await getRes.json();
+            currentSha = fileMeta.sha || null;
+          } else if (getRes.status !== 404) {
+            const errJson = await getRes.json().catch(() => ({}));
+            const msg = explainGitHubError(getRes.status, errJson.message);
+            showGhResultBox(msg, false);
+            showToast(msg, "error");
+            return;
+          }
+
+          // Bước 2: Mã hóa JSON sạch thành Base64 UTF-8 an toàn
+          const payload = buildCleanPublicPayload();
+          const jsonText = JSON.stringify(payload, null, 2);
+          const base64Content = utf8ToBase64Chunked(jsonText);
+
+          // Bước 3: PUT đẩy lên GitHub
+          const putBody = {
+            message: "Cap nhat Bio Gaming & Fix Lag (" + new Date().toLocaleString("vi-VN") + ")",
+            content: base64Content,
+            branch: ghConfig.branch
+          };
+          if (currentSha) {
+            putBody.sha = currentSha;
+          }
+
+          const putRes = await fetch(baseUrl, {
+            method: "PUT",
+            headers: {
+              "Authorization": "Bearer " + ghConfig.token,
+              "Accept": "application/vnd.github+json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(putBody)
+          });
+
+          const putData = await putRes.json().catch(() => ({}));
+
+          if (putRes.status === 409 && !isRetry) {
+            isPushingToGitHub = false;
+            await pushDataToGitHub(true);
+            return;
+          }
+
+          if (!putRes.ok) {
+            const msg = explainGitHubError(putRes.status, putData.message);
+            showGhResultBox(msg, false);
+            showToast(msg, "error");
+            return;
+          }
+
+          bioData.version = payload.version;
+          bioData.updatedAt = payload.updatedAt;
+          clearUnsavedFlag();
+
+          const okMsg = "✅ Đã lưu thẳng lên Web! Đợi khoảng 30–60 giây để mọi người thấy bản cập nhật mới nhất.";
+          showGhResultBox(okMsg, true);
+          showToast(okMsg, "success");
+        } catch (err) {
+          const netMsg = "❌ Không thể kết nối tới GitHub. Kiểm tra lại kết nối mạng trên điện thoại nhé!";
+          showGhResultBox(netMsg, false);
+          showToast(netMsg, "error");
+        } finally {
+          isPushingToGitHub = false;
+          globalBtn.disabled = false;
+          tabBtn.disabled = false;
+          globalIcon.textContent = "☁️";
+          tabBtn.innerHTML = "<span>☁️</span><span>Lưu thẳng lên Web ngay</span>";
+          updateUnsavedUI();
+        }
+      }
+
+      // =========================================================================
+      // TRÌNH PHÁT NHẠC (WEB AUDIO API TÍCH HỢP + LINK MP3 + FILE AUDIO BASE64)
+      // =========================================================================
+      const MusicPlayer = {
+        index: 0,
+        playing: false,
+        muted: false,
+        isSeeking: false,
+        audioEl: null,
+        ctx: null,
+        master: null,
+        synthTimer: null,
+        progTimer: null,
+        step: 0,
+        elapsed: 0,
+
+        init() {
+          this.audioEl = document.getElementById("html-audio-player");
+          this.applyVolume();
+
+          this.audioEl.addEventListener("timeupdate", () => {
+            if (!this.isBuiltIn() && this.playing && !this.isSeeking) {
+              this.updateProgressUI(this.audioEl.currentTime || 0, this.audioEl.duration || 0);
+            }
+          });
+
+          this.audioEl.addEventListener("loadedmetadata", () => {
+            if (!this.isBuiltIn()) {
+              this.updateProgressUI(this.audioEl.currentTime || 0, this.audioEl.duration || 0);
+            }
+          });
+
+          this.audioEl.addEventListener("ended", () => this.handleEnded());
+
+          this.audioEl.addEventListener("error", () => {
+            if (!this.isBuiltIn() && this.playing) {
+              this.pause();
+              showToast("Không phát được bài này, kiểm tra lại link hoặc file nhạc nhé!", "error");
+            }
+          });
+
+          this.renderVisibility();
+          this.renderTrackInfo();
+          this.renderMuteIcon();
+        },
+
+        getVolRatio() {
+          if (this.muted) return 0;
+          const pct = (bioData && bioData.musicSettings && typeof bioData.musicSettings.volume === "number")
+            ? bioData.musicSettings.volume
+            : 75;
+          return Math.max(0, Math.min(1, pct / 100));
+        },
+
+        applyVolume() {
+          const v = this.getVolRatio();
+          if (this.audioEl) {
+            this.audioEl.volume = v;
+            this.audioEl.muted = this.muted;
+          }
+          if (this.master && this.ctx) {
+            this.master.gain.setTargetAtTime(v * 0.36, this.ctx.currentTime, 0.03);
+          }
+          this.renderMuteIcon();
+        },
+
+        toggleMute() {
+          this.muted = !this.muted;
+          this.applyVolume();
+        },
+
+        renderMuteIcon() {
+          const on = document.getElementById("icon-vol-on");
+          const off = document.getElementById("icon-vol-off");
+          const silent = this.muted || this.getVolRatio() === 0;
+          if (on && off) {
+            on.classList.toggle("hidden", silent);
+            off.classList.toggle("hidden", !silent);
+          }
+        },
+
+        renderVisibility() {
+          const sec = document.getElementById("music-player-section");
+          const show = bioData && bioData.musicSettings ? bioData.musicSettings.enabled !== false : true;
+          sec.classList.toggle("hidden", !show);
+          if (!show && this.playing) this.pause();
+        },
+
+        currentTrack() {
+          if (!bioData || !bioData.playlist || bioData.playlist.length === 0) return null;
+          if (this.index >= bioData.playlist.length) this.index = 0;
+          if (this.index < 0) this.index = bioData.playlist.length - 1;
+          return bioData.playlist[this.index];
+        },
+
+        isBuiltIn() {
+          const t = this.currentTrack();
+          if (!t) return true;
+          if (t.sourceType === "file" && t.audioData) return false;
+          if (t.sourceType === "url" && t.audioUrl && t.audioUrl.trim()) return false;
+          if (!t.sourceType && t.audioUrl && t.audioUrl.trim()) return false;
+          return true;
+        },
+
+        getAudioSrc(track) {
+          if (!track) return "";
+          if (track.sourceType === "file" && track.audioData) return track.audioData;
+          if (track.audioUrl && track.audioUrl.trim()) return normalizeUrl(track.audioUrl);
+          return "";
+        },
+
+        ensureAudioCtx() {
+          if (!this.ctx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (!Ctx) return false;
+            this.ctx = new Ctx();
+            this.master = this.ctx.createGain();
+            this.master.gain.value = this.getVolRatio() * 0.36;
+            this.master.connect(this.ctx.destination);
+          }
+          if (this.ctx.state === "suspended") this.ctx.resume();
+          this.applyVolume();
+          return true;
+        },
+
+        playTone(freq, at, dur, type, vol, cutoff) {
+          if (!this.ctx || !this.master) return;
+          const osc = this.ctx.createOscillator();
+          const filter = this.ctx.createBiquadFilter();
+          const gain = this.ctx.createGain();
+          osc.type = type || "triangle";
+          osc.frequency.setValueAtTime(freq, at);
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(cutoff || 1500, at);
+          gain.gain.setValueAtTime(0.001, at);
+          gain.gain.linearRampToValueAtTime(vol || 0.2, at + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0008, at + dur);
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.master);
+          osc.start(at);
+          osc.stop(at + dur + 0.02);
+        },
+
+        playCowbell(freq, at, dur, vol) {
+          if (!this.ctx || !this.master) return;
+          const o1 = this.ctx.createOscillator();
+          const o2 = this.ctx.createOscillator();
+          const bp = this.ctx.createBiquadFilter();
+          const gain = this.ctx.createGain();
+          o1.type = "square";
+          o2.type = "square";
+          o1.frequency.setValueAtTime(freq, at);
+          o2.frequency.setValueAtTime(freq * 1.48, at);
+          bp.type = "bandpass";
+          bp.frequency.setValueAtTime(freq * 1.35, at);
+          bp.Q.value = 3.2;
+          gain.gain.setValueAtTime(0.001, at);
+          gain.gain.linearRampToValueAtTime(vol || 0.22, at + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.001, at + (dur || 0.22));
+          o1.connect(bp);
+          o2.connect(bp);
+          bp.connect(gain);
+          gain.connect(this.master);
+          o1.start(at);
+          o2.start(at);
+          o1.stop(at + (dur || 0.22) + 0.02);
+          o2.stop(at + (dur || 0.22) + 0.02);
+        },
+
+        playKick(at, fStart, fEnd, dur) {
+          if (!this.ctx || !this.master) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(fStart || 135, at);
+          osc.frequency.exponentialRampToValueAtTime(fEnd || 40, at + (dur || 0.16));
+          gain.gain.setValueAtTime(0.56, at);
+          gain.gain.exponentialRampToValueAtTime(0.001, at + (dur || 0.24));
+          osc.connect(gain);
+          gain.connect(this.master);
+          osc.start(at);
+          osc.stop(at + (dur || 0.24) + 0.03);
+        },
+
+        playNoise(at, dur, vol, hpFreq) {
+          if (!this.ctx || !this.master) return;
+          const len = Math.floor(this.ctx.sampleRate * (dur || 0.05));
+          const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+          const ch = buf.getChannelData(0);
+          for (let i = 0; i < len; i++) {
+            ch[i] = (Math.random() * 2 - 1) * Math.exp(-i / (len * 0.34));
+          }
+          const src = this.ctx.createBufferSource();
+          src.buffer = buf;
+          const hp = this.ctx.createBiquadFilter();
+          hp.type = "highpass";
+          hp.frequency.value = hpFreq || 5000;
+          const gain = this.ctx.createGain();
+          gain.gain.value = vol || 0.09;
+          src.connect(hp);
+          hp.connect(gain);
+          gain.connect(this.master);
+          src.start(at);
+        },
+
+        startSynth(kind) {
+          this.stopSynth();
+          if (!this.ensureAudioCtx()) {
+            showToast("Trình duyệt không hỗ trợ phát nhạc tích hợp!", "error");
+            return;
+          }
+
+          const isPhonk = kind === "phonk";
+          const intervalMs = isPhonk ? 225 : 365;
+
+          const lofiChords = [
+            [293.66, 349.23, 440.0, 523.25],
+            [196.0, 329.63, 392.0, 493.88],
+            [261.63, 329.63, 392.0, 493.88],
+            [220.0, 261.63, 329.63, 392.0]
+          ];
+          const lofiBass = [146.83, 98.0, 130.81, 110.0];
+          const lofiMel = [587.33, 0, 523.25, 440.0, 0, 493.88, 523.25, 0, 659.25, 0, 587.33, 523.25, 440.0, 0, 392.0, 0];
+
+          const phonkCb = [
+            587.33, 0, 698.46, 587.33, 783.99, 0, 698.46, 587.33,
+            523.25, 0, 659.25, 523.25, 587.33, 0, 440.0, 523.25
+          ];
+          const phonkBass = [73.42, 73.42, 65.41, 58.27];
+
+          const tick = () => {
+            if (!this.playing || !this.ctx) return;
+            const now = this.ctx.currentTime;
+            const s = this.step;
+            const bar = Math.floor(s / 4) % 4;
+            const beat = s % 4;
+
+            if (!isPhonk) {
+              if (beat === 0) {
+                lofiChords[bar].forEach((f, idx) => this.playTone(f, now + idx * 0.02, 1.35, "triangle", 0.14, 1150));
+                this.playTone(lofiBass[bar], now, 1.2, "sine", 0.28, 450);
+                this.playKick(now, 118, 44, 0.18);
+              }
+              if (beat === 2) this.playNoise(now, 0.1, 0.12, 2400);
+              if (beat === 1 || beat === 3) this.playNoise(now, 0.035, 0.06, 6200);
+              const note = lofiMel[s % lofiMel.length];
+              if (note > 0) this.playTone(note, now + 0.02, 0.5, "sine", 0.12, 1850);
+            } else {
+              const cb = phonkCb[s % phonkCb.length];
+              if (cb > 0) this.playCowbell(cb, now, 0.2, 0.2);
+              if (beat === 0 || (bar % 2 === 1 && beat === 3)) {
+                this.playKick(now, 155, 36, 0.24);
+                this.playTone(phonkBass[bar], now, 0.36, "sawtooth", 0.22, 260);
+              }
+              if (beat === 2) this.playNoise(now, 0.12, 0.2, 1600);
+              this.playNoise(now, 0.032, beat % 2 === 0 ? 0.07 : 0.11, 6800);
+            }
+            this.step++;
+          };
+
+          tick();
+          this.synthTimer = setInterval(tick, intervalMs);
+
+          const track = this.currentTrack();
+          const total = (track && track.duration) || 90;
+          this.progTimer = setInterval(() => {
+            if (!this.playing || this.isSeeking) return;
+            this.elapsed += 0.25;
+            if (this.elapsed >= total) {
+              this.elapsed = 0;
+              this.handleEnded();
+              return;
+            }
+            this.updateProgressUI(this.elapsed, total);
+          }, 250);
+        },
+
+        stopSynth() {
+          if (this.synthTimer) { clearInterval(this.synthTimer); this.synthTimer = null; }
+          if (this.progTimer) { clearInterval(this.progTimer); this.progTimer = null; }
+        },
+
+        handleEnded() {
+          const mode = (bioData.musicSettings && bioData.musicSettings.playMode) || "next";
+          if (mode === "repeat") {
+            this.elapsed = 0;
+            this.step = 0;
+            if (!this.isBuiltIn() && this.audioEl) {
+              this.audioEl.currentTime = 0;
+              this.audioEl.play().catch(() => {});
+            } else {
+              this.play();
+            }
+          } else {
+            this.next(true);
+          }
+        },
+
+        play() {
+          const t = this.currentTrack();
+          if (!t) {
+            showToast("Playlist đang trống!", "info");
+            return;
+          }
+          this.stopSynth();
+          if (this.audioEl) this.audioEl.pause();
+
+          this.playing = true;
+          this.renderPlayState();
+
+          if (this.isBuiltIn()) {
+            this.startSynth(t.synthType || "lofi");
+          } else {
+            const src = this.getAudioSrc(t);
+            if (!src) {
+              this.pause();
+              showToast("Bài hát chưa có link hoặc file âm thanh!", "error");
+              return;
+            }
+            if (this.audioEl.src !== src) {
+              this.audioEl.src = src;
+            }
+            this.applyVolume();
+            const p = this.audioEl.play();
+            if (p && typeof p.catch === "function") {
+              p.catch(() => {
+                this.pause();
+                showToast("Hãy chạm lại nút Phát để nghe bài này!", "info");
+              });
+            }
+          }
+        },
+
+        pause() {
+          this.playing = false;
+          this.stopSynth();
+          if (this.audioEl) this.audioEl.pause();
+          this.renderPlayState();
+        },
+
+        toggle() {
+          if (this.playing) this.pause(); else this.play();
+        },
+
+        next(forcePlay) {
+          if (!bioData.playlist || bioData.playlist.length === 0) return;
+          const keep = typeof forcePlay === "boolean" ? forcePlay : this.playing;
+          this.pause();
+          this.index = (this.index + 1) % bioData.playlist.length;
+          this.step = 0;
+          this.elapsed = 0;
+          this.renderTrackInfo();
+          if (keep) this.play();
+        },
+
+        prev() {
+          if (!bioData.playlist || bioData.playlist.length === 0) return;
+          const keep = this.playing;
+          this.pause();
+          this.index = (this.index - 1 + bioData.playlist.length) % bioData.playlist.length;
+          this.step = 0;
+          this.elapsed = 0;
+          this.renderTrackInfo();
+          if (keep) this.play();
+        },
+
+        selectAndPlay(i) {
+          if (!bioData.playlist || i < 0 || i >= bioData.playlist.length) return;
+          if (this.index === i && this.playing) {
+            this.pause();
+            return;
+          }
+          this.pause();
+          this.index = i;
+          this.step = 0;
+          this.elapsed = 0;
+          this.renderTrackInfo();
+          this.play();
+        },
+
+        seekByRatio(ratio) {
+          const t = this.currentTrack();
+          if (!t) return;
+          const r = Math.max(0, Math.min(1, ratio));
+          if (this.isBuiltIn()) {
+            const total = t.duration || 90;
+            this.elapsed = r * total;
+            this.updateProgressUI(this.elapsed, total);
+          } else if (this.audioEl && isFinite(this.audioEl.duration) && this.audioEl.duration > 0) {
+            this.audioEl.currentTime = r * this.audioEl.duration;
+            this.updateProgressUI(this.audioEl.currentTime, this.audioEl.duration);
+          }
+        },
+
+        renderTrackInfo() {
+          const t = this.currentTrack();
+          const titleEl = document.getElementById("track-title");
+          const artistEl = document.getElementById("track-artist");
+          const coverImg = document.getElementById("track-cover-img");
+          const coverDef = document.getElementById("track-cover-default");
+          const coverDot = document.getElementById("track-cover-dot");
+
+          if (!t) {
+            titleEl.textContent = "Chưa có bài hát";
+            artistEl.textContent = "Thêm nhạc trong bảng Quản lý";
+            coverImg.classList.add("hidden");
+            coverDot.classList.add("hidden");
+            coverDef.classList.remove("hidden");
+            this.updateProgressUI(0, 0);
+            return;
+          }
+
+          titleEl.textContent = t.title || "Bài hát chưa đặt tên";
+          artistEl.textContent = t.artist || (this.isBuiltIn() ? "Nhạc tích hợp" : "Nhạc tùy chỉnh");
+
+          if (t.cover && t.cover.trim()) {
+            coverImg.src = normalizeUrl(t.cover);
+            coverImg.onload = () => {
+              coverImg.classList.remove("hidden");
+              coverDot.classList.remove("hidden");
+              coverDef.classList.add("hidden");
+            };
+            coverImg.onerror = () => {
+              coverImg.classList.add("hidden");
+              coverDot.classList.add("hidden");
+              coverDef.classList.remove("hidden");
+            };
+          } else {
+            coverImg.removeAttribute("src");
+            coverImg.classList.add("hidden");
+            coverDot.classList.add("hidden");
+            coverDef.classList.remove("hidden");
+          }
+
+          this.updateProgressUI(this.isBuiltIn() ? this.elapsed : 0, this.isBuiltIn() ? (t.duration || 90) : 0);
+        },
+
+        renderPlayState() {
+          const disc = document.getElementById("vinyl-disc");
+          const eq = document.getElementById("music-eq");
+          const iPlay = document.getElementById("icon-play");
+          const iPause = document.getElementById("icon-pause");
+
+          if (this.playing) {
+            disc.classList.remove("vinyl-paused");
+            disc.classList.add("vinyl-playing");
+            eq.classList.add("eq-running");
+            iPlay.classList.add("hidden");
+            iPause.classList.remove("hidden");
+          } else {
+            disc.classList.remove("vinyl-playing");
+            disc.classList.add("vinyl-paused");
+            eq.classList.remove("eq-running");
+            iPlay.classList.remove("hidden");
+            iPause.classList.add("hidden");
+          }
+          renderAdminMusicList();
+        },
+
+        updateProgressUI(cur, dur) {
+          document.getElementById("music-current-time").textContent = formatTime(cur);
+          document.getElementById("music-duration").textContent = dur > 0 ? formatTime(dur) : "--:--";
+          const pct = dur > 0 ? Math.min(100, (cur / dur) * 100) : 0;
+          document.getElementById("music-progress-fill").style.width = pct + "%";
+          const slider = document.getElementById("music-seek-slider");
+          if (slider && !this.isSeeking) {
+            slider.value = Math.round(pct * 10);
+          }
+        }
+      };
+
+      // =========================================================================
+      // RENDER GIAO DIỆN CÔNG KHAI (HỒ SƠ, NHẠC, TÌM KIẾM THÔNG MINH, 2 TAB, THẺ)
+      // =========================================================================
+      function renderAllPublicUI() {
+        renderProfile();
+        renderSearchVisibility();
+        renderLinks();
+        MusicPlayer.renderVisibility();
+        MusicPlayer.renderTrackInfo();
+        MusicPlayer.applyVolume();
+      }
+
+      function renderProfile() {
+        const p = bioData.profile || {};
+        document.getElementById("profile-name").textContent = p.name || "Gaming & Fix Lag";
+        document.getElementById("profile-bio").textContent = p.bio || "";
+        document.title = (p.name || "Gaming & Fix Lag") + " • Bio";
+
+        const verifiedIcon = document.getElementById("profile-verified-badge");
+        verifiedIcon.classList.toggle("hidden", p.verified === false);
+
+        const img = document.getElementById("profile-avatar-img");
+        const fallback = document.getElementById("profile-avatar-fallback");
+
+        if (p.avatar && p.avatar.trim()) {
+          img.src = normalizeUrl(p.avatar);
+          img.onload = () => {
+            img.classList.remove("hidden");
+            fallback.classList.add("hidden");
+          };
+          img.onerror = () => {
+            img.classList.add("hidden");
+            fallback.classList.remove("hidden");
+          };
+        } else {
+          img.removeAttribute("src");
+          img.classList.add("hidden");
+          fallback.classList.remove("hidden");
+        }
+
+        // ẨN TUYỆT ĐỐI nút Quản lý trên GitHub Pages & tên miền public
+        const adminBtn = document.getElementById("btn-open-admin");
+        if (isLocalPreviewEnv()) {
+          adminBtn.style.display = "inline-flex";
+        } else {
+          adminBtn.style.display = "none";
+        }
+      }
+
+      function renderSearchVisibility() {
+        const searchSec = document.getElementById("search-bar-section");
+        const showSearch = bioData.searchEnabled !== false;
+        searchSec.classList.toggle("hidden", !showSearch);
+        if (!showSearch && searchQuery) {
+          clearPublicSearch(false);
+        }
+      }
+
+      function clearPublicSearch(shouldFocus) {
+        searchQuery = "";
+        const inp = document.getElementById("public-search-input");
+        if (inp) {
+          inp.value = "";
+          if (shouldFocus) inp.focus();
+        }
+        document.getElementById("btn-clear-search").classList.add("hidden");
+        renderLinks();
+      }
+
+      function getBadgeColorClass(badge) {
+        const up = (badge || "").toUpperCase();
+        if (up.indexOf("HOT") !== -1) return "bg-rose-500 text-white shadow-sm";
+        if (up.indexOf("LINK4M") !== -1) return "bg-emerald-500 text-white shadow-sm";
+        if (up.indexOf("VIP") !== -1) return "bg-amber-400 text-slate-950 shadow-sm";
+        return "bg-[#0ea5e9] text-white shadow-sm";
+      }
+
+      function renderMainTabs() {
+        const btnScript = document.getElementById("tab-btn-script");
+        const btnFixlag = document.getElementById("tab-btn-fixlag");
+        const cntScript = document.getElementById("count-script");
+        const cntFixlag = document.getElementById("count-fixlag");
+
+        cntScript.textContent = bioData.scriptItems.length;
+        cntFixlag.textContent = bioData.appItems.length;
+
+        const activeCls = "py-3 px-3 rounded-full text-[13.5px] font-extrabold flex items-center justify-center gap-1.5 transition-all duration-200 bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 shadow-[0_4px_18px_rgba(56,189,248,0.45)]";
+        const idleCls = "py-3 px-3 rounded-full text-[13.5px] font-bold flex items-center justify-center gap-1.5 transition-all duration-200 text-sky-100/80 hover:text-white";
+
+        if (activeMainTab === "script") {
+          btnScript.className = activeCls;
+          btnFixlag.className = idleCls;
+          cntScript.className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-950/20 text-slate-950 font-extrabold";
+          cntFixlag.className = "text-[11px] px-1.5 py-0.5 rounded-full bg-sky-950/90 text-sky-200 font-bold";
+        } else {
+          btnFixlag.className = activeCls;
+          btnScript.className = idleCls;
+          cntFixlag.className = "text-[11px] px-1.5 py-0.5 rounded-full bg-slate-950/20 text-slate-950 font-extrabold";
+          cntScript.className = "text-[11px] px-1.5 py-0.5 rounded-full bg-sky-950/90 text-sky-200 font-bold";
+        }
+      }
+
+      // Tạo 1 thẻ Brotox V9 (ảnh tròn 76px ở trên chữ, hỗ trợ thêm nhãn phân loại khi đang tìm kiếm)
+      function buildBrotoxCardElement(item, categoryType, idx, isSearching) {
+        const isScriptItem = categoryType === "script";
+        const isCopy = isScriptItem && item.mode === "copy";
+
+        const card = document.createElement("div");
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.className = "brotox-card anim-card" + (isSearching ? " pt-9" : "");
+        card.style.animationDelay = Math.min(idx * 40, 240) + "ms";
+
+        // Nhãn phân loại góc trên trái khi đang ở chế độ tìm kiếm
+        const catPillHtml = isSearching
+          ? '<span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold tracking-tight ' +
+              (isScriptItem ? "bg-[#0b4f8c] text-sky-100" : "bg-sky-600 text-white") +
+            '">' + (isScriptItem ? "🎮 Script Roblox" : "⚡ App Fix Lag") + "</span>"
+          : "";
+
+        // Nhãn nổi bật góc trên phải
+        const badgeHtml = item.badge
+          ? '<span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold tracking-wide uppercase ' + getBadgeColorClass(item.badge) + '">' + escapeHtml(item.badge) + "</span>"
+          : "";
+
+        const hasImg = item.image && item.image.trim().length > 0;
+        const imgHtml = hasImg
+          ? '<img src="' + escapeHtml(normalizeUrl(item.image)) + '" alt="' + escapeHtml(item.title) + '" class="w-full h-full object-cover" />'
+          : getDefaultIconSvg(item.defaultIcon, isScriptItem);
+
+        const defaultSub = isCopy ? "📋 Chạm để Copy Script" : (isScriptItem ? "🔗 Vượt link lấy Script" : "⚡ Tối ưu FPS");
+        const subText = (item.subtitle && item.subtitle.trim()) ? item.subtitle.trim() : defaultSub;
+
+        card.innerHTML =
+          catPillHtml +
+          badgeHtml +
+          '<div class="brotox-avatar-wrap">' + imgHtml + "</div>" +
+          '<h3 class="brotox-title">' + escapeHtml(item.title) + "</h3>" +
+          '<div class="brotox-sub-pill">' + escapeHtml(subText) + "</div>";
+
+        const imgEl = card.querySelector("img");
+        if (imgEl) {
+          imgEl.addEventListener("error", () => {
+            const box = card.querySelector(".brotox-avatar-wrap");
+            if (box) box.innerHTML = getDefaultIconSvg(item.defaultIcon, isScriptItem);
+          });
+        }
+
+        const handleAction = async () => {
+          if (isCopy) {
+            const ok = await copyToClipboard(item.value || "");
+            if (ok) {
+              showToast("✅ Đã copy Script thành công!", "success");
+              const pill = card.querySelector(".brotox-sub-pill");
+              card.classList.add("copied-state");
+              if (pill) pill.textContent = "✅ Đã copy Script!";
+              setTimeout(() => {
+                card.classList.remove("copied-state");
+                if (pill) pill.textContent = subText;
+              }, 1700);
+            } else {
+              showToast("Không copy được, bạn thử chạm lại nhé!", "error");
+            }
+          } else {
+            const url = normalizeUrl(item.value);
+            if (!url) {
+              showToast("Đường dẫn link chưa hợp lệ!", "error");
+              return;
+            }
+            window.open(url, "_blank", "noopener,noreferrer");
+          }
+        };
+
+        card.addEventListener("click", handleAction);
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleAction();
+          }
+        });
+
+        return card;
+      }
+
+      // Render danh sách thẻ: Tự động chuyển đổi giữa chế độ TÌM KIẾM XUYÊN 2 MỤC và chế độ 2 TAB
+      function renderLinks() {
+        renderMainTabs();
+        const container = document.getElementById("links-container");
+        const mainTabsNav = document.getElementById("main-tabs-nav");
+        const statusBar = document.getElementById("search-status-bar");
+        const statusText = document.getElementById("search-status-text");
+        const clearBtn = document.getElementById("btn-clear-search");
+
+        container.innerHTML = "";
+
+        const rawQuery = (searchQuery || "").trim();
+        const isSearching = bioData.searchEnabled !== false && rawQuery.length > 0;
+
+        clearBtn.classList.toggle("hidden", rawQuery.length === 0);
+
+        if (isSearching) {
+          // Chế độ TÌM KIẾM: ẩn thanh 2 tab, hiện thanh trạng thái kết quả và tìm xuyên suốt cả 2 mục
+          mainTabsNav.classList.add("hidden");
+          statusBar.classList.remove("hidden");
+
+          const normQ = normalizeVietnamese(rawQuery);
+          const matched = [];
+
+          (bioData.scriptItems || []).forEach((item) => {
+            if (matchesSearchQuery(item, "script", normQ)) {
+              matched.push({ item, category: "script" });
+            }
+          });
+
+          (bioData.appItems || []).forEach((item) => {
+            if (matchesSearchQuery(item, "fixlag", normQ)) {
+              matched.push({ item, category: "fixlag" });
+            }
+          });
+
+          statusText.textContent = "Tìm thấy " + matched.length + " kết quả cho '" + rawQuery + "'";
+
+          if (matched.length === 0) {
+            const emptyBox = document.createElement("div");
+            emptyBox.className = "glass-panel rounded-3xl p-8 text-center anim-card";
+            emptyBox.innerHTML =
+              '<div class="text-4xl mb-2.5">🔎</div>' +
+              '<p class="text-[15px] font-extrabold text-white">Không tìm thấy kết quả nào</p>' +
+              '<p class="text-[12.5px] text-sky-200/75 mt-1 leading-relaxed">Không có Script hay App nào khớp với từ khóa <span class="text-sky-300 font-bold">"' + escapeHtml(rawQuery) + '"</span></p>' +
+              '<button id="btn-empty-show-all" type="button" class="mt-4 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 font-extrabold text-[13px] shadow-lg shadow-sky-500/25 active:scale-95 transition">Xem tất cả</button>';
+
+            container.appendChild(emptyBox);
+            emptyBox.querySelector("#btn-empty-show-all").addEventListener("click", () => clearPublicSearch(false));
+            return;
+          }
+
+          matched.forEach((entry, idx) => {
+            container.appendChild(buildBrotoxCardElement(entry.item, entry.category, idx, true));
+          });
+          return;
+        }
+
+        // Chế độ BÌNH THƯỜNG (2 Tab: Script Roblox / App Fix Lag)
+        mainTabsNav.classList.remove("hidden");
+        statusBar.classList.add("hidden");
+
+        const isScriptTab = activeMainTab === "script";
+        const list = isScriptTab ? bioData.scriptItems : bioData.appItems;
+
+        if (!list || list.length === 0) {
+          container.innerHTML =
+            '<div class="glass-panel rounded-3xl p-8 text-center anim-card">' +
+              '<div class="text-3xl mb-2">' + (isScriptTab ? "🎮" : "⚡") + "</div>" +
+              '<p class="text-[14.5px] font-bold text-white">Chưa có mục nào trong danh sách</p>' +
+              '<p class="text-[12.5px] text-sky-200/70 mt-1">Chủ web có thể thêm Link4m hoặc App Fix Lag mới bất cứ lúc nào</p>' +
+            "</div>";
+          return;
+        }
+
+        list.forEach((item, idx) => {
+          container.appendChild(buildBrotoxCardElement(item, isScriptTab ? "script" : "fixlag", idx, false));
+        });
+      }
+
+      // =========================================================================
+      // BẢNG QUẢN LÝ CHỦ WEB (5 TAB)
+      // =========================================================================
+      function openPinModal() {
+        document.getElementById("input-pin-code").value = "";
+        document.getElementById("pin-error-msg").classList.add("hidden");
+        document.getElementById("pin-modal").classList.remove("hidden");
+        setTimeout(() => document.getElementById("input-pin-code").focus(), 100);
+      }
+
+      function closePinModal() {
+        document.getElementById("pin-modal").classList.add("hidden");
+      }
+
+      function openAdminModal() {
+        document.getElementById("admin-modal").classList.remove("hidden");
+        document.getElementById("body-root").classList.add("overflow-hidden");
+        syncProfileForm();
+        syncMusicSettingsUI();
+        syncGhInputsFromConfig();
+        renderAdminScriptList();
+        renderAdminFixlagList();
+        renderAdminMusicList();
+        updateUnsavedUI();
+        updateDataSizeLabel();
+        switchAdminTab(activeAdminTab);
+      }
+
+      function closeAdminModal() {
+        document.getElementById("admin-modal").classList.add("hidden");
+        document.getElementById("body-root").classList.remove("overflow-hidden");
+        resetScriptForm();
+        resetFixlagForm();
+        resetMusicForm();
+      }
+
+      function switchAdminTab(tab) {
+        activeAdminTab = tab;
+        document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
+          const on = btn.dataset.adminTab === tab;
+          btn.className = on
+            ? "admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-extrabold flex flex-col items-center justify-center gap-0.5 transition bg-gradient-to-r from-[#0ea5e9] to-[#38bdf8] text-slate-950 shadow-sm"
+            : "admin-tab-btn py-2 px-0.5 rounded-xl text-[10.5px] font-bold flex flex-col items-center justify-center gap-0.5 transition bg-slate-900/90 text-sky-100/75 hover:text-white";
+        });
+
+        ["script", "fixlag", "music", "profile", "github"].forEach((t) => {
+          document.getElementById("admin-panel-" + t).classList.toggle("hidden", tab !== t);
+        });
+
+        if (tab === "github") {
+          syncGhInputsFromConfig();
+          updateDataSizeLabel();
+        }
+        document.getElementById("admin-scroll-body").scrollTop = 0;
+      }
+
+      function setPreviewImage(imgId, phId, src) {
+        const img = document.getElementById(imgId);
+        const ph = document.getElementById(phId);
+        if (src && src.trim()) {
+          img.src = normalizeUrl(src);
+          img.classList.remove("hidden");
+          ph.classList.add("hidden");
+        } else {
+          img.removeAttribute("src");
+          img.classList.add("hidden");
+          ph.classList.remove("hidden");
+        }
+      }
+
+      function setBadgeSelection(groupId, inputId, val) {
+        document.getElementById(inputId).value = val || "";
+        const group = document.getElementById(groupId);
+        if (!group) return;
+        group.querySelectorAll(".badge-pill-btn").forEach((btn) => {
+          const selected = btn.dataset.badge === (val || "");
+          btn.className = selected
+            ? "badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-extrabold border transition bg-sky-400 text-slate-950 border-sky-300 shadow-sm"
+            : "badge-pill-btn px-2.5 py-1.5 rounded-xl text-[11.5px] font-bold border transition bg-slate-950 text-sky-100/80 border-slate-700 hover:border-sky-400/50";
+        });
+      }
+
+      function setToggleSwitchUI(btnId, knobId, isOn) {
+        const btn = document.getElementById(btnId);
+        const knob = document.getElementById(knobId);
+        if (!btn || !knob) return;
+        btn.setAttribute("aria-checked", isOn ? "true" : "false");
+        if (isOn) {
+          btn.classList.remove("bg-slate-700");
+          btn.classList.add("bg-sky-400");
+          knob.classList.add("translate-x-5");
+        } else {
+          btn.classList.add("bg-slate-700");
+          btn.classList.remove("bg-sky-400");
+          knob.classList.remove("translate-x-5");
+        }
+      }
+
+      // ================= TAB 1: SCRIPT ROBLOX =================
+      function setScriptFormMode(mode, autoUpdateSub) {
+        scriptFormMode = mode === "copy" ? "copy" : "link";
+
+        const btnLink = document.getElementById("btn-script-mode-link");
+        const btnCopy = document.getElementById("btn-script-mode-copy");
+        const boxLink = document.getElementById("script-link-box");
+        const boxCopy = document.getElementById("script-code-box");
+        const subInput = document.getElementById("input-script-subtitle");
+
+        const onCls = "py-2.5 px-2 rounded-2xl text-[11.5px] font-extrabold border-2 transition flex flex-col items-center justify-center gap-1 text-center bg-sky-400/20 border-sky-400 text-sky-200 shadow-[0_0_16px_rgba(56,189,248,0.22)]";
+        const offCls = "py-2.5 px-2 rounded-2xl text-[11.5px] font-bold border-2 transition flex flex-col items-center justify-center gap-1 text-center bg-slate-950/80 border-slate-700 text-slate-400 hover:text-white";
+
+        btnLink.className = scriptFormMode === "link" ? onCls : offCls;
+        btnCopy.className = scriptFormMode === "copy" ? onCls : offCls;
+
+        boxLink.classList.toggle("hidden", scriptFormMode !== "link");
+        boxCopy.classList.toggle("hidden", scriptFormMode !== "copy");
+
+        if (autoUpdateSub) {
+          const cur = subInput.value.trim();
+          if (scriptFormMode === "link" && (!cur || cur === "📋 Chạm để Copy Script")) {
+            subInput.value = "🔗 Vượt link lấy Script";
+          } else if (scriptFormMode === "copy" && (!cur || cur === "🔗 Vượt link lấy Script")) {
+            subInput.value = "📋 Chạm để Copy Script";
+          }
+        }
+      }
+
+      function resetScriptForm() {
+        document.getElementById("edit-script-id").value = "";
+        document.getElementById("input-script-title").value = "";
+        document.getElementById("input-script-url").value = "";
+        document.getElementById("input-script-code").value = "";
+        document.getElementById("input-script-subtitle").value = "🔗 Vượt link lấy Script";
+        document.getElementById("file-script-img").value = "";
+        document.getElementById("info-script-img").textContent = "Tự cắt vuông & nén siêu nhẹ (<30KB)";
+        tempScriptImg = "";
+        setPreviewImage("preview-script-img", "placeholder-script-img", "");
+        setBadgeSelection("script-badge-group", "input-script-badge", "LINK4M");
+        setScriptFormMode("link", false);
+        document.getElementById("script-form-heading").textContent = "➕ Thêm Script Roblox mới";
+        document.getElementById("btn-submit-script").textContent = "➕ Thêm Script vào danh sách";
+        document.getElementById("btn-cancel-script-edit").classList.add("hidden");
+      }
+
+      function startEditScript(id) {
+        const item = bioData.scriptItems.find((x) => x.id === id);
+        if (!item) return;
+        document.getElementById("edit-script-id").value = item.id;
+        document.getElementById("input-script-title").value = item.title || "";
+        const mode = item.mode === "copy" ? "copy" : "link";
+        setScriptFormMode(mode, false);
+        if (mode === "link") {
+          document.getElementById("input-script-url").value = item.value || "";
+          document.getElementById("input-script-code").value = "";
+        } else {
+          document.getElementById("input-script-code").value = item.value || "";
+          document.getElementById("input-script-url").value = "";
+        }
+        document.getElementById("input-script-subtitle").value = item.subtitle || (mode === "copy" ? "📋 Chạm để Copy Script" : "🔗 Vượt link lấy Script");
+        setBadgeSelection("script-badge-group", "input-script-badge", item.badge || "");
+        tempScriptImg = item.image || "";
+        setPreviewImage("preview-script-img", "placeholder-script-img", tempScriptImg);
+        document.getElementById("script-form-heading").textContent = "✏️ Sửa: " + item.title;
+        document.getElementById("btn-submit-script").textContent = "💾 Cập nhật Script";
+        document.getElementById("btn-cancel-script-edit").classList.remove("hidden");
+        document.getElementById("script-form").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function renderAdminScriptList() {
+        const listEl = document.getElementById("admin-script-list");
+        listEl.innerHTML = "";
+        const items = bioData.scriptItems || [];
+        if (items.length === 0) {
+          listEl.innerHTML = '<p class="text-[12.5px] text-slate-400 text-center py-4">Chưa có Script nào.</p>';
+          return;
+        }
+        items.forEach((item, idx) => {
+          const row = document.createElement("div");
+          row.className = "p-3 rounded-2xl bg-[#0e1b33] border border-sky-400/20 flex items-center gap-2.5";
+          const thumb = item.image
+            ? '<img src="' + escapeHtml(normalizeUrl(item.image)) + '" alt="" class="w-10 h-10 rounded-full object-cover border border-sky-400/40 shrink-0" />'
+            : '<div class="w-10 h-10 rounded-full bg-slate-950 border border-sky-400/30 flex items-center justify-center shrink-0 overflow-hidden">' + getDefaultIconSvg(item.defaultIcon, true) + "</div>";
+
+          const typeLabel = item.mode === "copy" ? "📋 Copy Lua" : "🔗 Link4m / URL";
+
+          row.innerHTML =
+            thumb +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center gap-1.5">' +
+                '<p class="text-[13px] font-bold text-white truncate">' + escapeHtml(item.title) + "</p>" +
+                (item.badge ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/25 text-sky-200 font-bold shrink-0">' + escapeHtml(item.badge) + "</span>" : "") +
+              "</div>" +
+              '<p class="text-[11px] text-sky-200/65 truncate mt-0.5">' + typeLabel + " • " + escapeHtml(item.value) + "</p>" +
+            "</div>" +
+            '<div class="flex items-center gap-1 shrink-0">' +
+              '<button type="button" data-up class="w-7 h-7 rounded-lg bg-slate-800 text-slate-200 disabled:opacity-30 text-xs font-bold flex items-center justify-center" ' + (idx === 0 ? "disabled" : "") + ">↑</button>" +
+              '<button type="button" data-down class="w-7 h-7 rounded-lg bg-slate-800 text-slate-200 disabled:opacity-30 text-xs font-bold flex items-center justify-center" ' + (idx === items.length - 1 ? "disabled" : "") + ">↓</button>" +
+              '<button type="button" data-edit class="w-7 h-7 rounded-lg bg-sky-500/25 text-sky-200 text-xs flex items-center justify-center">✏️</button>' +
+              '<button type="button" data-del class="w-7 h-7 rounded-lg bg-rose-500/25 text-rose-200 text-xs flex items-center justify-center">🗑️</button>' +
+            "</div>";
+
+          row.querySelector("[data-up]").addEventListener("click", () => {
+            if (idx === 0) return;
+            const tmp = bioData.scriptItems[idx];
+            bioData.scriptItems[idx] = bioData.scriptItems[idx - 1];
+            bioData.scriptItems[idx - 1] = tmp;
+            markUnsavedAndCache();
+            renderLinks();
+            renderAdminScriptList();
+          });
+          row.querySelector("[data-down]").addEventListener("click", () => {
+            if (idx === items.length - 1) return;
+            const tmp = bioData.scriptItems[idx];
+            bioData.scriptItems[idx] = bioData.scriptItems[idx + 1];
+            bioData.scriptItems[idx + 1] = tmp;
+            markUnsavedAndCache();
+            renderLinks();
+            renderAdminScriptList();
+          });
+          row.querySelector("[data-edit]").addEventListener("click", () => startEditScript(item.id));
+          row.querySelector("[data-del]").addEventListener("click", () => {
+            openConfirm("Xóa Script?", 'Xóa "' + item.title + '" khỏi tab Script Roblox?', () => {
+              bioData.scriptItems = bioData.scriptItems.filter((x) => x.id !== item.id);
+              markUnsavedAndCache();
+              renderLinks();
+              renderAdminScriptList();
+              showToast("Đã xóa Script! Nhớ bấm ☁️ Lưu thẳng lên Web nhé.", "info");
+            });
+          });
+          listEl.appendChild(row);
+        });
+      }
+
+      // ================= TAB 2: APP FIX LAG =================
+      function resetFixlagForm() {
+        document.getElementById("edit-fixlag-id").value = "";
+        document.getElementById("input-fixlag-title").value = "";
+        document.getElementById("input-fixlag-url").value = "";
+        document.getElementById("input-fixlag-subtitle").value = "⚡ Tối ưu FPS";
+        document.getElementById("file-fixlag-img").value = "";
+        document.getElementById("info-fixlag-img").textContent = "Tự cắt vuông & nén siêu nhẹ (<30KB)";
+        tempFixlagImg = "";
+        setPreviewImage("preview-fixlag-img", "placeholder-fixlag-img", "");
+        setBadgeSelection("fixlag-badge-group", "input-fixlag-badge", "HOT");
+        document.getElementById("fixlag-form-heading").textContent = "➕ Thêm App Fix Lag mới";
+        document.getElementById("btn-submit-fixlag").textContent = "➕ Thêm App Fix Lag vào danh sách";
+        document.getElementById("btn-cancel-fixlag-edit").classList.add("hidden");
+      }
+
+      function startEditFixlag(id) {
+        const item = bioData.appItems.find((x) => x.id === id);
+        if (!item) return;
+        document.getElementById("edit-fixlag-id").value = item.id;
+        document.getElementById("input-fixlag-title").value = item.title || "";
+        document.getElementById("input-fixlag-url").value = item.value || "";
+        document.getElementById("input-fixlag-subtitle").value = item.subtitle || "⚡ Tối ưu FPS";
+        setBadgeSelection("fixlag-badge-group", "input-fixlag-badge", item.badge || "");
+        tempFixlagImg = item.image || "";
+        setPreviewImage("preview-fixlag-img", "placeholder-fixlag-img", tempFixlagImg);
+        document.getElementById("fixlag-form-heading").textContent = "✏️ Sửa: " + item.title;
+        document.getElementById("btn-submit-fixlag").textContent = "💾 Cập nhật App";
+        document.getElementById("btn-cancel-fixlag-edit").classList.remove("hidden");
+        document.getElementById("fixlag-form").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function renderAdminFixlagList() {
+        const listEl = document.getElementById("admin-fixlag-list");
+        listEl.innerHTML = "";
+        const items = bioData.appItems || [];
+        if (items.length === 0) {
+          listEl.innerHTML = '<p class="text-[12.5px] text-slate-400 text-center py-4">Chưa có App Fix Lag nào.</p>';
+          return;
+        }
+        items.forEach((item, idx) => {
+          const row = document.createElement("div");
+          row.className = "p-3 rounded-2xl bg-[#0e1b33] border border-sky-400/20 flex items-center gap-2.5";
+          const thumb = item.image
+            ? '<img src="' + escapeHtml(normalizeUrl(item.image)) + '" alt="" class="w-10 h-10 rounded-full object-cover border border-sky-400/40 shrink-0" />'
+            : '<div class="w-10 h-10 rounded-full bg-slate-950 border border-sky-400/30 flex items-center justify-center shrink-0 overflow-hidden">' + getDefaultIconSvg(item.defaultIcon, false) + "</div>";
+
+          row.innerHTML =
+            thumb +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center gap-1.5">' +
+                '<p class="text-[13px] font-bold text-white truncate">' + escapeHtml(item.title) + "</p>" +
+                (item.badge ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/25 text-sky-200 font-bold shrink-0">' + escapeHtml(item.badge) + "</span>" : "") +
+              "</div>" +
+              '<p class="text-[11px] text-sky-200/65 truncate mt-0.5">🔗 ' + escapeHtml(item.value) + "</p>" +
+            "</div>" +
+            '<div class="flex items-center gap-1 shrink-0">' +
+              '<button type="button" data-up class="w-7 h-7 rounded-lg bg-slate-800 text-slate-200 disabled:opacity-30 text-xs font-bold flex items-center justify-center" ' + (idx === 0 ? "disabled" : "") + ">↑</button>" +
+              '<button type="button" data-down class="w-7 h-7 rounded-lg bg-slate-800 text-slate-200 disabled:opacity-30 text-xs font-bold flex items-center justify-center" ' + (idx === items.length - 1 ? "disabled" : "") + ">↓</button>" +
+              '<button type="button" data-edit class="w-7 h-7 rounded-lg bg-sky-500/25 text-sky-200 text-xs flex items-center justify-center">✏️</button>' +
+              '<button type="button" data-del class="w-7 h-7 rounded-lg bg-rose-500/25 text-rose-200 text-xs flex items-center justify-center">🗑️</button>' +
+            "</div>";
+
+          row.querySelector("[data-up]").addEventListener("click", () => {
+            if (idx === 0) return;
+            const tmp = bioData.appItems[idx];
+            bioData.appItems[idx] = bioData.appItems[idx - 1];
+            bioData.appItems[idx - 1] = tmp;
+            markUnsavedAndCache();
+            renderLinks();
+            renderAdminFixlagList();
+          });
+          row.querySelector("[data-down]").addEventListener("click", () => {
+            if (idx === items.length - 1) return;
+            const tmp = bioData.appItems[idx];
+            bioData.appItems[idx] = bioData.appItems[idx + 1];
+            bioData.appItems[idx + 1] = tmp;
+            markUnsavedAndCache();
+            renderLinks();
+            renderAdminFixlagList();
+          });
+          row.querySelector("[data-edit]").addEventListener("click", () => startEditFixlag(item.id));
+          row.querySelector("[data-del]").addEventListener("click", () => {
+            openConfirm("Xóa App Fix Lag?", 'Xóa "' + item.title + '" khỏi tab App Fix Lag?', () => {
+              bioData.appItems = bioData.appItems.filter((x) => x.id !== item.id);
+              markUnsavedAndCache();
+              renderLinks();
+              renderAdminFixlagList();
+              showToast("Đã xóa App! Nhớ bấm ☁️ Lưu thẳng lên Web nhé.", "info");
+            });
+          });
+          listEl.appendChild(row);
+        });
+      }
+
+      // ================= TAB 3: CHỈNH NHẠC =================
+      function syncMusicSettingsUI() {
+        const ms = bioData.musicSettings || { enabled: true, volume: 75, playMode: "next" };
+        setToggleSwitchUI("toggle-music-visible", "toggle-music-knob", ms.enabled !== false);
+
+        document.getElementById("slider-default-volume").value = ms.volume;
+        document.getElementById("label-default-volume").textContent = ms.volume + "%";
+
+        const btnNext = document.getElementById("btn-mode-next");
+        const btnRepeat = document.getElementById("btn-mode-repeat");
+        const onMode = "py-2.5 px-2.5 rounded-xl text-[12px] font-extrabold border transition bg-sky-400/20 text-sky-200 border-sky-400/60";
+        const offMode = "py-2.5 px-2.5 rounded-xl text-[12px] font-bold border transition bg-slate-950/75 text-slate-400 border-slate-700 hover:text-white";
+        btnNext.className = ms.playMode === "repeat" ? offMode : onMode;
+        btnRepeat.className = ms.playMode === "repeat" ? onMode : offMode;
+      }
+
+      function setMusicFormSource(src) {
+        tempMusicSource = src;
+        const btnUrl = document.getElementById("btn-src-url");
+        const btnFile = document.getElementById("btn-src-file");
+        const boxUrl = document.getElementById("music-source-url-box");
+        const boxFile = document.getElementById("music-source-file-box");
+        const synthNote = document.getElementById("music-synth-note");
+
+        const onBtn = "py-2 px-2 rounded-lg text-[11.5px] font-extrabold transition bg-sky-400 text-slate-950";
+        const offBtn = "py-2 px-2 rounded-lg text-[11.5px] font-bold transition text-sky-100/75 hover:text-white";
+
+        btnUrl.className = src === "url" ? onBtn : offBtn;
+        btnFile.className = src === "file" ? onBtn : offBtn;
+        boxUrl.classList.toggle("hidden", src !== "url");
+        boxFile.classList.toggle("hidden", src !== "file");
+        synthNote.classList.toggle("hidden", src !== "builtin");
+      }
+
+      function resetMusicForm() {
+        document.getElementById("edit-music-id").value = "";
+        document.getElementById("input-music-url").value = "";
+        document.getElementById("input-music-title").value = "";
+        document.getElementById("input-music-artist").value = "";
+        document.getElementById("file-music-audio").value = "";
+        document.getElementById("file-cover-img").value = "";
+        tempMusicAudioData = "";
+        tempMusicFileName = "";
+        tempMusicFileSize = 0;
+        tempCoverImg = "";
+        setPreviewImage("preview-cover-img", "placeholder-cover-img", "");
+        document.getElementById("music-file-status").classList.add("hidden");
+        document.getElementById("music-file-size-warn").classList.add("hidden");
+        document.getElementById("music-form-heading").textContent = "➕ Thêm bài hát mới";
+        document.getElementById("btn-submit-music").textContent = "➕ Thêm vào Playlist";
+        document.getElementById("btn-cancel-music-edit").classList.add("hidden");
+        setMusicFormSource("url");
+      }
+
+      function startEditMusic(id) {
+        const track = bioData.playlist.find((x) => x.id === id);
+        if (!track) return;
+        document.getElementById("edit-music-id").value = track.id;
+        document.getElementById("input-music-title").value = track.title || "";
+        document.getElementById("input-music-artist").value = track.artist || "";
+        document.getElementById("input-music-url").value = track.audioUrl || "";
+        tempCoverImg = track.cover || "";
+        setPreviewImage("preview-cover-img", "placeholder-cover-img", tempCoverImg);
+
+        const type = track.sourceType || (track.audioData ? "file" : (track.audioUrl ? "url" : "builtin"));
+        setMusicFormSource(type);
+
+        if (type === "file" && track.audioData) {
+          tempMusicAudioData = track.audioData;
+          tempMusicFileName = track.fileName || "File nhạc từ máy";
+          tempMusicFileSize = track.fileSize || Math.round(track.audioData.length * 0.75);
+          document.getElementById("music-file-info-text").textContent = "🎵 " + tempMusicFileName + " (" + formatFileSize(tempMusicFileSize) + ")";
+          document.getElementById("music-file-status").classList.remove("hidden");
+          document.getElementById("music-file-size-warn").classList.toggle("hidden", tempMusicFileSize <= 4 * 1024 * 1024);
+        } else {
+          tempMusicAudioData = "";
+          tempMusicFileName = "";
+          tempMusicFileSize = 0;
+          document.getElementById("music-file-status").classList.add("hidden");
+          document.getElementById("music-file-size-warn").classList.add("hidden");
+        }
+
+        document.getElementById("music-form-heading").textContent = "✏️ Sửa bài: " + track.title;
+        document.getElementById("btn-submit-music").textContent = "💾 Cập nhật bài hát";
+        document.getElementById("btn-cancel-music-edit").classList.remove("hidden");
+        document.getElementById("music-form").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function renderAdminMusicList() {
+        const listEl = document.getElementById("admin-music-list");
+        if (!listEl || !bioData) return;
+        listEl.innerHTML = "";
+
+        if (!bioData.playlist || bioData.playlist.length === 0) {
+          listEl.innerHTML = '<p class="text-[12.5px] text-slate-400 text-center py-4">Chưa có bài nhạc nào.</p>';
+          return;
+        }
+
+        bioData.playlist.forEach((track, idx) => {
+          const isCur = MusicPlayer.playing && MusicPlayer.index === idx;
+          const type = track.sourceType || (track.audioData ? "file" : (track.audioUrl ? "url" : "builtin"));
+
+          let typeBadge = '<span class="text-[10px] px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 font-bold">✨ Tích hợp sẵn</span>';
+          if (type === "url") typeBadge = '<span class="text-[10px] px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold">🔗 Link MP3</span>';
+          if (type === "file") {
+            const sz = track.fileSize ? " • " + formatFileSize(track.fileSize) : "";
+            typeBadge = '<span class="text-[10px] px-1.5 py-0.5 rounded-md bg-purple-500/25 text-purple-200 font-bold">📂 File máy' + sz + "</span>";
+          }
+
+          const topBadge = idx === 0 ? '<span class="text-[10px] px-1.5 py-0.5 rounded-md bg-amber-400/20 text-amber-300 font-bold">⭐ Mặc định</span>' : "";
+          const coverHtml = track.cover
+            ? '<img src="' + escapeHtml(normalizeUrl(track.cover)) + '" alt="" class="w-11 h-11 rounded-full object-cover border border-sky-400/50 shrink-0" />'
+            : '<div class="w-11 h-11 rounded-full bg-slate-950 border border-sky-400/35 flex items-center justify-center text-lg shrink-0">💿</div>';
+
+          const card = document.createElement("div");
+          card.className = "p-3 rounded-2xl bg-[#0e1b33] border " + (isCur ? "border-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.2)]" : "border-sky-400/20") + " space-y-2.5";
+
+          card.innerHTML =
+            '<div class="flex items-center gap-2.5">' +
+              coverHtml +
+              '<div class="flex-1 min-w-0">' +
+                '<p class="text-[13px] font-bold text-white truncate">' + escapeHtml(track.title) + "</p>" +
+                '<p class="text-[11px] text-sky-200/70 truncate">' + escapeHtml(track.artist || "Không có mô tả") + "</p>" +
+                '<div class="flex flex-wrap items-center gap-1 mt-1">' + topBadge + typeBadge + "</div>" +
+              "</div>" +
+            "</div>" +
+            '<div class="grid grid-cols-4 gap-1.5 pt-2 border-t border-sky-400/10">' +
+              '<button type="button" data-play class="py-1.5 px-1 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1 transition active:scale-95 ' + (isCur ? "bg-sky-400 text-slate-950" : "bg-sky-500/20 text-sky-200 hover:bg-sky-500/30") + '">' +
+                (isCur ? "⏸ Dừng" : "▶ Nghe thử") +
+              "</button>" +
+              '<button type="button" data-top ' + (idx === 0 ? "disabled" : "") + ' class="py-1.5 px-1 rounded-xl text-[11px] font-bold bg-slate-800 hover:bg-slate-700 text-amber-200 disabled:opacity-35 transition active:scale-95">⬆ Lên đầu</button>' +
+              '<button type="button" data-edit class="py-1.5 px-1 rounded-xl text-[11px] font-bold bg-slate-800 hover:bg-slate-700 text-sky-200 transition active:scale-95">✏️ Sửa</button>' +
+              '<button type="button" data-del class="py-1.5 px-1 rounded-xl text-[11px] font-bold bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 transition active:scale-95">🗑️ Xóa</button>' +
+            "</div>";
+
+          card.querySelector("[data-play]").addEventListener("click", () => MusicPlayer.selectAndPlay(idx));
+          card.querySelector("[data-top]").addEventListener("click", () => {
+            if (idx === 0) return;
+            const curId = MusicPlayer.currentTrack() ? MusicPlayer.currentTrack().id : null;
+            const picked = bioData.playlist.splice(idx, 1)[0];
+            bioData.playlist.unshift(picked);
+            if (curId) {
+              const ni = bioData.playlist.findIndex((x) => x.id === curId);
+              if (ni !== -1) MusicPlayer.index = ni;
+            }
+            if (!MusicPlayer.playing) {
+              MusicPlayer.index = 0;
+              MusicPlayer.renderTrackInfo();
+            }
+            markUnsavedAndCache();
+            renderAdminMusicList();
+            showToast('⭐ Đã đưa "' + picked.title + '" lên đầu Playlist!', "success");
+          });
+          card.querySelector("[data-edit]").addEventListener("click", () => startEditMusic(track.id));
+          card.querySelector("[data-del]").addEventListener("click", () => {
+            openConfirm("Xóa bài hát?", 'Xóa "' + track.title + '" khỏi Playlist?', () => {
+              const wasPlaying = MusicPlayer.playing;
+              const wasCur = MusicPlayer.index === idx;
+              if (wasCur) MusicPlayer.pause();
+              bioData.playlist.splice(idx, 1);
+              if (MusicPlayer.index >= bioData.playlist.length) {
+                MusicPlayer.index = Math.max(0, bioData.playlist.length - 1);
+              }
+              markUnsavedAndCache();
+              MusicPlayer.renderTrackInfo();
+              renderAdminMusicList();
+              if (wasPlaying && wasCur && bioData.playlist.length > 0) MusicPlayer.play();
+              showToast("Đã xóa bài hát!", "info");
+            });
+          });
+          listEl.appendChild(card);
+        });
+      }
+
+      // ================= TAB 4: HỒ SƠ =================
+      function syncProfileForm() {
+        const p = bioData.profile || {};
+        document.getElementById("input-profile-name").value = p.name || "";
+        document.getElementById("input-profile-bio").value = p.bio || "";
+        tempAvatarImg = p.avatar || "";
+        setPreviewImage("preview-avatar-img", "placeholder-avatar-img", tempAvatarImg);
+        document.getElementById("input-new-pin").value = bioData.pin || "1234";
+
+        setToggleSwitchUI("toggle-search-visible", "toggle-search-knob", bioData.searchEnabled !== false);
+        setToggleSwitchUI("toggle-verified-badge", "toggle-verified-knob", p.verified !== false);
+      }
+
+      // =========================================================================
+      // GẮN TẤT CẢ SỰ KIỆN TƯƠNG TÁC
+      // =========================================================================
+      function bindEvents() {
+        // 1. Tìm kiếm thông minh thời gian thực
+        const searchInput = document.getElementById("public-search-input");
+        searchInput.addEventListener("input", (e) => {
+          searchQuery = e.target.value || "";
+          renderLinks();
+        });
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && searchQuery) {
+            clearPublicSearch(false);
+          }
+        });
+        document.getElementById("btn-clear-search").addEventListener("click", () => clearPublicSearch(true));
+        document.getElementById("btn-reset-search-status").addEventListener("click", () => clearPublicSearch(false));
+
+        // 2. Chuyển 2 tab chính ngoài trang Bio
+        document.getElementById("tab-btn-script").addEventListener("click", () => {
+          activeMainTab = "script";
+          renderLinks();
+        });
+        document.getElementById("tab-btn-fixlag").addEventListener("click", () => {
+          activeMainTab = "fixlag";
+          renderLinks();
+        });
+
+        // 3. Điều khiển trình phát nhạc
+        document.getElementById("btn-play-pause").addEventListener("click", () => MusicPlayer.toggle());
+        document.getElementById("btn-next-track").addEventListener("click", () => MusicPlayer.next());
+        document.getElementById("btn-prev-track").addEventListener("click", () => MusicPlayer.prev());
+        document.getElementById("btn-mute-toggle").addEventListener("click", () => MusicPlayer.toggleMute());
+
+        const seekSlider = document.getElementById("music-seek-slider");
+        seekSlider.addEventListener("input", (e) => {
+          MusicPlayer.isSeeking = true;
+          const r = Number(e.target.value) / 1000;
+          document.getElementById("music-progress-fill").style.width = (r * 100) + "%";
+        });
+        seekSlider.addEventListener("change", (e) => {
+          const r = Number(e.target.value) / 1000;
+          MusicPlayer.isSeeking = false;
+          MusicPlayer.seekByRatio(r);
+        });
+
+        // 4. Chạm 5 lần liên tiếp vào Ảnh đại diện (trong 3 giây) -> Mở PIN Chủ Web
+        document.getElementById("avatar-secret-trigger").addEventListener("click", () => {
+          avatarTapCount++;
+          clearTimeout(avatarTapTimer);
+          if (avatarTapCount >= 5) {
+            avatarTapCount = 0;
+            if (ownerUnlocked) {
+              openAdminModal();
+            } else {
+              openPinModal();
+            }
+          } else {
+            avatarTapTimer = setTimeout(() => {
+              avatarTapCount = 0;
+            }, 3000);
+          }
+        });
+
+        // 5. Xác thực Mã PIN
+        document.getElementById("pin-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const entered = document.getElementById("input-pin-code").value.trim();
+          const correct = (bioData.pin || "1234").trim();
+          if (entered === correct) {
+            ownerUnlocked = true;
+            closePinModal();
+            showToast("🔓 Đã mở khóa Bảng Quản Lý Chủ Web!", "success");
+            openAdminModal();
+          } else {
+            document.getElementById("pin-error-msg").classList.remove("hidden");
+            document.getElementById("input-pin-code").value = "";
+            document.getElementById("input-pin-code").focus();
+          }
+        });
+        document.getElementById("btn-pin-cancel").addEventListener("click", closePinModal);
+        document.getElementById("pin-modal").addEventListener("click", (e) => {
+          if (e.target.id === "pin-modal") closePinModal();
+        });
+
+        // 6. Mở / Đóng Modal Quản Lý & Chuyển 5 Tab
+        document.getElementById("btn-open-admin").addEventListener("click", openAdminModal);
+        document.getElementById("btn-close-admin").addEventListener("click", closeAdminModal);
+        document.getElementById("admin-modal").addEventListener("click", (e) => {
+          if (e.target.id === "admin-modal") closeAdminModal();
+        });
+
+        document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
+          btn.addEventListener("click", () => switchAdminTab(btn.dataset.adminTab));
+        });
+
+        // Nút Lưu thẳng lên Web ở đáy Modal, Banner nhắc nhở & Tab GitHub
+        document.getElementById("btn-global-push-web").addEventListener("click", () => pushDataToGitHub(false));
+        document.getElementById("btn-banner-save-now").addEventListener("click", () => pushDataToGitHub(false));
+        document.getElementById("btn-gh-push-tab").addEventListener("click", () => pushDataToGitHub(false));
+        document.getElementById("btn-gh-test").addEventListener("click", testGitHubConnection);
+
+        ["input-gh-owner", "input-gh-repo", "input-gh-branch", "input-gh-path", "input-gh-token"].forEach((id) => {
+          document.getElementById(id).addEventListener("change", readGhInputsToConfig);
+        });
+
+        document.getElementById("btn-toggle-token-vis").addEventListener("click", () => {
+          const inp = document.getElementById("input-gh-token");
+          const btn = document.getElementById("btn-toggle-token-vis");
+          if (inp.type === "password") {
+            inp.type = "text";
+            btn.textContent = "🙈";
+          } else {
+            inp.type = "password";
+            btn.textContent = "👁️";
+          }
+        });
+
+        // Sao lưu / Nhập file data.json thủ công
+        document.getElementById("btn-download-json").addEventListener("click", () => {
+          try {
+            const text = JSON.stringify(buildCleanPublicPayload(), null, 2);
+            const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "data.json";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
+            showToast("✅ Đã tải file sao lưu data.json!", "success");
+          } catch (err) {
+            showToast("Không tải được file sao lưu!", "error");
+          }
+        });
+
+        document.getElementById("btn-import-json").addEventListener("click", () => {
+          document.getElementById("file-import-json").click();
+        });
+        document.getElementById("file-import-json").addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            try {
+              const parsed = JSON.parse(ev.target.result);
+              bioData = normalizeBioData(parsed);
+              markUnsavedAndCache();
+              renderAllPublicUI();
+              syncProfileForm();
+              syncMusicSettingsUI();
+              renderAdminScriptList();
+              renderAdminFixlagList();
+              renderAdminMusicList();
+              showToast("✅ Đã nhập dữ liệu từ data.json! Bấm ☁️ Lưu thẳng lên Web để áp dụng.", "success");
+            } catch (err) {
+              showToast("File JSON không hợp lệ!", "error");
+            }
+          };
+          reader.readAsText(file);
+          e.target.value = "";
+        });
+
+        // Nhãn nhanh cho Tab Script & Tab Fix Lag
+        document.getElementById("script-badge-group").querySelectorAll(".badge-pill-btn").forEach((btn) => {
+          btn.addEventListener("click", () => setBadgeSelection("script-badge-group", "input-script-badge", btn.dataset.badge));
+        });
+        document.getElementById("fixlag-badge-group").querySelectorAll(".badge-pill-btn").forEach((btn) => {
+          btn.addEventListener("click", () => setBadgeSelection("fixlag-badge-group", "input-fixlag-badge", btn.dataset.badge));
+        });
+
+        // 7. Tab 1: Script Roblox
+        document.getElementById("btn-script-mode-link").addEventListener("click", () => setScriptFormMode("link", true));
+        document.getElementById("btn-script-mode-copy").addEventListener("click", () => setScriptFormMode("copy", true));
+        document.getElementById("btn-cancel-script-edit").addEventListener("click", resetScriptForm);
+
+        document.getElementById("btn-pick-script-img").addEventListener("click", () => document.getElementById("file-script-img").click());
+        document.getElementById("file-script-img").addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            const res = await compressSquareImage(file, 240);
+            tempScriptImg = res.dataUrl;
+            setPreviewImage("preview-script-img", "placeholder-script-img", tempScriptImg);
+            document.getElementById("info-script-img").textContent = "✅ Đã nén siêu nhẹ: " + formatFileSize(res.bytes);
+            showToast("✅ Đã chọn & nén ảnh (" + formatFileSize(res.bytes) + ")!", "success");
+          } catch (err) {
+            showToast("Không xử lý được ảnh này!", "error");
+          }
+        });
+        document.getElementById("btn-clear-script-img").addEventListener("click", () => {
+          tempScriptImg = "";
+          document.getElementById("file-script-img").value = "";
+          document.getElementById("info-script-img").textContent = "Tự cắt vuông & nén siêu nhẹ (<30KB)";
+          setPreviewImage("preview-script-img", "placeholder-script-img", "");
+        });
+
+        document.getElementById("script-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const editId = document.getElementById("edit-script-id").value;
+          const title = document.getElementById("input-script-title").value.trim();
+          const mode = scriptFormMode;
+          const value = mode === "link"
+            ? document.getElementById("input-script-url").value.trim()
+            : document.getElementById("input-script-code").value.trim();
+          const subtitle = document.getElementById("input-script-subtitle").value.trim() || (mode === "copy" ? "📋 Chạm để Copy Script" : "🔗 Vượt link lấy Script");
+          const badge = document.getElementById("input-script-badge").value.trim();
+
+          if (!title) {
+            showToast("Vui lòng nhập Tiêu đề Script!", "error");
+            return;
+          }
+          if (!value) {
+            showToast(mode === "link" ? "Vui lòng dán đường dẫn Link4m / URL!" : "Vui lòng dán đoạn code Script Lua!", "error");
+            return;
+          }
+
+          if (editId) {
+            const idx = bioData.scriptItems.findIndex((x) => x.id === editId);
+            if (idx !== -1) {
+              bioData.scriptItems[idx] = {
+                ...bioData.scriptItems[idx],
+                mode,
+                title,
+                subtitle,
+                value,
+                badge,
+                image: tempScriptImg || ""
+              };
+            }
+            showToast("✅ Đã sửa Script! Bấm ☁️ Lưu thẳng lên Web để cập nhật.", "success");
+          } else {
+            bioData.scriptItems.unshift({
+              id: "sc-" + Date.now(),
+              mode,
+              title,
+              subtitle,
+              value,
+              badge,
+              image: tempScriptImg || "",
+              defaultIcon: mode === "copy" ? "code" : "gamepad"
+            });
+            showToast("✅ Đã thêm Script! Bấm ☁️ Lưu thẳng lên Web để mọi người thấy.", "success");
+          }
+
+          markUnsavedAndCache();
+          activeMainTab = "script";
+          renderLinks();
+          renderAdminScriptList();
+          resetScriptForm();
+        });
+
+        // 8. Tab 2: App Fix Lag
+        document.getElementById("btn-cancel-fixlag-edit").addEventListener("click", resetFixlagForm);
+        document.getElementById("btn-pick-fixlag-img").addEventListener("click", () => document.getElementById("file-fixlag-img").click());
+        document.getElementById("file-fixlag-img").addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            const res = await compressSquareImage(file, 240);
+            tempFixlagImg = res.dataUrl;
+            setPreviewImage("preview-fixlag-img", "placeholder-fixlag-img", tempFixlagImg);
+            document.getElementById("info-fixlag-img").textContent = "✅ Đã nén siêu nhẹ: " + formatFileSize(res.bytes);
+            showToast("✅ Đã chọn & nén ảnh (" + formatFileSize(res.bytes) + ")!", "success");
+          } catch (err) {
+            showToast("Không xử lý được ảnh này!", "error");
+          }
+        });
+        document.getElementById("btn-clear-fixlag-img").addEventListener("click", () => {
+          tempFixlagImg = "";
+          document.getElementById("file-fixlag-img").value = "";
+          document.getElementById("info-fixlag-img").textContent = "Tự cắt vuông & nén siêu nhẹ (<30KB)";
+          setPreviewImage("preview-fixlag-img", "placeholder-fixlag-img", "");
+        });
+
+        document.getElementById("fixlag-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const editId = document.getElementById("edit-fixlag-id").value;
+          const title = document.getElementById("input-fixlag-title").value.trim();
+          const value = document.getElementById("input-fixlag-url").value.trim();
+          const subtitle = document.getElementById("input-fixlag-subtitle").value.trim() || "⚡ Tối ưu FPS";
+          const badge = document.getElementById("input-fixlag-badge").value.trim();
+
+          if (!title || !value) {
+            showToast("Vui lòng nhập Tên App và Link tải!", "error");
+            return;
+          }
+
+          if (editId) {
+            const idx = bioData.appItems.findIndex((x) => x.id === editId);
+            if (idx !== -1) {
+              bioData.appItems[idx] = {
+                ...bioData.appItems[idx],
+                title,
+                subtitle,
+                value,
+                badge,
+                image: tempFixlagImg || ""
+              };
+            }
+            showToast("✅ Đã sửa App! Bấm ☁️ Lưu thẳng lên Web để cập nhật.", "success");
+          } else {
+            bioData.appItems.unshift({
+              id: "app-" + Date.now(),
+              mode: "link",
+              title,
+              subtitle,
+              value,
+              badge,
+              image: tempFixlagImg || "",
+              defaultIcon: "bolt"
+            });
+            showToast("✅ Đã thêm App! Bấm ☁️ Lưu thẳng lên Web để mọi người thấy.", "success");
+          }
+
+          markUnsavedAndCache();
+          activeMainTab = "fixlag";
+          renderLinks();
+          renderAdminFixlagList();
+          resetFixlagForm();
+        });
+
+        // 9. Tab 3: Chỉnh Nhạc
+        document.getElementById("toggle-music-visible").addEventListener("click", () => {
+          bioData.musicSettings.enabled = !bioData.musicSettings.enabled;
+          markUnsavedAndCache();
+          syncMusicSettingsUI();
+          MusicPlayer.renderVisibility();
+          showToast(bioData.musicSettings.enabled ? "🎵 Đã bật khung phát nhạc" : "🔇 Đã ẩn khung phát nhạc", "info");
+        });
+
+        document.getElementById("slider-default-volume").addEventListener("input", (e) => {
+          const val = Number(e.target.value);
+          bioData.musicSettings.volume = val;
+          document.getElementById("label-default-volume").textContent = val + "%";
+          if (val > 0 && MusicPlayer.muted) MusicPlayer.muted = false;
+          MusicPlayer.applyVolume();
+        });
+        document.getElementById("slider-default-volume").addEventListener("change", markUnsavedAndCache);
+
+        document.getElementById("btn-mode-next").addEventListener("click", () => {
+          bioData.musicSettings.playMode = "next";
+          markUnsavedAndCache();
+          syncMusicSettingsUI();
+          showToast("🔁 Chế độ: Tự chuyển bài", "info");
+        });
+        document.getElementById("btn-mode-repeat").addEventListener("click", () => {
+          bioData.musicSettings.playMode = "repeat";
+          markUnsavedAndCache();
+          syncMusicSettingsUI();
+          showToast("🔂 Chế độ: Lặp 1 bài", "info");
+        });
+
+        document.getElementById("btn-src-url").addEventListener("click", () => setMusicFormSource("url"));
+        document.getElementById("btn-src-file").addEventListener("click", () => setMusicFormSource("file"));
+        document.getElementById("btn-cancel-music-edit").addEventListener("click", resetMusicForm);
+
+        document.getElementById("btn-pick-music-file").addEventListener("click", () => document.getElementById("file-music-audio").click());
+        document.getElementById("file-music-audio").addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onerror = () => showToast("Không đọc được file nhạc này!", "error");
+          reader.onload = (ev) => {
+            tempMusicAudioData = ev.target.result;
+            tempMusicFileName = file.name;
+            tempMusicFileSize = file.size;
+
+            document.getElementById("music-file-info-text").textContent = "🎵 " + file.name + " (" + formatFileSize(file.size) + ")";
+            document.getElementById("music-file-status").classList.remove("hidden");
+            document.getElementById("music-file-size-warn").classList.toggle("hidden", file.size <= 4 * 1024 * 1024);
+
+            const titleInput = document.getElementById("input-music-title");
+            if (!titleInput.value.trim()) {
+              titleInput.value = file.name.replace(/\.[^/.]+$/, "");
+            }
+            showToast("✅ Đã nạp file nhạc (" + formatFileSize(file.size) + ")!", "success");
+          };
+          reader.readAsDataURL(file);
+        });
+
+        document.getElementById("btn-clear-music-file").addEventListener("click", () => {
+          tempMusicAudioData = "";
+          tempMusicFileName = "";
+          tempMusicFileSize = 0;
+          document.getElementById("file-music-audio").value = "";
+          document.getElementById("music-file-status").classList.add("hidden");
+          document.getElementById("music-file-size-warn").classList.add("hidden");
+        });
+
+        document.getElementById("btn-pick-cover-img").addEventListener("click", () => document.getElementById("file-cover-img").click());
+        document.getElementById("file-cover-img").addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            const res = await compressSquareImage(file, 180);
+            tempCoverImg = res.dataUrl;
+            setPreviewImage("preview-cover-img", "placeholder-cover-img", tempCoverImg);
+            showToast("✅ Đã chọn ảnh bìa (" + formatFileSize(res.bytes) + ")!", "success");
+          } catch (err) {
+            showToast("Không xử lý được ảnh bìa này!", "error");
+          }
+        });
+        document.getElementById("btn-clear-cover-img").addEventListener("click", () => {
+          tempCoverImg = "";
+          document.getElementById("file-cover-img").value = "";
+          setPreviewImage("preview-cover-img", "placeholder-cover-img", "");
+        });
+
+        document.getElementById("music-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const editId = document.getElementById("edit-music-id").value;
+          const title = document.getElementById("input-music-title").value.trim();
+          const artist = document.getElementById("input-music-artist").value.trim();
+          const urlVal = document.getElementById("input-music-url").value.trim();
+
+          if (!title) {
+            showToast("Vui lòng nhập Tên bài hát!", "error");
+            return;
+          }
+          if (tempMusicSource === "url" && !urlVal) {
+            showToast("Vui lòng dán link nhạc (.mp3 / .m4a / .ogg)!", "error");
+            return;
+          }
+          if (tempMusicSource === "file" && !tempMusicAudioData) {
+            showToast("Vui lòng chọn file nhạc từ điện thoại!", "error");
+            return;
+          }
+
+          if (editId) {
+            const idx = bioData.playlist.findIndex((x) => x.id === editId);
+            if (idx !== -1) {
+              const old = bioData.playlist[idx];
+              bioData.playlist[idx] = {
+                ...old,
+                title,
+                artist: artist || old.artist || "Nhạc tùy chỉnh",
+                sourceType: tempMusicSource,
+                audioUrl: tempMusicSource === "url" ? urlVal : "",
+                audioData: tempMusicSource === "file" ? tempMusicAudioData : "",
+                fileName: tempMusicSource === "file" ? tempMusicFileName : "",
+                fileSize: tempMusicSource === "file" ? tempMusicFileSize : 0,
+                cover: tempCoverImg || ""
+              };
+              if (MusicPlayer.index === idx) MusicPlayer.renderTrackInfo();
+            }
+            showToast("✅ Đã cập nhật bài hát!", "success");
+          } else {
+            const song = {
+              id: "song-" + Date.now(),
+              title,
+              artist: artist || (tempMusicSource === "file" ? "File từ điện thoại" : "Link MP3"),
+              sourceType: tempMusicSource,
+              synthType: "",
+              audioUrl: tempMusicSource === "url" ? urlVal : "",
+              audioData: tempMusicSource === "file" ? tempMusicAudioData : "",
+              fileName: tempMusicSource === "file" ? tempMusicFileName : "",
+              fileSize: tempMusicSource === "file" ? tempMusicFileSize : 0,
+              cover: tempCoverImg || "",
+              duration: 0
+            };
+            bioData.playlist.unshift(song);
+            if (!MusicPlayer.playing) {
+              MusicPlayer.index = 0;
+              MusicPlayer.renderTrackInfo();
+            } else {
+              MusicPlayer.index += 1;
+            }
+            showToast("🎵 Đã thêm nhạc mới! Bấm ☁️ Lưu thẳng lên Web để lưu lại.", "success");
+          }
+
+          markUnsavedAndCache();
+          renderAdminMusicList();
+          resetMusicForm();
+        });
+
+        document.getElementById("btn-restore-builtin-music").addEventListener("click", () => {
+          const builtIns = createBuiltInTracks();
+          let added = 0;
+          builtIns.forEach((b) => {
+            if (!bioData.playlist.some((m) => m.id === b.id)) {
+              bioData.playlist.push(b);
+              added++;
+            }
+          });
+          if (added > 0) {
+            markUnsavedAndCache();
+            MusicPlayer.renderTrackInfo();
+            renderAdminMusicList();
+            showToast("✨ Đã nạp lại " + added + " bài mặc định!", "success");
+          } else {
+            showToast("2 bài tích hợp sẵn vẫn đang có trong Playlist!", "info");
+          }
+        });
+
+        // 10. Tab 4: Hồ sơ, Thanh tìm kiếm & Mã PIN
+        document.getElementById("btn-pick-avatar-img").addEventListener("click", () => document.getElementById("file-avatar-img").click());
+        document.getElementById("file-avatar-img").addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            const res = await compressSquareImage(file, 240);
+            tempAvatarImg = res.dataUrl;
+            setPreviewImage("preview-avatar-img", "placeholder-avatar-img", tempAvatarImg);
+            showToast("✅ Đã chọn Avatar (" + formatFileSize(res.bytes) + "), bấm Áp dụng Hồ sơ nhé!", "success");
+          } catch (err) {
+            showToast("Không xử lý được ảnh đại diện này!", "error");
+          }
+        });
+        document.getElementById("btn-clear-avatar").addEventListener("click", () => {
+          tempAvatarImg = "";
+          document.getElementById("file-avatar-img").value = "";
+          setPreviewImage("preview-avatar-img", "placeholder-avatar-img", "");
+        });
+
+        document.getElementById("toggle-search-visible").addEventListener("click", () => {
+          bioData.searchEnabled = bioData.searchEnabled === false ? true : false;
+          markUnsavedAndCache();
+          syncProfileForm();
+          renderSearchVisibility();
+          showToast(bioData.searchEnabled ? "🔍 Đã bật thanh tìm kiếm" : "Đã ẩn thanh tìm kiếm", "info");
+        });
+
+        document.getElementById("toggle-verified-badge").addEventListener("click", () => {
+          bioData.profile.verified = bioData.profile.verified === false ? true : false;
+          markUnsavedAndCache();
+          syncProfileForm();
+          renderProfile();
+        });
+
+        document.getElementById("profile-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          bioData.profile = {
+            ...bioData.profile,
+            name: document.getElementById("input-profile-name").value.trim() || "Gaming & Fix Lag",
+            bio: document.getElementById("input-profile-bio").value.trim(),
+            avatar: tempAvatarImg || ""
+          };
+          markUnsavedAndCache();
+          renderProfile();
+          showToast("✅ Đã cập nhật Hồ sơ! Bấm ☁️ Lưu thẳng lên Web để lưu lại.", "success");
+        });
+
+        document.getElementById("pin-change-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const pin = document.getElementById("input-new-pin").value.trim();
+          if (pin.length < 4 || pin.length > 8) {
+            showToast("Mã PIN cần dài từ 4 đến 8 ký tự!", "error");
+            return;
+          }
+          bioData.pin = pin;
+          markUnsavedAndCache();
+          showToast("🔐 Đã đổi Mã PIN thành: " + pin + ". Nhớ bấm ☁️ Lưu thẳng lên Web!", "success");
+        });
+
+        document.getElementById("btn-reset-default").addEventListener("click", () => {
+          openConfirm(
+            "Khôi phục dữ liệu mẫu?",
+            "Toàn bộ Link, Script, App và Nhạc sẽ quay về dữ liệu mẫu ban đầu.",
+            () => {
+              MusicPlayer.pause();
+              bioData = createDefaultBioData();
+              markUnsavedAndCache();
+              renderAllPublicUI();
+              syncProfileForm();
+              syncMusicSettingsUI();
+              renderAdminScriptList();
+              renderAdminFixlagList();
+              renderAdminMusicList();
+              MusicPlayer.index = 0;
+              showToast("Đã khôi phục dữ liệu mẫu! Bấm ☁️ Lưu thẳng lên Web để áp dụng.", "info");
+            }
+          );
+        });
+
+        // 11. Modal xác nhận tùy chỉnh
+        document.getElementById("confirm-cancel").addEventListener("click", closeConfirm);
+        document.getElementById("confirm-ok").addEventListener("click", () => {
+          const fn = confirmCallback;
+          closeConfirm();
+          if (typeof fn === "function") fn();
+        });
+        document.getElementById("confirm-modal").addEventListener("click", (e) => {
+          if (e.target.id === "confirm-modal") closeConfirm();
+        });
+      }
+
+      // =========================================================================
+      // KHỞI CHẠY ỨNG DỤNG
+      // =========================================================================
+      function init() {
+        MusicPlayer.init();
+        bindEvents();
+        resetScriptForm();
+        resetFixlagForm();
+        setMusicFormSource("url");
+        bootstrapBioData();
+      }
+
+      document.addEventListener("DOMContentLoaded", init);
+    })();
+  </script>
+</body>
+</html>
