@@ -1,6 +1,6 @@
 {
-  "version": 9,
-  "updatedAt": "2026-11-27T07:15:55.926Z",
+  "version": 10,
+  "updatedAt": "2026-11-27T07:17:44.508Z",
   "pin": "911213",
   "searchEnabled": true,
   "profile": {
@@ -15,7 +15,18 @@
     "playMode": "repeat"
   },
   "playlist": [],
-  "scriptItems": [],
+  "scriptItems": [
+    {
+      "id": "sc-1795763860022",
+      "mode": "link",
+      "title": "Script kaitun blox fruits Kuzan",
+      "subtitle": "🔗 Script kaitun laya vật phẩm siêu ngon",
+      "value": "https://link4m.net/KMZruu",
+      "badge": "LINK4M",
+      "image": "",
+      "defaultIcon": "gamepad"
+    }
+  ],
   "appItems": [
     {
       "id": "app-1795763744110",
